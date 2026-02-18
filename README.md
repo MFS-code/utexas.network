@@ -19,13 +19,26 @@ GITHUB_JOIN_BOT_TOKEN=replace-with-github-token
 GITHUB_JOIN_REPO_OWNER=MFS-code
 GITHUB_JOIN_REPO_NAME=utexas.network
 NEXT_PUBLIC_BASE_URL=https://utexas.network
+RESEND_API_KEY=replace-with-resend-api-key
+RESEND_FROM_EMAIL=alerts@your-domain.com
 ```
+
+Join submissions also send an email alert to `miguelfserna@gmail.com`.  
+`RESEND_FROM_EMAIL` must be a verified sender in your Resend account.
 
 For local dev, use:
 
 ```bash
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
+
+For the `/approve` workflow email, also configure GitHub repository settings:
+
+- `Settings -> Secrets and variables -> Actions -> Secrets`
+  - `RESEND_API_KEY`
+  - `RESEND_FROM_EMAIL` (your verified noreply sender)
+- `Settings -> Secrets and variables -> Actions -> Variables`
+  - `SITE_URL` (optional, defaults to `https://utexas.network`)
 
 ### 2. Approve/reject by GitHub issue comment
 

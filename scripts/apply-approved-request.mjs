@@ -11,18 +11,28 @@ if (!markerMatch) {
 
 const payload = JSON.parse(markerMatch[1]);
 
-const slugify = (value) =>
+const normalizeNameToken = (value) =>
   String(value)
     .toLowerCase()
+    .replace(/[^a-z0-9]/g, '');
+
+const toMemberId = (fullName) => {
+  const parts = String(fullName || '')
     .trim()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-');
+    .split(/\s+/)
+    .filter(Boolean);
+
+  if (parts.length === 0) return '';
+  if (parts.length === 1) return normalizeNameToken(parts[0]);
+
+  // Enforce firstname-lastname format for generated IDs.
+  return `${normalizeNameToken(parts[0])}-${normalizeNameToken(parts[parts.length - 1])}`;
+};
 
 const sanitizeUrl = (value) => String(value || '').trim();
 const sanitizeText = (value) => String(value || '').trim();
 
-const id = slugify(payload.fullName);
+const id = toMemberId(payload.fullName);
 if (!id) {
   throw new Error('Generated id is empty.');
 }
@@ -66,10 +76,19 @@ if (new RegExp(`id:\\s*["']${id}["']`).test(file)) {
   throw new Error(`Member with id "${id}" already exists.`);
 }
 
-const insertionPoint = file.lastIndexOf('];');
-if (insertionPoint === -1) {
+const membersArrayMatch = file.match(/export const members:\s*Member\[\]\s*=\s*\[/);
+if (!membersArrayMatch || membersArrayMatch.index == null) {
+  throw new Error('Could not find members array declaration.');
+}
+
+const membersArrayStart = membersArrayMatch.index + membersArrayMatch[0].length;
+const membersArrayTail = file.slice(membersArrayStart);
+const membersArrayCloseMatch = membersArrayTail.match(/^\s*\];/m);
+if (!membersArrayCloseMatch || membersArrayCloseMatch.index == null) {
   throw new Error('Could not find members array closing.');
 }
+
+const insertionPoint = membersArrayStart + membersArrayCloseMatch.index;
 
 const updated =
   file.slice(0, insertionPoint) +

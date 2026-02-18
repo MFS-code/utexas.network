@@ -52,6 +52,18 @@ jobs:
             git push
           fi
 
+      - name: Send approval email to applicant
+        if: steps.gate.outputs.run == 'true' && steps.gate.outputs.command == '/approve'
+        id: approval_email
+        continue-on-error: true
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM_EMAIL: ${{ secrets.RESEND_FROM_EMAIL }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          node scripts/send-approval-email.mjs
+
       - name: Mark approved and close issue
         if: steps.gate.outputs.run == 'true' && steps.gate.outputs.command == '/approve'
         uses: actions/github-script@v7
@@ -74,7 +86,13 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number,
-              body: 'Approved and committed to `src/data/members.ts`.'
+              body: `Approved and committed to \`src/data/members.ts\`.
+
+Approval email status: ${
+  '${{ steps.approval_email.outcome }}' === 'success'
+    ? 'sent to applicant.'
+    : 'failed to send (check workflow logs).'
+}`
             });
             await github.rest.issues.update({
               owner: context.repo.owner,

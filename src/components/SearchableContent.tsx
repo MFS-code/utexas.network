@@ -22,6 +22,15 @@ interface SearchableContentProps {
     connections: Connection[];
 }
 
+const PINNED_MEMBER_ID = 'miguel-serna';
+
+function prioritizePinnedMember(memberList: Member[]): Member[] {
+    const pinnedMember = memberList.find((member) => member.id === PINNED_MEMBER_ID);
+    if (!pinnedMember) return memberList;
+
+    return [pinnedMember, ...memberList.filter((member) => member.id !== PINNED_MEMBER_ID)];
+}
+
 export default function SearchableContent({ members, connections }: SearchableContentProps) {
     const [searchQuery, setSearchQuery] = useState('');
     const [shuffledMembers, setShuffledMembers] = useState<Member[]>(members);
@@ -41,6 +50,7 @@ export default function SearchableContent({ members, connections }: SearchableCo
             member.website?.toLowerCase().includes(searchQuery.toLowerCase())
         )
         : shuffledMembers;
+    const displayedMembers = prioritizePinnedMember(filteredMembers);
 
     const handleJoinSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -111,55 +121,21 @@ export default function SearchableContent({ members, connections }: SearchableCo
                         </p>
                     </div>
                     <div className="join-actions">
-                        {!showJoinForm && (
-                            <button
-                                type="button"
-                                className="join-request-btn"
-                                onClick={() => setShowJoinForm(true)}
-                            >
-                                request to join
-                            </button>
-                        )}
+                        <button
+                            type="button"
+                            className="join-request-btn"
+                            onClick={() => setShowJoinForm(true)}
+                        >
+                            request to join
+                        </button>
                         {submitStatus && (
                             <p className={`join-status join-status-${submitStatus.type}`}>{submitStatus.message}</p>
                         )}
                     </div>
-
-                    {showJoinForm && (
-                        <form className="join-form" onSubmit={handleJoinSubmit}>
-                            <div className="join-form-grid">
-                                <input className="join-input" name="fullName" required placeholder="Full name *" />
-                                <input className="join-input" name="utEmail" required type="email" placeholder="UT email *" />
-                                <input className="join-input" name="website" required type="url" placeholder="Personal website URL *" />
-                                <input className="join-input" name="profilePic" required type="url" placeholder="Profile photo URL *" />
-                                <input className="join-input" name="program" placeholder="Program / major" />
-                                <input className="join-input" name="year" placeholder="Graduation year" />
-                                <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
-                                <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
-                                <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
-                                <input className="join-input join-input-wide" name="connections" placeholder="Connection IDs (comma-separated, optional)" />
-                                <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
-                            </div>
-
-                            <div className="join-form-actions">
-                                <button type="submit" className="join-submit" disabled={isSubmitting}>
-                                    {isSubmitting ? 'Submitting...' : 'Submit for review'}
-                                </button>
-                                <button
-                                    type="button"
-                                    className="join-cancel-btn"
-                                    onClick={() => setShowJoinForm(false)}
-                                    disabled={isSubmitting}
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-                    )}
                 </div>
 
                 <div className="table-section">
-                    <MembersTable members={filteredMembers} searchQuery={searchQuery} />
+                    <MembersTable members={displayedMembers} searchQuery={searchQuery} />
                 </div>
             </div>
 
@@ -185,10 +161,73 @@ export default function SearchableContent({ members, connections }: SearchableCo
                 <NetworkGraph 
                     members={members} 
                     connections={connections} 
-                    highlightedMemberIds={filteredMembers.map(m => m.id)}
+                    highlightedMemberIds={displayedMembers.map(m => m.id)}
                     searchQuery={searchQuery}
                 />
             </div>
+
+            {showJoinForm && (
+                <div
+                    className="join-modal-overlay"
+                    onClick={() => !isSubmitting && setShowJoinForm(false)}
+                    role="presentation"
+                >
+                    <div
+                        className="join-modal-content"
+                        onClick={(e) => e.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Request to join"
+                    >
+                        <div className="join-modal-header">
+                            <h2>request to join</h2>
+                            <button
+                                type="button"
+                                className="join-modal-close"
+                                onClick={() => setShowJoinForm(false)}
+                                disabled={isSubmitting}
+                                aria-label="Close"
+                            >
+                                x
+                            </button>
+                        </div>
+
+                        <form className="join-form" onSubmit={handleJoinSubmit}>
+                            <div className="join-form-grid">
+                                <input className="join-input" name="fullName" required placeholder="Full name *" />
+                                <input className="join-input" name="utEmail" required type="email" placeholder="UT email *" />
+                                <input className="join-input" name="website" required type="url" placeholder="Personal website URL *" />
+                                <input className="join-input" name="profilePic" required type="url" placeholder="Profile photo URL *" />
+                                <input className="join-input" name="program" placeholder="Program / major" />
+                                <input className="join-input" name="year" placeholder="Graduation year" />
+                                <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
+                                <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
+                                <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
+                                <input className="join-input join-input-wide" name="connections" placeholder="Connection IDs (comma-separated, optional)" />
+                                <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
+                            </div>
+                            <p className="join-tip">
+                                tip: IDs are generated as <code>firstname-lastname</code>, all lowercase.
+                                Any space is converted to <code>-</code>.
+                            </p>
+
+                            <div className="join-form-actions">
+                                <button type="submit" className="join-submit" disabled={isSubmitting}>
+                                    {isSubmitting ? 'Submitting...' : 'Submit for review'}
+                                </button>
+                                <button
+                                    type="button"
+                                    className="join-cancel-btn"
+                                    onClick={() => setShowJoinForm(false)}
+                                    disabled={isSubmitting}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }

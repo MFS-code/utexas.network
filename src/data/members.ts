@@ -50,6 +50,37 @@ export const members: Member[] = [
   //   linkedin: "https://linkedin.com/in/johndoe",
   //   connections: [],
   // },
+  {
+    id: "miguel-serna",
+    name: "Miguel Serna",
+    website: "https://mfserna.dev",
+    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
+    program: "Computer Science",
+    year: "2027",
+    instagram: "https://www.instagram.com/mfserna_/",
+    twitter: "https://x.com/miguelfserna",
+    linkedin: "https://www.linkedin.com/in/mfserna/",
+    connections: [],
+  },
+  {
+    id: "gabriel-keller",
+    name: "Gabriel Keller",
+    website: "https://www.keller.cv/",
+    profilePic: "https://pbs.twimg.com/profile_images/1954231097962663936/e-MdQDp6_400x400.jpg",
+    program: "Computer Science",
+    year: "2027",
+    instagram: "https://www.instagram.com/atxgabe/",
+    twitter: "https://x.com/gabrieljkeller",
+    linkedin: "https://linkedin.com/in/gjkeller",
+    connections: ["miguel-serna"],
+  },
+  {
+    id: "test",
+    name: "test",
+    website: "https://mfserna.dev",
+    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
+    connections: ["miguel-serna", "gabriel-keller"],
+  },
 ];
 
 // Helper to get all connections for the network graph
@@ -91,37 +122,5 @@ export function getWebringNavigation(currentWebsite: string): { prev: Member | n
 
 // Get a random member (useful for the webring widget)
 export function getRandomMember(): Member {
-  return members[Math.floor(Math.random() * members.length)
-  {
-    id: "miguel-serna",
-    name: "Miguel Serna",
-    website: "https://mfserna.dev",
-    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
-    program: "Computer Science",
-    year: "2027",
-    instagram: "https://www.instagram.com/mfserna_/",
-    twitter: "https://x.com/miguelfserna",
-    linkedin: "https://www.linkedin.com/in/mfserna/",
-    connections: [],
-  },
-  {
-    id: "gabriel-keller",
-    name: "Gabriel Keller",
-    website: "https://www.keller.cv/",
-    profilePic: "https://x.com/gabrieljkeller/photo",
-    program: "Computer Science",
-    year: "2027",
-    instagram: "https://www.instagram.com/atxgabe/",
-    twitter: "https://x.com/gabrieljkeller",
-    linkedin: "https://linkedin.com/in/gjkeller",
-    connections: ["miguel-serna"],
-  },
-  {
-    id: "test",
-    name: "test",
-    website: "https://mfserna.dev",
-    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
-    connections: ["miguel-serna","gabriel-keller"],
-  },
-];
+  return members[Math.floor(Math.random() * members.length)];
 }

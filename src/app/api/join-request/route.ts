@@ -14,6 +14,8 @@ interface JoinRequestPayload {
   notes?: string;
 }
 
+const JOIN_ALERT_TO_EMAIL = 'miguelfserna@gmail.com';
+
 const requiredFields: Array<keyof JoinRequestPayload> = [
   'fullName',
   'utEmail',
@@ -30,6 +32,53 @@ function isValidPayload(payload: Partial<JoinRequestPayload>): payload is JoinRe
 
 function escapeFence(input: string): string {
   return input.replace(/```/g, '\\`\\`\\`');
+}
+
+async function sendJoinAlertEmail(payload: JoinRequestPayload, issueUrl?: string): Promise<void> {
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const resendFromEmail = process.env.RESEND_FROM_EMAIL;
+
+  if (!resendApiKey || !resendFromEmail) {
+    throw new Error('Email not configured: set RESEND_API_KEY and RESEND_FROM_EMAIL.');
+  }
+
+  const subject = `New utexas.network join request: ${payload.fullName}`;
+  const lines = [
+    'A new join request was submitted.',
+    '',
+    `Name: ${payload.fullName}`,
+    `UT Email: ${payload.utEmail}`,
+    `Website: ${payload.website}`,
+    `Profile Photo: ${payload.profilePic}`,
+    `Program: ${payload.program || '-'}`,
+    `Year: ${payload.year || '-'}`,
+    `Twitter: ${payload.twitter || '-'}`,
+    `Instagram: ${payload.instagram || '-'}`,
+    `LinkedIn: ${payload.linkedin || '-'}`,
+    `Connections: ${payload.connections || '-'}`,
+    `Notes: ${payload.notes || '-'}`,
+    '',
+    `Moderation Issue: ${issueUrl || '(not available)'}`,
+  ];
+
+  const resendResponse = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${resendApiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: resendFromEmail,
+      to: [JOIN_ALERT_TO_EMAIL],
+      subject,
+      text: lines.join('\n'),
+    }),
+  });
+
+  if (!resendResponse.ok) {
+    const errText = await resendResponse.text();
+    throw new Error(`Failed to send join alert email: ${errText}`);
+  }
 }
 
 export async function POST(request: Request) {
@@ -116,7 +165,16 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json({ ok: true });
+    const issueData = (await response.json()) as { html_url?: string };
+
+    try {
+      await sendJoinAlertEmail(cleanPayload, issueData.html_url);
+      return NextResponse.json({ ok: true, emailSent: true });
+    } catch (emailError) {
+      const message = emailError instanceof Error ? emailError.message : 'Unknown email delivery error.';
+      console.error(message);
+      return NextResponse.json({ ok: true, emailSent: false, emailError: message });
+    }
   } catch {
     return NextResponse.json({ error: 'Invalid request payload.' }, { status: 400 });
   }
