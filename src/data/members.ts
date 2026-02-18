@@ -1,0 +1,95 @@
+/**
+ * UTEXAS WEBRING MEMBERS
+ *
+ * Member entries are manually reviewed from the join form and then added here.
+ *
+ * Required fields:
+ * - id: Name with hyphens (e.g., "jane-doe")
+ * - name: Full name
+ * - website: Personal website URL
+ *
+ * Optional fields:
+ * - program: Program or major
+ * - year: Graduation year
+ * - profilePic: Path to photo in /public/photos
+ * - instagram: Full URL
+ * - twitter: Full URL
+ * - linkedin: Full URL
+ * - connections: IDs of other members
+ */
+
+export interface Member {
+  id: string;
+  name: string;
+  website: string;
+  program?: string;
+  year?: string;
+  profilePic?: string;
+  instagram?: string;
+  twitter?: string;
+  linkedin?: string;
+  connections?: string[]; // IDs of other members you want to connect with
+}
+
+// Connection type for the network graph
+export interface Connection {
+  fromId: string;
+  toId: string;
+}
+
+export const members: Member[] = [
+  // Example entry:
+  // {
+  //   id: "john-doe",
+  //   name: "John Doe",
+  //   website: "https://johndoe.com",
+  //   profilePic: "/photos/john-doe.jpg",
+  //   program: "Computer Science",
+  //   year: "2028",
+  //   twitter: "https://x.com/johndoe",
+  //   linkedin: "https://linkedin.com/in/johndoe",
+  //   connections: [],
+  // },
+];
+
+// Helper to get all connections for the network graph
+export function getConnections(): Connection[] {
+  const connections: Connection[] = [];
+  
+  members.forEach(member => {
+    if (member.connections) {
+      member.connections.forEach(targetId => {
+        // Only add connection if target member exists
+        if (members.some(m => m.id === targetId)) {
+          connections.push({
+            fromId: member.id,
+            toId: targetId,
+          });
+        }
+      });
+    }
+  });
+  
+  return connections;
+}
+
+// Helper to get the next and previous members for webring navigation
+export function getWebringNavigation(currentWebsite: string): { prev: Member | null; next: Member | null } {
+  const index = members.findIndex(m => m.website === currentWebsite);
+  if (index === -1) {
+    return { prev: null, next: null };
+  }
+  
+  const prevIndex = (index - 1 + members.length) % members.length;
+  const nextIndex = (index + 1) % members.length;
+  
+  return {
+    prev: members[prevIndex],
+    next: members[nextIndex],
+  };
+}
+
+// Get a random member (useful for the webring widget)
+export function getRandomMember(): Member {
+  return members[Math.floor(Math.random() * members.length)];
+}

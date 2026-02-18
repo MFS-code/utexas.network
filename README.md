@@ -15,14 +15,21 @@ Submissions are sent to `POST /api/join-request` (no redirect), which creates a 
 Set these server env vars:
 
 ```bash
-GITHUB_JOIN_BOT_TOKEN=ghp_xxx
-GITHUB_JOIN_REPO_OWNER=your-github-org-or-user
+GITHUB_JOIN_BOT_TOKEN=replace-with-github-token
+GITHUB_JOIN_REPO_OWNER=MFS-code
 GITHUB_JOIN_REPO_NAME=utexas.network
+NEXT_PUBLIC_BASE_URL=https://utexas.network
 ```
 
-### 2. Approve/reject by email reply
+For local dev, use:
 
-When GitHub sends you an issue notification email, reply with either:
+```bash
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+```
+
+### 2. Approve/reject by GitHub issue comment
+
+On the generated join-request issue, comment with either:
 
 - `/approve` -> auto-adds the member to `src/data/members.ts` and closes the issue
 - `/reject` -> closes without adding
