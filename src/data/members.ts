@@ -91,5 +91,18 @@ export function getWebringNavigation(currentWebsite: string): { prev: Member | n
 
 // Get a random member (useful for the webring widget)
 export function getRandomMember(): Member {
-  return members[Math.floor(Math.random() * members.length)];
+  return members[Math.floor(Math.random() * members.length)
+  {
+    id: "miguel-serna",
+    name: "Miguel Serna",
+    website: "https://mfserna.dev",
+    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
+    program: "Computer Science",
+    year: "2027",
+    instagram: "https://www.instagram.com/mfserna_/",
+    twitter: "https://x.com/miguelfserna",
+    linkedin: "https://www.linkedin.com/in/mfserna/",
+    connections: [],
+  },
+];
 }
