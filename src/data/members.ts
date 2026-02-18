@@ -116,5 +116,12 @@ export function getRandomMember(): Member {
     linkedin: "https://linkedin.com/in/gjkeller",
     connections: ["miguel-serna"],
   },
+  {
+    id: "test",
+    name: "test",
+    website: "https://mfserna.dev",
+    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
+    connections: ["miguel-serna","gabriel-keller"],
+  },
 ];
 }
