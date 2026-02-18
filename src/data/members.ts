@@ -74,55 +74,6 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/gjkeller",
     connections: ["miguel-serna"],
   },
-  {
-    id: "test",
-    name: "test",
-    website: "https://mfserna.dev",
-    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
-    connections: ["miguel-serna", "gabriel-keller"],
-  },
-  {
-    id: "testy",
-    name: "testy",
-    website: "https://mfserna.dev",
-    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
-    connections: [],
-  },
-  {
-    id: "test2",
-    name: "test2",
-    website: "https://mfserna.dev",
-    profilePic: "https://x.com/gabrieljkeller/photo",
-    connections: [],
-  },
-  {
-    id: "miguel-sernanboub",
-    name: "Miguel Sernanboub",
-    website: "https://www.keller.cv/",
-    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
-    connections: [],
-  },
-  {
-    id: "heyman",
-    name: "heyman",
-    website: "https://mfserna.dev",
-    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
-    connections: [],
-  },
-  {
-    id: "yo",
-    name: "yo",
-    website: "https://mfserna.dev",
-    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
-    connections: [],
-  },
-  {
-    id: "gadnogn",
-    name: "gadnogn",
-    website: "https://mfserna.dev",
-    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
-    connections: [],
-  },
 ];
 
 // Helper to get all connections for the network graph
