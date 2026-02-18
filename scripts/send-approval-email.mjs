@@ -54,7 +54,7 @@ const text = [
   `  data-user="${memberId || 'your-id'}"`,
   '></script>',
   '',
-  'Important:',
+  'Important: ',
   '- data-user is prefilled with your generated member id.',
   '- The center icon links to utexas.network.',
   '- The arrows navigate to your webring connections.',
@@ -65,8 +65,10 @@ const text = [
   '',
   `Directory: ${siteUrl.replace(/\/+$/, '')}`,
   '',
+  'If you have any questions, trouble with the setup, or just want to say hi, please contact me at miguelfserna@gmail.com or any of my socials (expect instagram) listed on the website.',
+  '',
   'Welcome aboard,',
-  'utexas.network',
+  'Miguel F. Serna',
 ].join('\n');
 
 const response = await fetch('https://api.resend.com/emails', {
