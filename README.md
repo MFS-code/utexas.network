@@ -39,6 +39,7 @@ For the `/approve` workflow email, also configure GitHub repository settings:
   - `RESEND_FROM_EMAIL` (your verified noreply sender)
 - `Settings -> Secrets and variables -> Actions -> Variables`
   - `SITE_URL` (optional, defaults to `https://utexas.network`)
+  - `DEPLOY_HOOK_URL` (recommended: production deploy hook URL from your hosting provider)
 
 ### 2. Approve/reject by GitHub issue comment
 
@@ -48,6 +49,11 @@ On the generated join-request issue, comment with either:
 - `/reject` -> closes without adding
 
 This is handled by `.github/workflows/moderate-join-requests.yml`.
+
+### 2.5 Auto-deploy after merges/approvals
+
+Profile entries are source-controlled in `src/data/members.ts`, so they appear on the live site only after a production deploy.  
+This repo includes `.github/workflows/trigger-deploy.yml`, which calls `DEPLOY_HOOK_URL` on every push to `main` (including approve-workflow commits), so new profiles publish automatically once that secret is configured.
 
 ### 3. Optional profile images
 You can use external `profilePic` URLs directly, or upload to `public/photos/` and edit the member later.
