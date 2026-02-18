@@ -95,6 +95,13 @@ export const members: Member[] = [
     profilePic: "https://x.com/gabrieljkeller/photo",
     connections: [],
   },
+  {
+    id: "miguel-sernanboub",
+    name: "Miguel Sernanboub",
+    website: "https://www.keller.cv/",
+    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
+    connections: [],
+  },
 ];
 
 // Helper to get all connections for the network graph
