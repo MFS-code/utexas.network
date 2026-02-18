@@ -88,13 +88,11 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number,
-              body: `Approved and committed to \`src/data/members.ts\`.
-
-Approval email status: ${
-  '${{ steps.approval_email.outcome }}' === 'success'
-    ? 'sent to applicant.'
-    : 'failed to send (check workflow logs).'
-}`
+              body:
+                'Approved and committed to `src/data/members.ts`.\n\nApproval email status: ' +
+                ('${{ steps.approval_email.outcome }}' === 'success'
+                  ? 'sent to applicant.'
+                  : 'failed to send (check workflow logs).')
             });
             await github.rest.issues.update({
               owner: context.repo.owner,
