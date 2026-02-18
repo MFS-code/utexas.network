@@ -88,6 +88,13 @@ export const members: Member[] = [
     profilePic: "https://www.mfserna.dev/photos/headshot.webp",
     connections: [],
   },
+  {
+    id: "test2",
+    name: "test2",
+    website: "https://mfserna.dev",
+    profilePic: "https://x.com/gabrieljkeller/photo",
+    connections: [],
+  },
 ];
 
 // Helper to get all connections for the network graph
