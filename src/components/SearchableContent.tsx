@@ -110,14 +110,14 @@ export default function SearchableContent({ members, connections }: SearchableCo
                         <h1 className="title">utexas.network</h1>
                     </div>
                     <div className="description">
-                        <p>welcome to the official webring for university of texas at austin students.</p>
+                        <p>Welcome to the unofficial webring for builders at the university of texas at austin.</p>
                         <p>
-                            UT is home to ambitious engineers, builders, makers, artists, designers, and
-                            writers. this directory helps you discover other longhorns building cool things
-                            on the internet.
+                            From engineers and founders to artists, designers, and writers, 
+                            UT has people building all kinds of cool stuff online. 
+                            This directory makes it easier to find and connect with fellow Longhorns and their work.
                         </p>
                         <p>
-                            want to join? request access and we will review your submission manually.
+                            want to join? request access and your submission will be reviewed manually.
                         </p>
                     </div>
                     <div className="join-actions">
@@ -228,6 +228,17 @@ export default function SearchableContent({ members, connections }: SearchableCo
                     </div>
                 </div>
             )}
+            <div className="template-credit">
+                template by{' '}
+                <a
+                    href="https://uwaterloo.network"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="template-credit-link"
+                >
+                    uwaterloo.network
+                </a>
+            </div>
         </main>
     );
 }
