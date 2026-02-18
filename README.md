@@ -74,7 +74,7 @@ You can use external `profilePic` URLs directly, or upload to `public/photos/` a
 - Center icon → links to [utexas.network](https://utexas.network)
 - Arrows → open your connections' websites
 
-**Customize:** Add `data-color="red"` or `data-arrow="chevron"` for different styles.
+**Customize:** `data-color` and `data-arrow` still work, and you can also size/space the widget with `data-icon-size`, `data-arrow-size`, and `data-gap` (numeric pixel values).
 
 ---
 

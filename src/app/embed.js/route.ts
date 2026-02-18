@@ -6,6 +6,7 @@ export async function GET() {
     const scriptTag = document.currentScript || document.querySelector('script[data-webring]');
     if (!scriptTag) return;
     
+    const configuredBaseUrl = '${process.env.NEXT_PUBLIC_BASE_URL || ''}';
     const userId = scriptTag.getAttribute('data-user') || '';
     const embedColor = scriptTag.getAttribute('data-color') || 'black';
     const embedArrow = scriptTag.getAttribute('data-arrow') || 'arrow';
@@ -15,7 +16,46 @@ export async function GET() {
     const embedBorder = scriptTag.getAttribute('data-border') || '';
     const embedNoBg = scriptTag.hasAttribute('data-no-background');
     
-    const baseUrl = '${process.env.NEXT_PUBLIC_BASE_URL || 'https://utexas.network'}';
+    function normalizeBaseUrl(url) {
+        if (!url) return '';
+        try {
+            const parsed = new URL(url, window.location.href);
+            const isLocalHost = parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1' || parsed.hostname === '::1';
+            if (!isLocalHost && parsed.protocol !== 'https:') {
+                parsed.protocol = 'https:';
+            }
+            return parsed.origin;
+        } catch (error) {
+            return '';
+        }
+    }
+
+    function resolveBaseUrl() {
+        const scriptSrc = scriptTag.getAttribute('src') || '';
+        const scriptOrigin = normalizeBaseUrl(scriptSrc);
+        if (scriptOrigin) return scriptOrigin;
+
+        const configuredOrigin = normalizeBaseUrl(configuredBaseUrl);
+        if (configuredOrigin) return configuredOrigin;
+
+        return 'https://utexas.network';
+    }
+
+    function parseSizeAttr(attrName, fallback, min, max) {
+        const raw = scriptTag.getAttribute(attrName);
+        if (raw === null) return fallback;
+
+        const value = Number.parseFloat(raw);
+        if (!Number.isFinite(value)) return fallback;
+        if (value < min) return min;
+        if (value > max) return max;
+        return value;
+    }
+
+    const iconSize = parseSizeAttr('data-icon-size', 56, 16, 256);
+    const arrowSize = parseSizeAttr('data-arrow-size', 24, 10, 96);
+    const gapSize = parseSizeAttr('data-gap', 12, 0, 80);
+    const baseUrl = resolveBaseUrl();
     
     // Fetch connections for this user (or all members if no user specified)
     const apiUrl = userId ? baseUrl + '/api/webring?user=' + userId : baseUrl + '/api/webring';
@@ -47,7 +87,7 @@ export async function GET() {
             let containerStyles = \`
                 display: inline-flex;
                 align-items: center;
-                gap: 12px;
+                gap: \${gapSize}px;
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 transition: all 0.3s ease;
             \`;
@@ -76,7 +116,7 @@ export async function GET() {
                 align-items: center;
                 justify-content: center;
                 transition: transform 0.2s, opacity 0.2s;
-                font-size: 24px;
+                font-size: \${arrowSize}px;
                 padding: 0;
                 line-height: 1;
                 color: \${arrowColor};
@@ -100,8 +140,8 @@ export async function GET() {
             if (embedColor === 'custom' && embedCustomColor) {
                 const iconWrapper = document.createElement('div');
                 iconWrapper.style.cssText = \`
-                    width: 56px;
-                    height: 56px;
+                    width: \${iconSize}px;
+                    height: \${iconSize}px;
                     background-color: \${embedCustomColor};
                     mask: url(\${baseUrl}/icon.svg) center/contain no-repeat;
                     -webkit-mask: url(\${baseUrl}/icon.svg) center/contain no-repeat;
@@ -120,8 +160,8 @@ export async function GET() {
                 icon.src = iconSrc;
                 icon.alt = 'UT Austin Webring';
                 icon.style.cssText = \`
-                    width: 56px;
-                    height: 56px;
+                    width: \${iconSize}px;
+                    height: \${iconSize}px;
                     display: block;
                 \`;
                 centerLink.appendChild(icon);
@@ -138,7 +178,7 @@ export async function GET() {
                 align-items: center;
                 justify-content: center;
                 transition: transform 0.2s, opacity 0.2s;
-                font-size: 24px;
+                font-size: \${arrowSize}px;
                 padding: 0;
                 line-height: 1;
                 color: \${arrowColor};
