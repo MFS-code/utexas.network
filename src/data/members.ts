@@ -74,13 +74,6 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/gjkeller",
     connections: ["miguel-serna"],
   },
-  {
-    id: "goaubadsf",
-    name: "goaubadsf",
-    website: "https://mfserna.dev",
-    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
-    connections: [],
-  },
 ];
 
 // Helper to get all connections for the network graph
