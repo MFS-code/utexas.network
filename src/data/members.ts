@@ -104,5 +104,17 @@ export function getRandomMember(): Member {
     linkedin: "https://www.linkedin.com/in/mfserna/",
     connections: [],
   },
+  {
+    id: "gabriel-keller",
+    name: "Gabriel Keller",
+    website: "https://www.keller.cv/",
+    profilePic: "https://x.com/gabrieljkeller/photo",
+    program: "Computer Science",
+    year: "2027",
+    instagram: "https://www.instagram.com/atxgabe/",
+    twitter: "https://x.com/gabrieljkeller",
+    linkedin: "https://linkedin.com/in/gjkeller",
+    connections: ["miguel-serna"],
+  },
 ];
 }
