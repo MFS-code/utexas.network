@@ -78,7 +78,7 @@ export const members: Member[] = [
     id: "eric-zazovsky",
     name: "Eric Zazovsky",
     website: "https://ezazovsky.github.io/",
-    profilePic: "https://media.licdn.com/dms/image/v2/D4D03AQEnv92TWARiQg/profile-displayphoto-shrink_800_800/B4DZb5ThGDGgAk-/0/1747939365620?e=1773273600&v=beta&t=D37pz07oWSuo0fRFbTf3Jn7leZG5jquYcGozaHOmds0t",
+    profilePic: "https://scontent-dfw6-1.cdninstagram.com/v/t51.2885-19/428387567_367095602784291_9004954564172798434_n.jpg?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-dfw6-1.cdninstagram.com&_nc_cat=103&_nc_oc=Q6cZ2QF5JvV3vwfr9AJ4WScw8eUjXkglDBfq9aiu7zaEjAXJ9ERjuOjjO8UUD-6gRBGpVB4&_nc_ohc=Hy4lMZttZkoQ7kNvwEaUMIN&_nc_gid=BkyySvAg_Zt0cYr5N8AIIA&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_AfuN5XCK8Sfw5ESQ0MQa8iAdwMS2lLseeMsdZ-wyULaYSg&oe=699C478F&_nc_sid=7a9f4b",
     program: "Computer Science",
     year: "2027",
     linkedin: "https://www.linkedin.com/in/eric-zazovsky/",
