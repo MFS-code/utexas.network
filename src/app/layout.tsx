@@ -23,11 +23,13 @@ export const metadata: Metadata = {
     title: "utexas.network",
     description: "A webring for UT Austin students",
     type: 'website',
+    images: ['/iconwhite.svg'],
   },
   twitter: {
     card: 'summary_large_image',
     title: "utexas.network",
     description: "A webring for UT Austin students",
+    images: ['/iconwhite.svg'],
   },
 };
 
