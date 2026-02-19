@@ -229,7 +229,7 @@ export default function SearchableContent({ members, connections }: SearchableCo
                 </div>
             )}
             <div className="template-credit">
-                template by{' '}
+                inspired by{' '}
                 <a
                     href="https://uwaterloo.network"
                     target="_blank"
