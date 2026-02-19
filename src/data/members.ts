@@ -74,6 +74,15 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/gjkeller",
     connections: ["miguel-serna"],
   },
+  {
+    id: "eric-zazovsky",
+    name: "Eric Zazovsky",
+    website: "https://ezazovsky.github.io/",
+    profilePic: "https://github.com/account",
+    program: "Computer Science",
+    year: "2027",
+    connections: [],
+  },
 ];
 
 // Helper to get all connections for the network graph
