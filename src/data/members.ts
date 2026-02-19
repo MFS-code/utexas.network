@@ -78,7 +78,7 @@ export const members: Member[] = [
     id: "eric-zazovsky",
     name: "Eric Zazovsky",
     website: "https://ezazovsky.github.io/",
-    profilePic: "https://scontent-dfw6-1.cdninstagram.com/v/t51.2885-19/428387567_367095602784291_9004954564172798434_n.jpg?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-dfw6-1.cdninstagram.com&_nc_cat=103&_nc_oc=Q6cZ2QF5JvV3vwfr9AJ4WScw8eUjXkglDBfq9aiu7zaEjAXJ9ERjuOjjO8UUD-6gRBGpVB4&_nc_ohc=Hy4lMZttZkoQ7kNvwEaUMIN&_nc_gid=BkyySvAg_Zt0cYr5N8AIIA&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_AfuN5XCK8Sfw5ESQ0MQa8iAdwMS2lLseeMsdZ-wyULaYSg&oe=699C478F&_nc_sid=7a9f4b",
+    profilePic: "https://avatars.githubusercontent.com/u/70543279?v=4",
     program: "Computer Science",
     year: "2027",
     linkedin: "https://www.linkedin.com/in/eric-zazovsky/",
