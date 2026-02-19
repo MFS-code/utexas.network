@@ -84,6 +84,17 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/eric-zazovsky/",
     connections: ["miguel-serna", "gabriel-keller"],
   },
+  {
+    id: "nicolas-garza",
+    name: "Nicolas Garza",
+    website: "https://nicolas.ai",
+    profilePic: "https://drive.google.com/file/d/1ZNCxMDwSprcZouZzAdmLpBxRRWECi3I9/view?usp=sharing",
+    program: "Computer Science",
+    year: "2027",
+    instagram: "https://www.instagram.com/nicolasgarza_/",
+    linkedin: "https://www.linkedin.com/in/nicolas-garza/",
+    connections: ["gabriel-keller"],
+  },
 ];
 
 // Helper to get all connections for the network graph
