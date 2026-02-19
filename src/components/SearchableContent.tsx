@@ -197,7 +197,7 @@ export default function SearchableContent({ members, connections }: SearchableCo
                                 <input className="join-input" name="fullName" required placeholder="Full name *" />
                                 <input className="join-input" name="utEmail" required type="email" placeholder="UT email *" />
                                 <input className="join-input" name="website" required type="url" placeholder="Personal website URL *" />
-                                <input className="join-input" name="profilePic" required type="url" placeholder="Profile photo URL *" />
+                                <input className="join-input" name="profilePic" required type="url" placeholder="Profile photo URL (direct link, Google Drive, Imgur, etc.) *" />
                                 <input className="join-input" name="program" placeholder="Program / major" />
                                 <input className="join-input" name="year" placeholder="Graduation year" />
                                 <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />

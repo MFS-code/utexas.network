@@ -1,5 +1,6 @@
 import React from 'react';
 import { Member } from '@/data/members';
+import { normalizeImageUrl } from '@/utils/profileImage';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 
@@ -44,14 +45,25 @@ export default function MembersTable({ members, searchQuery }: MembersTableProps
                             <td className="user-cell">
                                 {member.profilePic ? (
                                     <img 
-                                        src={member.profilePic} 
+                                        src={normalizeImageUrl(member.profilePic)} 
                                         alt={member.name || 'Member'} 
                                         className={`avatar ${searchQuery && index === 0 ? 'avatar-highlighted' : ''}`}
+                                        onError={(e) => {
+                                            (e.currentTarget as HTMLImageElement).style.display = 'none';
+                                            const fallback = e.currentTarget.nextElementSibling as HTMLElement | null;
+                                            if (fallback) fallback.style.display = '';
+                                        }}
+                                    />
+                                ) : null}
+                                {!member.profilePic ? (
+                                    <div 
+                                        className={`avatar ${searchQuery && index === 0 ? 'avatar-highlighted' : ''}`}
+                                        style={{ backgroundColor: '#e0e0e0' }} 
                                     />
                                 ) : (
                                     <div 
                                         className={`avatar ${searchQuery && index === 0 ? 'avatar-highlighted' : ''}`}
-                                        style={{ backgroundColor: '#e0e0e0' }} 
+                                        style={{ backgroundColor: '#e0e0e0', display: 'none' }} 
                                     />
                                 )}
                                 {member.website && member.website.trim() ? (

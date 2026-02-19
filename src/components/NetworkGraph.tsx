@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Member, Connection } from '@/data/members';
+import { normalizeImageUrl } from '@/utils/profileImage';
 
 interface NetworkGraphProps {
     members: Member[];
@@ -207,16 +208,16 @@ export default function NetworkGraph({ members, connections, highlightedMemberId
             nodeDiv.style.transition = 'left 0.5s ease, top 0.5s ease, transform 0.5s ease';
 
             const img = document.createElement('img');
-            img.src = node.profilePic || '/icon.svg';
+            img.src = normalizeImageUrl(node.profilePic) || '/icon.svg';
             img.style.width = '32px';
             img.style.height = '32px';
             img.style.borderRadius = '50%';
             img.style.objectFit = 'cover';
             img.style.filter = 'grayscale(100%)';
-            img.style.transition = 'filter 0.3s ease';
             img.style.display = 'block';
             img.draggable = false;
             img.style.transition = 'filter 0.3s ease, opacity 0.3s ease';
+            img.onerror = () => { img.src = '/icon.svg'; img.onerror = null; };
 
             const nameLabel = document.createElement('div');
             nameLabel.textContent = node.name || 'Unknown';
