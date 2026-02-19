@@ -4,7 +4,7 @@ export const runtime = 'edge';
 
 export const alt = 'utexas.network';
 export const size = {
-  width: 1200,
+  width: 1800,
   height: 630,
 };
 export const contentType = 'image/png';
