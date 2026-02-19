@@ -88,7 +88,7 @@ export const members: Member[] = [
     id: "nicolas-garza",
     name: "Nicolas Garza",
     website: "https://nicolas.ai",
-    profilePic: "https://drive.google.com/file/d/1ZNCxMDwSprcZouZzAdmLpBxRRWECi3I9/view?usp=sharing",
+    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQEHwhMLVC1YLg/profile-displayphoto-shrink_800_800/B56ZfMyLcpHoAc-/0/1751487400783?e=1773273600&v=beta&t=WuLafKER8gc0bEydVRAwxqw-YVa3Sbx8tx5yiV_QfCU",
     program: "Computer Science",
     year: "2027",
     instagram: "https://www.instagram.com/nicolasgarza_/",
