@@ -4,7 +4,7 @@ export const runtime = 'edge';
 
 export const alt = 'utexas.network';
 export const size = {
-  width: 1800,
+  width: 1200,
   height: 630,
 };
 export const contentType = 'image/png';
@@ -42,9 +42,9 @@ export default async function Image() {
         >
           <img
             src={iconUrl}
-            width="500"
+            width="750"
             height="500"
-            style={{ width: '500px', height: '500px' }}
+            style={{ width: '750px', height: '500px' }}
           />
         </div>
         
