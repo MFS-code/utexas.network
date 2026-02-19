@@ -42,9 +42,9 @@ export default async function Image() {
         >
           <img
             src={iconUrl}
-            width="820"
+            width="860"
             height="500"
-            style={{ width: '820px', height: '500px' }}
+            style={{ width: '860px', height: '500px' }}
           />
         </div>
         
