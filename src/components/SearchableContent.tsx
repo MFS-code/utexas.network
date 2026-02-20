@@ -240,6 +240,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                 projectName: String(formData.get('projectName') || ''),
                 contactEmail: String(formData.get('contactEmail') || ''),
                 memberIds: String(formData.get('memberIds') || ''),
+                accentItem: String(formData.get('accentItem') || ''),
                 description: String(formData.get('description') || ''),
                 website: String(formData.get('website') || ''),
                 profilePic: String(formData.get('profilePic') || ''),
@@ -485,6 +486,11 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="projectName" required placeholder="Project / org name *" />
                                         <input className="join-input" name="contactEmail" required type="email" placeholder="Contact email *" />
                                         <input className="join-input join-input-wide" name="memberIds" required placeholder="Member IDs (comma-separated, at least one existing member) *" />
+                                        <input
+                                            className="join-input"
+                                            name="accentItem"
+                                            placeholder="Accent item (default, red, yellow, white, black, or #2E4258)"
+                                        />
                                         <input className="join-input join-input-wide" name="description" placeholder="Short description" />
                                         <input className="join-input" name="website" type="url" placeholder="Project website URL" />
                                         <input className="join-input" name="profilePic" type="url" placeholder="Logo / image URL" />

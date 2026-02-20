@@ -47,6 +47,7 @@ export interface Member {
  * - description: Short blurb
  * - website: Project / org URL
  * - profilePic: Logo or image URL
+ * - accentItem: Optional accent style for project cards/graph (named color or #hex)
  * - instagram, twitter, linkedin, github: Social links
  */
 export interface Project {
@@ -56,6 +57,7 @@ export interface Project {
   description?: string;
   website?: string;
   profilePic?: string;
+  accentItem?: 'default' | 'red' | 'yellow' | 'white' | 'black' | `#${string}`;
   instagram?: string;
   twitter?: string;
   linkedin?: string;
@@ -245,6 +247,7 @@ export const projects: Project[] = [
     profilePic: "https://drive.google.com/file/d/1LF8k1v9mayo-ZO01aJA-3xBFN8IK6qS0/view?usp=drive_link",
     twitter: "https://x.com/HelmPM_",
     linkedin: "https://www.linkedin.com/company/helm-pm/",
+    accentItem: "#2E4258",
   },
 ];
 

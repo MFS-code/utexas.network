@@ -11,6 +11,24 @@ interface MembersTableProps {
 }
 
 export default function MembersTable({ members, projects, searchQuery }: MembersTableProps) {
+    const getProjectAccentColor = (accentItem?: Project['accentItem']) => {
+        if (typeof accentItem === 'string' && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(accentItem)) {
+            return accentItem;
+        }
+        switch (accentItem) {
+            case 'yellow':
+                return '#ffb81c';
+            case 'white':
+                return '#ffffff';
+            case 'black':
+                return '#111111';
+            case 'red':
+                return '#bf5700';
+            default:
+                return undefined;
+        }
+    };
+
     const highlightText = (text: string | null | undefined) => {
         if (!text || !searchQuery) return text || '';
         
@@ -164,6 +182,7 @@ export default function MembersTable({ members, projects, searchQuery }: Members
                                                 src={normalizeImageUrl(project.profilePic)}
                                                 alt={project.name}
                                                 className="avatar avatar-project"
+                                                style={{ borderColor: getProjectAccentColor(project.accentItem) }}
                                                 onError={(e) => {
                                                     (e.currentTarget as HTMLImageElement).style.display = 'none';
                                                     const fallback = e.currentTarget.nextElementSibling as HTMLElement | null;
@@ -172,9 +191,15 @@ export default function MembersTable({ members, projects, searchQuery }: Members
                                             />
                                         ) : null}
                                         {!project.profilePic ? (
-                                            <div className="avatar avatar-project" style={{ backgroundColor: '#e0e0e0' }} />
+                                            <div
+                                                className="avatar avatar-project"
+                                                style={{ backgroundColor: '#e0e0e0', borderColor: getProjectAccentColor(project.accentItem) }}
+                                            />
                                         ) : (
-                                            <div className="avatar avatar-project" style={{ backgroundColor: '#e0e0e0', display: 'none' }} />
+                                            <div
+                                                className="avatar avatar-project"
+                                                style={{ backgroundColor: '#e0e0e0', display: 'none', borderColor: getProjectAccentColor(project.accentItem) }}
+                                            />
                                         )}
                                         {project.website ? (
                                             <a

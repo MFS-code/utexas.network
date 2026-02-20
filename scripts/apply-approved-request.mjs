@@ -40,6 +40,13 @@ const toMemberId = (fullName) => {
 
 const sanitizeUrl = (value) => String(value || '').trim();
 const sanitizeText = (value) => String(value || '').trim();
+const sanitizeAccentItem = (value) => {
+  const normalized = String(value || '').trim().toLowerCase();
+  const allowed = new Set(['default', 'red', 'yellow', 'white', 'black']);
+  if (allowed.has(normalized)) return normalized;
+  if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(normalized)) return normalized;
+  return '';
+};
 
 const file = fs.readFileSync(membersPath, 'utf8');
 
@@ -65,6 +72,10 @@ if (isProject) {
 
   if (sanitizeText(payload.description)) {
     entryLines.push(`    description: ${JSON.stringify(sanitizeText(payload.description))},`);
+  }
+  const accentItem = sanitizeAccentItem(payload.accentItem);
+  if (accentItem) {
+    entryLines.push(`    accentItem: ${JSON.stringify(accentItem)},`);
   }
   if (sanitizeUrl(payload.website)) {
     entryLines.push(`    website: ${JSON.stringify(sanitizeUrl(payload.website))},`);

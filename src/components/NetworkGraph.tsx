@@ -17,6 +17,7 @@ interface Node {
     name: string | null;
     profilePic: string | undefined;
     website: string | null;
+    accentItem?: Project['accentItem'];
     x: number;
     y: number;
     isProject?: boolean;
@@ -135,6 +136,24 @@ export default function NetworkGraph({ members, projects, connections, highlight
         });
     }, []);
 
+    const getProjectAccentColor = (accentItem?: Project['accentItem']) => {
+        if (typeof accentItem === 'string' && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(accentItem)) {
+            return accentItem;
+        }
+        switch (accentItem) {
+            case 'yellow':
+                return '#ffb81c';
+            case 'white':
+                return '#ffffff';
+            case 'black':
+                return '#111111';
+            case 'red':
+                return '#bf5700';
+            default:
+                return '#bf5700';
+        }
+    };
+
     useEffect(() => {
         if (!containerRef.current) return;
 
@@ -196,8 +215,15 @@ export default function NetworkGraph({ members, projects, connections, highlight
         nodeElementsRef.current.clear();
 
         const allEntries = [
-            ...members.map(m => ({ id: m.id, name: m.name, profilePic: m.profilePic, website: m.website, isProject: false })),
-            ...projects.map(p => ({ id: p.id, name: p.name, profilePic: p.profilePic, website: p.website || null, isProject: true })),
+            ...members.map(m => ({ id: m.id, name: m.name, profilePic: m.profilePic, website: m.website, accentItem: undefined, isProject: false })),
+            ...projects.map(p => ({
+                id: p.id,
+                name: p.name,
+                profilePic: p.profilePic,
+                website: p.website || null,
+                accentItem: p.accentItem,
+                isProject: true,
+            })),
         ];
 
         const goldenAngle = Math.PI * (3 - Math.sqrt(5));
@@ -210,6 +236,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 name: entry.name,
                 profilePic: entry.profilePic,
                 website: entry.website,
+                accentItem: entry.accentItem,
                 x: width / 2 + radius * Math.cos(angle),
                 y: height / 2 + radius * Math.sin(angle),
                 isProject: entry.isProject,
@@ -246,7 +273,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
             img.onerror = () => { img.src = '/icon.svg'; img.onerror = null; };
 
             if (node.isProject) {
-                nodeDiv.style.border = '2px dashed #bf5700';
+                nodeDiv.style.border = `2px dashed ${getProjectAccentColor(node.accentItem)}`;
                 nodeDiv.style.borderRadius = '8px';
                 nodeDiv.style.padding = '3px';
             }

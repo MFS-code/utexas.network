@@ -20,6 +20,7 @@ interface ProjectPayload {
   projectName: string;
   contactEmail: string;
   memberIds: string;
+  accentItem?: string;
   description?: string;
   website?: string;
   profilePic?: string;
@@ -160,6 +161,7 @@ function buildProjectIssue(payload: ProjectPayload) {
     projectName: payload.projectName.trim(),
     contactEmail: payload.contactEmail.trim(),
     memberIds: payload.memberIds.trim(),
+    accentItem: payload.accentItem?.trim() || '',
     description: payload.description?.trim() || '',
     website: payload.website?.trim() || '',
     profilePic: payload.profilePic?.trim() || '',
@@ -176,6 +178,7 @@ function buildProjectIssue(payload: ProjectPayload) {
     `- **Project Name:** ${clean.projectName}`,
     `- **Contact Email:** ${clean.contactEmail}`,
     `- **Member IDs:** ${clean.memberIds}`,
+    `- **Accent Item:** ${clean.accentItem || '(default)'}`,
     `- **Description:** ${clean.description || '-'}`,
     `- **Website:** ${clean.website || '-'}`,
     `- **Logo / Image:** ${clean.profilePic || '-'}`,
@@ -208,6 +211,7 @@ function buildProjectIssue(payload: ProjectPayload) {
       `Project: ${clean.projectName}`,
       `Contact: ${clean.contactEmail}`,
       `Members: ${clean.memberIds}`,
+      `Accent Item: ${clean.accentItem || '(default)'}`,
       `Description: ${clean.description || '-'}`,
       `Website: ${clean.website || '-'}`,
       `Logo: ${clean.profilePic || '-'}`,
