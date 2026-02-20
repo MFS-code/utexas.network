@@ -180,6 +180,16 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/nj-brown/",
     connections: [],
   },
+  {
+    id: "neev-gupta",
+    name: "Neev Gupta",
+    website: "https://neevgupta.com",
+    profilePic: "https://drive.google.com/file/d/1ip8578b_fC5325gbgc00hFN9v6cT_di-/view?usp=drivesdk",
+    program: "Computer Science",
+    year: "2029",
+    linkedin: "https://linkedin.com/in/neevgupta",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
