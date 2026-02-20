@@ -138,6 +138,7 @@ export const projects: Project[] = [
     profilePic: "https://pbs.twimg.com/profile_images/2016047683505438720/aIQMt7Yy_400x400.png",
     website: "https://agentops.sh",
     twitter: "https://x.com/agentopslab",
+    linkedin: "https://www.linkedin.com/company/agentopslab/",
   },
 ];
 
