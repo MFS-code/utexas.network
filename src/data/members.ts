@@ -170,6 +170,16 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/praneelseth",
     connections: ["miguel-serna", "gabriel-keller"],
   },
+  {
+    id: "nathan-brown",
+    name: "Nathan Brown",
+    website: "https://www.njbrown.com",
+    profilePic: "https://drive.google.com/file/d/1vY6Q2clGgoZMVpQk4JfIU5pyIf4VZiMd/view?usp=sharing",
+    program: "Mathematics",
+    year: "2028",
+    linkedin: "https://www.linkedin.com/in/nj-brown/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
