@@ -35,7 +35,7 @@ type JoinRequestPayload = MemberPayload | ProjectPayload;
 const JOIN_ALERT_TO_EMAIL = 'miguelfserna@gmail.com';
 
 function isEduEmail(email: string): boolean {
-  return /\.edu$/i.test(email.trim());
+  return /^[^\s@]+@[^\s@]+\.edu$/i.test(email.trim());
 }
 
 function isValidMemberPayload(p: Record<string, unknown>): boolean {

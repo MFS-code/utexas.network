@@ -26,7 +26,7 @@ interface SearchableContentProps {
 
 const PINNED_MEMBER_ID = 'miguel-serna';
 const GOOGLE_OAUTH_SOURCE = 'google-oauth';
-const EDU_EMAIL_REGEX = /\.edu$/i;
+const EDU_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.edu$/i;
 
 interface GoogleOAuthProfile {
     name: string;
@@ -91,6 +91,8 @@ export default function SearchableContent({ members, projects, connections }: Se
         }
     };
 
+    const isEduEmail = (email: string): boolean => EDU_EMAIL_REGEX.test(email.trim());
+
     const setJoinInputValue = (name: string, value: string) => {
         const field = joinFormRef.current?.elements.namedItem(name);
         if (
@@ -147,7 +149,7 @@ export default function SearchableContent({ members, projects, connections }: Se
             setJoinInputValue('utEmail', profile.email || '');
             setJoinInputValue('profilePic', profile.picture || '');
 
-            if (profile.email && !EDU_EMAIL_REGEX.test(profile.email)) {
+            if (profile.email && !isEduEmail(profile.email)) {
                 setSubmitStatus({
                     type: 'success',
                     message: 'Google profile imported. Please use your .edu email before submitting.',
@@ -264,7 +266,7 @@ export default function SearchableContent({ members, projects, connections }: Se
 
         if (formType === 'member') {
             const utEmail = (payload as { utEmail: string }).utEmail.trim();
-            if (!EDU_EMAIL_REGEX.test(utEmail)) {
+            if (!isEduEmail(utEmail)) {
                 setSubmitStatus({
                     type: 'error',
                     message: 'Please use your .edu email before submitting.',
@@ -454,7 +456,11 @@ export default function SearchableContent({ members, projects, connections }: Se
                                             name="utEmail"
                                             required
                                             type="email"
-                                            pattern=".+\\.edu$"
+                                            onChange={(event) => {
+                                                if (isEduEmail(event.target.value) && submitStatus?.type === 'error') {
+                                                    setSubmitStatus(null);
+                                                }
+                                            }}
                                             placeholder="UT .edu email *"
                                             title="Please use your .edu email address."
                                         />
