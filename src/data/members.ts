@@ -139,6 +139,16 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/anushse/",
     connections: [],
   },
+  {
+    id: "jayden-ruddock",
+    name: "Jayden Ruddock",
+    website: "https://spacewalker215.github.io/MyPortfolio/",
+    profilePic: "https://media.licdn.com/dms/image/v2/D4D35AQFoPY0aSILmXA/profile-framedphoto-shrink_400_400/B4DZv25oFcK0Ac-/0/1769373860534?e=1772211600&v=beta&t=KWTV271PtMMMywp4nbZFKWwatb6ulRyddMohi5Ng1oo",
+    program: "Computer Science",
+    year: "2028",
+    linkedin: "https://www.linkedin.com/in/jaydenruddock/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
