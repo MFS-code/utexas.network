@@ -20,10 +20,12 @@ jobs:
           script: |
             const body = (context.payload.comment.body || '').trim().toLowerCase();
             const association = context.payload.comment.author_association;
-            const hasJoinLabel = (context.payload.issue.labels || []).some(l => l.name === 'join-request');
+            const labels = (context.payload.issue.labels || []).map(l => l.name);
+            const hasJoinLabel = labels.includes('join-request');
+            const hasProjectLabel = labels.includes('project-request');
             const allowed = ['OWNER', 'MEMBER', 'COLLABORATOR'].includes(association);
 
-            if (!hasJoinLabel || !allowed || (body !== '/approve' && body !== '/reject')) {
+            if ((!hasJoinLabel && !hasProjectLabel) || !allowed || (body !== '/approve' && body !== '/reject')) {
               core.setOutput('run', 'false');
               return;
             }
@@ -31,12 +33,13 @@ jobs:
             core.setOutput('run', 'true');
             core.setOutput('command', body);
             core.setOutput('issue_number', String(context.payload.issue.number));
+            core.setOutput('request_type', hasProjectLabel ? 'project' : 'member');
 
       - name: Checkout repository
         if: steps.gate.outputs.run == 'true'
         uses: actions/checkout@v4
 
-      - name: Approve request and commit member
+      - name: Approve request and commit
         if: steps.gate.outputs.run == 'true' && steps.gate.outputs.command == '/approve'
         id: approve_commit
         continue-on-error: true
@@ -50,12 +53,12 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add src/data/members.ts
-            git commit -m "approve join request #${{ steps.gate.outputs.issue_number }}"
+            git commit -m "approve ${{ steps.gate.outputs.request_type }} request #${{ steps.gate.outputs.issue_number }}"
             git push
           fi
 
       - name: Send approval email to applicant
-        if: steps.gate.outputs.run == 'true' && steps.gate.outputs.command == '/approve' && steps.approve_commit.outcome == 'success'
+        if: steps.gate.outputs.run == 'true' && steps.gate.outputs.command == '/approve' && steps.approve_commit.outcome == 'success' && steps.gate.outputs.request_type == 'member'
         id: approval_email
         continue-on-error: true
         env:
@@ -72,6 +75,7 @@ jobs:
         with:
           script: |
             const issue_number = Number('${{ steps.gate.outputs.issue_number }}');
+            const reqType = '${{ steps.gate.outputs.request_type }}';
             await github.rest.issues.addLabels({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -84,15 +88,19 @@ jobs:
               issue_number,
               name: 'pending'
             }).catch(() => {});
+
+            const emailNote = reqType === 'member'
+              ? '\n\nApproval email status: ' +
+                ('${{ steps.approval_email.outcome }}' === 'success'
+                  ? 'sent to applicant.'
+                  : 'failed to send (check workflow logs).')
+              : '';
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number,
-              body:
-                'Approved and committed to `src/data/members.ts`.\n\nApproval email status: ' +
-                ('${{ steps.approval_email.outcome }}' === 'success'
-                  ? 'sent to applicant.'
-                  : 'failed to send (check workflow logs).')
+              body: `Approved and committed to \`src/data/members.ts\`.${emailNote}`
             });
             await github.rest.issues.update({
               owner: context.repo.owner,
@@ -107,6 +115,7 @@ jobs:
         with:
           script: |
             const issue_number = Number('${{ steps.gate.outputs.issue_number }}');
+            const reqType = '${{ steps.gate.outputs.request_type }}';
             await github.rest.issues.addLabels({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -117,7 +126,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number,
-              body: 'Approval command failed before committing `src/data/members.ts`. This usually means the generated member id already exists or the payload was invalid. Check workflow logs and re-approve after fixing.'
+              body: `Approval command failed before committing \`src/data/members.ts\`. This usually means the generated ${reqType} id already exists or the payload was invalid. Check workflow logs and re-approve after fixing.`
             });
 
       - name: Mark rejected and close issue

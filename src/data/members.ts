@@ -134,7 +134,7 @@ export const projects: Project[] = [
     id: "agent-ops",
     name: "Agent Operations Lab",
     memberIds: ["miguel-serna", "gabriel-keller"],
-    description: "A lab for building and researching agentic systems",
+    description: "Reinventing inventing agents.",
     profilePic: "https://pbs.twimg.com/profile_images/2016047683505438720/aIQMt7Yy_400x400.png",
     website: "https://agentops.sh",
     twitter: "https://x.com/agentopslab",

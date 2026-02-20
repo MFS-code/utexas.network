@@ -36,6 +36,7 @@ export default function SearchableContent({ members, projects, connections }: Se
     const [searchQuery, setSearchQuery] = useState('');
     const [shuffledMembers, setShuffledMembers] = useState<Member[]>(members);
     const [showJoinForm, setShowJoinForm] = useState(false);
+    const [formType, setFormType] = useState<'member' | 'project'>('member');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
     
@@ -68,19 +69,52 @@ export default function SearchableContent({ members, projects, connections }: Se
 
         const form = event.currentTarget;
         const formData = new FormData(form);
-        const payload = {
-            fullName: String(formData.get('fullName') || ''),
-            utEmail: String(formData.get('utEmail') || ''),
-            website: String(formData.get('website') || ''),
-            profilePic: String(formData.get('profilePic') || ''),
-            program: String(formData.get('program') || ''),
-            year: String(formData.get('year') || ''),
-            twitter: String(formData.get('twitter') || ''),
-            instagram: String(formData.get('instagram') || ''),
-            linkedin: String(formData.get('linkedin') || ''),
-            connections: String(formData.get('connections') || ''),
-            notes: String(formData.get('notes') || ''),
-        };
+
+        const payload = formType === 'project'
+            ? {
+                type: 'project' as const,
+                projectName: String(formData.get('projectName') || ''),
+                contactEmail: String(formData.get('contactEmail') || ''),
+                memberIds: String(formData.get('memberIds') || ''),
+                description: String(formData.get('description') || ''),
+                website: String(formData.get('website') || ''),
+                profilePic: String(formData.get('profilePic') || ''),
+                twitter: String(formData.get('twitter') || ''),
+                instagram: String(formData.get('instagram') || ''),
+                linkedin: String(formData.get('linkedin') || ''),
+                github: String(formData.get('github') || ''),
+                notes: String(formData.get('notes') || ''),
+            }
+            : {
+                type: 'member' as const,
+                fullName: String(formData.get('fullName') || ''),
+                utEmail: String(formData.get('utEmail') || ''),
+                website: String(formData.get('website') || ''),
+                profilePic: String(formData.get('profilePic') || ''),
+                program: String(formData.get('program') || ''),
+                year: String(formData.get('year') || ''),
+                twitter: String(formData.get('twitter') || ''),
+                instagram: String(formData.get('instagram') || ''),
+                linkedin: String(formData.get('linkedin') || ''),
+                connections: String(formData.get('connections') || ''),
+                notes: String(formData.get('notes') || ''),
+            };
+
+        if (formType === 'project') {
+            const ids = (payload as { memberIds: string }).memberIds
+                .split(',')
+                .map(s => s.trim())
+                .filter(Boolean);
+            const hasConnection = ids.some(id => members.some(m => m.id === id));
+            if (!hasConnection) {
+                setSubmitStatus({
+                    type: 'error',
+                    message: 'At least one member ID must match an existing member in the network.',
+                });
+                setIsSubmitting(false);
+                return;
+            }
+        }
 
         try {
             const response = await fetch('/api/join-request', {
@@ -190,7 +224,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                         aria-label="Request to join"
                     >
                         <div className="join-modal-header">
-                            <h2>request to join</h2>
+                            <h2>{formType === 'project' ? 'submit a project / org' : 'request to join'}</h2>
                             <button
                                 type="button"
                                 className="join-modal-close"
@@ -202,24 +236,65 @@ export default function SearchableContent({ members, projects, connections }: Se
                             </button>
                         </div>
 
+                        <div className="form-type-toggle">
+                            <button
+                                type="button"
+                                className={`form-type-btn ${formType === 'member' ? 'form-type-btn-active' : ''}`}
+                                onClick={() => setFormType('member')}
+                            >
+                                member
+                            </button>
+                            <button
+                                type="button"
+                                className={`form-type-btn ${formType === 'project' ? 'form-type-btn-active' : ''}`}
+                                onClick={() => setFormType('project')}
+                            >
+                                project / org
+                            </button>
+                        </div>
+
                         <form className="join-form" onSubmit={handleJoinSubmit}>
-                            <div className="join-form-grid">
-                                <input className="join-input" name="fullName" required placeholder="Full name *" />
-                                <input className="join-input" name="utEmail" required type="email" placeholder="UT email *" />
-                                <input className="join-input" name="website" required type="url" placeholder="Personal website URL *" />
-                                <input className="join-input" name="profilePic" required type="url" placeholder="Profile photo URL (direct link, Google Drive, Imgur, etc.) *" />
-                                <input className="join-input" name="program" placeholder="Program / major" />
-                                <input className="join-input" name="year" placeholder="Graduation year" />
-                                <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
-                                <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
-                                <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
-                                <input className="join-input join-input-wide" name="connections" placeholder="Connection IDs (comma-separated, optional)" />
-                                <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
-                            </div>
-                            <p className="join-tip">
-                                tip: IDs are generated as <code>firstname-lastname</code>, all lowercase.
-                                Any space is converted to <code>-</code>.
-                            </p>
+                            {formType === 'member' ? (
+                                <>
+                                    <div className="join-form-grid">
+                                        <input className="join-input" name="fullName" required placeholder="Full name *" />
+                                        <input className="join-input" name="utEmail" required type="email" placeholder="UT email *" />
+                                        <input className="join-input" name="website" required type="url" placeholder="Personal website URL *" />
+                                        <input className="join-input" name="profilePic" required type="url" placeholder="Profile photo URL (direct link, Google Drive, Imgur, etc.) *" />
+                                        <input className="join-input" name="program" placeholder="Program / major" />
+                                        <input className="join-input" name="year" placeholder="Graduation year" />
+                                        <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
+                                        <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
+                                        <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
+                                        <input className="join-input join-input-wide" name="connections" placeholder="Connection IDs (comma-separated, optional)" />
+                                        <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
+                                    </div>
+                                    <p className="join-tip">
+                                        tip: IDs are generated as <code>firstname-lastname</code>, all lowercase.
+                                        Any space is converted to <code>-</code>.
+                                    </p>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="join-form-grid">
+                                        <input className="join-input" name="projectName" required placeholder="Project / org name *" />
+                                        <input className="join-input" name="contactEmail" required type="email" placeholder="Contact email *" />
+                                        <input className="join-input join-input-wide" name="memberIds" required placeholder="Member IDs (comma-separated, at least one existing member) *" />
+                                        <input className="join-input join-input-wide" name="description" placeholder="Short description" />
+                                        <input className="join-input" name="website" type="url" placeholder="Project website URL" />
+                                        <input className="join-input" name="profilePic" type="url" placeholder="Logo / image URL" />
+                                        <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
+                                        <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
+                                        <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
+                                        <input className="join-input" name="github" type="url" placeholder="GitHub URL" />
+                                        <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
+                                    </div>
+                                    <p className="join-tip">
+                                        at least one member ID must belong to someone already in the network.
+                                        IDs follow the <code>firstname-lastname</code> format.
+                                    </p>
+                                </>
+                            )}
 
                             <div className="join-form-actions">
                                 <button type="submit" className="join-submit" disabled={isSubmitting}>

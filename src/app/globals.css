@@ -154,6 +154,37 @@ a {
   color: var(--hover-color);
 }
 
+.form-type-toggle {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.form-type-btn {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  border: none;
+  background: var(--input-bg);
+  color: var(--secondary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.form-type-btn:not(:last-child) {
+  border-right: 1px solid var(--border);
+}
+
+.form-type-btn-active {
+  background: var(--hover-color);
+  color: #ffffff;
+}
+
 .join-form {
   margin-top: 0.5rem;
   border: 1px solid var(--border);
