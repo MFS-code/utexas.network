@@ -127,6 +127,18 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/nicolas-garza/",
     connections: ["gabriel-keller"],
   },
+  {
+    id: "anush-sonone",
+    name: "anush sonone",
+    website: "https://anush.wiki/",
+    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQFo2Yd18XnCOw/profile-displayphoto-scale_200_200/B56ZsEvEd2JQAY-/0/1765311013583?e=1773273600&v=beta&t=KNQ-wcM5t32W7Je8jt2n-gFgCUESsxG175Oq32tu4ck",
+    program: "CS",
+    year: "2028",
+    instagram: "https://noinsta",
+    twitter: "https://notwitter",
+    linkedin: "https://www.linkedin.com/in/anushse/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
