@@ -149,6 +149,16 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/jaydenruddock/",
     connections: [],
   },
+  {
+    id: "colin-angel",
+    name: "Colin Angel",
+    website: "https://colinangel.com",
+    profilePic: "https://drive.google.com/file/d/1vWuhBr-we8sFr6glR7Q4_wtaEtgZBP1w/view?usp=sharing",
+    program: "ECE",
+    year: "2025",
+    linkedin: "https://www.linkedin.com/in/colinjangel/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
