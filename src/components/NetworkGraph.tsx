@@ -232,7 +232,6 @@ export default function NetworkGraph({ members, projects, connections, highlight
             nodeDiv.style.position = 'absolute';
             nodeDiv.style.cursor = 'grab';
             nodeDiv.style.userSelect = 'none';
-            nodeDiv.style.transition = 'left 0.5s ease, top 0.5s ease, transform 0.5s ease';
 
             const img = document.createElement('img');
             img.src = normalizeImageUrl(node.profilePic) || '/icon.svg';
@@ -306,7 +305,6 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 isDraggingRef.current = false;
                 dragNodeRef.current = node.id;
                 nodeDiv.style.cursor = 'grabbing';
-                nodeDiv.style.transition = 'none';
                 const rect = container.getBoundingClientRect();
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
@@ -386,7 +384,6 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 const nodeDiv = nodeElementsRef.current.get(dragNodeRef.current);
                 if (nodeDiv) {
                     nodeDiv.style.cursor = 'grab';
-                    nodeDiv.style.transition = 'left 0.5s ease, top 0.5s ease, transform 0.5s ease';
                 }
                 isDraggingRef.current = false;
                 dragNodeRef.current = null;
