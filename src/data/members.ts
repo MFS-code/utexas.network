@@ -236,6 +236,16 @@ export const projects: Project[] = [
     twitter: "https://x.com/agentopslab",
     linkedin: "https://www.linkedin.com/company/agentopslab/",
   },
+  {
+    id: "helm-pm",
+    name: "Helm PM",
+    memberIds: ["ayman-mahfuz"],
+    description: "An AI native product management platform",
+    website: "https://helmpm.app/",
+    profilePic: "https://drive.google.com/file/d/1LF8k1v9mayo-ZO01aJA-3xBFN8IK6qS0/view?usp=drive_link",
+    twitter: "https://x.com/HelmPM_",
+    linkedin: "https://www.linkedin.com/company/helm-pm/",
+  },
 ];
 
 // Helper to get all connections for the network graph
