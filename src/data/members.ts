@@ -201,6 +201,18 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/parth-mehta100",
     connections: [],
   },
+  {
+    id: "ayman-mahfuz",
+    name: "Ayman Mahfuz",
+    website: "https://aymanmahfuzportfolio.com/",
+    profilePic: "https://lh3.googleusercontent.com/a/ACg8ocKMSefagoPfVL4xHrib4Fk6Dfxmx90hBtUVmHL9RwyF_Ikshw=s96-c",
+    program: "Computer Science",
+    year: "2027",
+    instagram: "https://www.instagram.com/aymanmahfuz05/",
+    twitter: "https://x.com/AymanMahfuz10",
+    linkedin: "https://www.linkedin.com/in/aymanmahfuz/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
