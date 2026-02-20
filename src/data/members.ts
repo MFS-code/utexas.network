@@ -159,6 +159,17 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/colinjangel/",
     connections: [],
   },
+  {
+    id: "kaustubh-duddala",
+    name: "Kaustubh Duddala",
+    website: "https://kaustubh.duddala.com",
+    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQF6Oniw545H9A/profile-displayphoto-scale_400_400/B56ZmzzkCkIYAk-/0/1759658263139?e=1773273600&v=beta&t=MLul8VGd_jHbIBHEcquSbG9-qvqIuETyhk8QganopAs",
+    program: "Statistics and Data Science",
+    year: "2028",
+    instagram: "https://www.instagram.com/kaustubh.duddala/",
+    linkedin: "https://www.linkedin.com/in/kaustubhduddala/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
