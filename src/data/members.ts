@@ -205,7 +205,7 @@ export const members: Member[] = [
     id: "ayman-mahfuz",
     name: "Ayman Mahfuz",
     website: "https://aymanmahfuzportfolio.com/",
-    profilePic: "https://lh3.googleusercontent.com/a/ACg8ocKMSefagoPfVL4xHrib4Fk6Dfxmx90hBtUVmHL9RwyF_Ikshw=s96-c",
+    profilePic: "https://www.aymanmahfuzportfolio.com/Facetune_07-05-2024-16-02-47.jpg",
     program: "Computer Science",
     year: "2027",
     instagram: "https://www.instagram.com/aymanmahfuz05/",
