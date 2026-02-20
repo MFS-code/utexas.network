@@ -47,6 +47,24 @@ export default function NetworkGraph({ members, projects, connections, highlight
     highlightedRef.current = highlightedMemberIds;
     searchQueryRef.current = searchQuery;
 
+    function getProjectAccentColor(accentItem?: Project['accentItem']) {
+        if (typeof accentItem === 'string' && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(accentItem)) {
+            return accentItem;
+        }
+        switch (accentItem) {
+            case 'yellow':
+                return '#ffb81c';
+            case 'white':
+                return '#ffffff';
+            case 'black':
+                return '#111111';
+            case 'red':
+                return '#bf5700';
+            default:
+                return '#bf5700';
+        }
+    }
+
     useEffect(() => {
         const checkDarkMode = () => {
             const theme = document.documentElement.getAttribute('data-theme');
@@ -102,7 +120,8 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 line.setAttribute('opacity', '0.5');
                 if (conn.dotted) {
                     line.setAttribute('stroke-dasharray', '4 4');
-                    line.setAttribute('stroke', '#bf5700');
+                    const projectNode = fromNode.isProject ? fromNode : (toNode.isProject ? toNode : null);
+                    line.setAttribute('stroke', getProjectAccentColor(projectNode?.accentItem));
                     line.setAttribute('opacity', '0.6');
                 }
                 svg.appendChild(line);
@@ -135,24 +154,6 @@ export default function NetworkGraph({ members, projects, connections, highlight
             }
         });
     }, []);
-
-    const getProjectAccentColor = (accentItem?: Project['accentItem']) => {
-        if (typeof accentItem === 'string' && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(accentItem)) {
-            return accentItem;
-        }
-        switch (accentItem) {
-            case 'yellow':
-                return '#ffb81c';
-            case 'white':
-                return '#ffffff';
-            case 'black':
-                return '#111111';
-            case 'red':
-                return '#bf5700';
-            default:
-                return '#bf5700';
-        }
-    };
 
     useEffect(() => {
         if (!containerRef.current) return;
