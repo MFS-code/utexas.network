@@ -466,6 +466,17 @@ a {
   font-size: 0.9rem;
 }
 
+/* Projects Section */
+.projects-section-divider {
+  margin: 2.5rem 0 1.5rem;
+  border-top: 1px dashed var(--border);
+}
+
+.avatar-project {
+  border-radius: 6px !important;
+  border: 1.5px dashed var(--hover-color);
+}
+
 /* Social Icons */
 .social-icons {
   display: flex;

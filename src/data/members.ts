@@ -31,10 +31,42 @@ export interface Member {
   connections?: string[]; // IDs of other members you want to connect with
 }
 
+/**
+ * PROJECTS & ORGS
+ *
+ * Shared projects or organizations involving two or more members.
+ * These appear as a separate category in the list and as distinct
+ * nodes (with dotted-line edges) in the network graph.
+ *
+ * Required fields:
+ * - id: Slug with hyphens (e.g., "cool-project")
+ * - name: Display name
+ * - memberIds: IDs of member participants (minimum 2)
+ *
+ * Optional fields:
+ * - description: Short blurb
+ * - website: Project / org URL
+ * - profilePic: Logo or image URL
+ * - instagram, twitter, linkedin, github: Social links
+ */
+export interface Project {
+  id: string;
+  name: string;
+  memberIds: string[];
+  description?: string;
+  website?: string;
+  profilePic?: string;
+  instagram?: string;
+  twitter?: string;
+  linkedin?: string;
+  github?: string;
+}
+
 // Connection type for the network graph
 export interface Connection {
   fromId: string;
   toId: string;
+  dotted?: boolean;
 }
 
 export const members: Member[] = [
@@ -97,6 +129,18 @@ export const members: Member[] = [
   },
 ];
 
+export const projects: Project[] = [
+  {
+    id: "agent-ops",
+    name: "Agent Operations Lab",
+    memberIds: ["miguel-serna", "gabriel-keller"],
+    description: "A lab for building and researching agentic systems",
+    profilePic: "https://pbs.twimg.com/profile_images/2016047683505438720/aIQMt7Yy_400x400.png",
+    website: "https://agentops.sh",
+    twitter: "https://x.com/agentopslab",
+  },
+];
+
 // Helper to get all connections for the network graph
 export function getConnections(): Connection[] {
   const connections: Connection[] = [];
@@ -104,7 +148,6 @@ export function getConnections(): Connection[] {
   members.forEach(member => {
     if (member.connections) {
       member.connections.forEach(targetId => {
-        // Only add connection if target member exists
         if (members.some(m => m.id === targetId)) {
           connections.push({
             fromId: member.id,
@@ -113,6 +156,18 @@ export function getConnections(): Connection[] {
         }
       });
     }
+  });
+
+  projects.forEach(project => {
+    project.memberIds.forEach(memberId => {
+      if (members.some(m => m.id === memberId)) {
+        connections.push({
+          fromId: project.id,
+          toId: memberId,
+          dotted: true,
+        });
+      }
+    });
   });
   
   return connections;

@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { Member, Connection } from '@/data/members';
+import { Member, Project, Connection } from '@/data/members';
 import { normalizeImageUrl } from '@/utils/profileImage';
 
 interface NetworkGraphProps {
     members: Member[];
+    projects: Project[];
     connections: Connection[];
     highlightedMemberIds?: string[];
     searchQuery?: string;
@@ -18,9 +19,10 @@ interface Node {
     website: string | null;
     x: number;
     y: number;
+    isProject?: boolean;
 }
 
-export default function NetworkGraph({ members, connections, highlightedMemberIds = [], searchQuery = '' }: NetworkGraphProps) {
+export default function NetworkGraph({ members, projects, connections, highlightedMemberIds = [], searchQuery = '' }: NetworkGraphProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const svgRef = useRef<SVGSVGElement | null>(null);
     const nodesRef = useRef<Node[]>([]);
@@ -133,6 +135,11 @@ export default function NetworkGraph({ members, connections, highlightedMemberId
                 line.setAttribute('stroke', isDark ? '#404040' : '#333');
                 line.setAttribute('stroke-width', '1');
                 line.setAttribute('opacity', '0.3');
+                if (conn.dotted) {
+                    line.setAttribute('stroke-dasharray', '4 4');
+                    line.setAttribute('stroke', isDark ? '#bf5700' : '#bf5700');
+                    line.setAttribute('opacity', '0.45');
+                }
                 svg.appendChild(line);
             }
         });
@@ -174,18 +181,24 @@ export default function NetworkGraph({ members, connections, highlightedMemberId
         container.innerHTML = '';
         nodeElementsRef.current.clear();
 
+        const allEntries = [
+            ...members.map(m => ({ id: m.id, name: m.name, profilePic: m.profilePic, website: m.website, isProject: false })),
+            ...projects.map(p => ({ id: p.id, name: p.name, profilePic: p.profilePic, website: p.website || null, isProject: true })),
+        ];
+
         const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-        nodesRef.current = members.map((member, i) => {
-            const radius = Math.sqrt(i + 0.5) * (Math.min(width, height) / (2.5 * Math.sqrt(members.length)));
+        nodesRef.current = allEntries.map((entry, i) => {
+            const radius = Math.sqrt(i + 0.5) * (Math.min(width, height) / (2.5 * Math.sqrt(allEntries.length)));
             const angle = i * goldenAngle;
 
             return {
-                id: member.id,
-                name: member.name,
-                profilePic: member.profilePic,
-                website: member.website,
+                id: entry.id,
+                name: entry.name,
+                profilePic: entry.profilePic,
+                website: entry.website,
                 x: width / 2 + radius * Math.cos(angle),
                 y: height / 2 + radius * Math.sin(angle),
+                isProject: entry.isProject,
             };
         });
 
@@ -209,15 +222,21 @@ export default function NetworkGraph({ members, connections, highlightedMemberId
 
             const img = document.createElement('img');
             img.src = normalizeImageUrl(node.profilePic) || '/icon.svg';
-            img.style.width = '32px';
-            img.style.height = '32px';
-            img.style.borderRadius = '50%';
+            img.style.width = node.isProject ? '28px' : '32px';
+            img.style.height = node.isProject ? '28px' : '32px';
+            img.style.borderRadius = node.isProject ? '6px' : '50%';
             img.style.objectFit = 'cover';
             img.style.filter = 'grayscale(100%)';
             img.style.display = 'block';
             img.draggable = false;
             img.style.transition = 'filter 0.3s ease, opacity 0.3s ease';
             img.onerror = () => { img.src = '/icon.svg'; img.onerror = null; };
+
+            if (node.isProject) {
+                nodeDiv.style.border = '2px dashed ' + (isDark ? '#bf5700' : '#bf5700');
+                nodeDiv.style.borderRadius = '8px';
+                nodeDiv.style.padding = '3px';
+            }
 
             const nameLabel = document.createElement('div');
             nameLabel.textContent = node.name || 'Unknown';
@@ -391,7 +410,7 @@ export default function NetworkGraph({ members, connections, highlightedMemberId
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
         };
-    }, [members, connections, isDark, zoomLevel, panOffset]);
+    }, [members, projects, connections, isDark, zoomLevel, panOffset]);
 
     return (
         <div 

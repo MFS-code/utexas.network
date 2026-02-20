@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Member, Connection } from '@/data/members';
+import { Member, Project, Connection } from '@/data/members';
 import MembersTable from './MembersTable';
 import NetworkGraph from './NetworkGraph';
 import AsciiBackground from './AsciiBackground';
@@ -19,6 +19,7 @@ function shuffleArray<T>(array: T[]): T[] {
 
 interface SearchableContentProps {
     members: Member[];
+    projects: Project[];
     connections: Connection[];
 }
 
@@ -31,7 +32,7 @@ function prioritizePinnedMember(memberList: Member[]): Member[] {
     return [pinnedMember, ...memberList.filter((member) => member.id !== PINNED_MEMBER_ID)];
 }
 
-export default function SearchableContent({ members, connections }: SearchableContentProps) {
+export default function SearchableContent({ members, projects, connections }: SearchableContentProps) {
     const [searchQuery, setSearchQuery] = useState('');
     const [shuffledMembers, setShuffledMembers] = useState<Member[]>(members);
     const [showJoinForm, setShowJoinForm] = useState(false);
@@ -51,6 +52,14 @@ export default function SearchableContent({ members, connections }: SearchableCo
         )
         : shuffledMembers;
     const displayedMembers = prioritizePinnedMember(filteredMembers);
+
+    const filteredProjects = searchQuery
+        ? projects.filter(project =>
+            project.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            project.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            project.website?.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        : projects;
 
     const handleJoinSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -135,7 +144,7 @@ export default function SearchableContent({ members, connections }: SearchableCo
                 </div>
 
                 <div className="table-section">
-                    <MembersTable members={displayedMembers} searchQuery={searchQuery} />
+                    <MembersTable members={displayedMembers} projects={filteredProjects} searchQuery={searchQuery} />
                 </div>
             </div>
 
@@ -159,9 +168,10 @@ export default function SearchableContent({ members, connections }: SearchableCo
                     )}
                 </div>
                 <NetworkGraph 
-                    members={members} 
+                    members={members}
+                    projects={projects}
                     connections={connections} 
-                    highlightedMemberIds={displayedMembers.map(m => m.id)}
+                    highlightedMemberIds={[...displayedMembers.map(m => m.id), ...filteredProjects.map(p => p.id)]}
                     searchQuery={searchQuery}
                 />
             </div>

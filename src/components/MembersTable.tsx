@@ -1,15 +1,16 @@
 import React from 'react';
-import { Member } from '@/data/members';
+import { Member, Project } from '@/data/members';
 import { normalizeImageUrl } from '@/utils/profileImage';
-import { FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 
 interface MembersTableProps {
     members: Member[];
+    projects: Project[];
     searchQuery?: string;
 }
 
-export default function MembersTable({ members, searchQuery }: MembersTableProps) {
+export default function MembersTable({ members, projects, searchQuery }: MembersTableProps) {
     const highlightText = (text: string | null | undefined) => {
         if (!text || !searchQuery) return text || '';
         
@@ -25,9 +26,12 @@ export default function MembersTable({ members, searchQuery }: MembersTableProps
         <div className="members-table-container">
             {searchQuery && (
                 <div className="search-results-info">
-                    {members.length === 0 
+                    {members.length === 0 && projects.length === 0
                         ? `No results found for "${searchQuery}"`
-                        : `Found ${members.length} member${members.length !== 1 ? 's' : ''}`}
+                        : [
+                            members.length > 0 ? `${members.length} member${members.length !== 1 ? 's' : ''}` : '',
+                            projects.length > 0 ? `${projects.length} project${projects.length !== 1 ? 's' : ''}` : '',
+                          ].filter(Boolean).join(', ')}
                 </div>
             )}
             <table className="members-table">
@@ -138,6 +142,101 @@ export default function MembersTable({ members, searchQuery }: MembersTableProps
                     ))}
                 </tbody>
             </table>
+
+            {projects.length > 0 && (
+                <>
+                    <div className="projects-section-divider" />
+                    <table className="members-table projects-table">
+                        <thead>
+                            <tr>
+                                <th>project / org</th>
+                                <th>description</th>
+                                <th>site</th>
+                                <th>links</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {projects.map((project) => (
+                                <tr key={project.id}>
+                                    <td className="user-cell">
+                                        {project.profilePic ? (
+                                            <img
+                                                src={normalizeImageUrl(project.profilePic)}
+                                                alt={project.name}
+                                                className="avatar avatar-project"
+                                                onError={(e) => {
+                                                    (e.currentTarget as HTMLImageElement).style.display = 'none';
+                                                    const fallback = e.currentTarget.nextElementSibling as HTMLElement | null;
+                                                    if (fallback) fallback.style.display = '';
+                                                }}
+                                            />
+                                        ) : null}
+                                        {!project.profilePic ? (
+                                            <div className="avatar avatar-project" style={{ backgroundColor: '#e0e0e0' }} />
+                                        ) : (
+                                            <div className="avatar avatar-project" style={{ backgroundColor: '#e0e0e0', display: 'none' }} />
+                                        )}
+                                        {project.website ? (
+                                            <a
+                                                href={project.website.startsWith('http') ? project.website : `https://${project.website}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="name-link"
+                                            >
+                                                {highlightText(project.name)}
+                                            </a>
+                                        ) : (
+                                            <span>{highlightText(project.name)}</span>
+                                        )}
+                                    </td>
+                                    <td>{highlightText(project.description) || '—'}</td>
+                                    <td>
+                                        {project.website ? (
+                                            <a
+                                                href={project.website.startsWith('http') ? project.website : `https://${project.website}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="site-link"
+                                            >
+                                                {project.website.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '')}
+                                            </a>
+                                        ) : (
+                                            <span className="table-placeholder">—</span>
+                                        )}
+                                    </td>
+                                    <td>
+                                        <div className="social-icons">
+                                            {project.github && (
+                                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="social-icon-link" title="GitHub">
+                                                    <FaGithub size={16} />
+                                                </a>
+                                            )}
+                                            {project.instagram && (
+                                                <a href={project.instagram} target="_blank" rel="noopener noreferrer" className="social-icon-link" title="Instagram">
+                                                    <FaInstagram size={16} />
+                                                </a>
+                                            )}
+                                            {project.twitter && (
+                                                <a href={project.twitter} target="_blank" rel="noopener noreferrer" className="social-icon-link" title="Twitter/X">
+                                                    <FaXTwitter size={16} />
+                                                </a>
+                                            )}
+                                            {project.linkedin && (
+                                                <a href={project.linkedin} target="_blank" rel="noopener noreferrer" className="social-icon-link" title="LinkedIn">
+                                                    <FaLinkedin size={16} />
+                                                </a>
+                                            )}
+                                            {!project.github && !project.instagram && !project.twitter && !project.linkedin && (
+                                                <span className="table-placeholder">—</span>
+                                            )}
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </>
+            )}
         </div>
     );
 }
