@@ -489,7 +489,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input
                                             className="join-input"
                                             name="accentItem"
-                                            placeholder="Accent item (default, red, yellow, white, black, or #2E4258)"
+                                            placeholder="Accent item (hex)"
                                         />
                                         <input className="join-input join-input-wide" name="description" placeholder="Short description" />
                                         <input className="join-input" name="website" type="url" placeholder="Project website URL" />
