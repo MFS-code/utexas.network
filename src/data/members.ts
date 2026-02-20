@@ -190,6 +190,17 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/neevgupta",
     connections: [],
   },
+  {
+    id: "parth-mehta",
+    name: "Parth Mehta",
+    website: "https://makistry.com",
+    profilePic: "https://drive.google.com/file/d/1qsenb4ASDHonB4UTNBhgmHXyJ3RNA5fA/view?usp=sharing",
+    program: "Mechanical Engineering + Economics",
+    year: "2028",
+    instagram: "https://www.instagram.com/parthmehta1005/",
+    linkedin: "https://www.linkedin.com/in/parth-mehta100",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
