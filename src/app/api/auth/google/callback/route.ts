@@ -12,17 +12,6 @@ interface GoogleUserInfoResponse {
   picture?: string;
 }
 
-function getTargetOrigin(requestOrigin: string): string {
-  const configuredBaseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  if (!configuredBaseUrl) return requestOrigin;
-
-  try {
-    return new URL(configuredBaseUrl).origin;
-  } catch {
-    return requestOrigin;
-  }
-}
-
 function escapeForScript(value: unknown): string {
   return JSON.stringify(value).replace(/</g, '\\u003c');
 }
@@ -65,7 +54,7 @@ function htmlResponse(message: Record<string, unknown>, targetOrigin: string): N
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const requestOrigin = requestUrl.origin;
-  const targetOrigin = getTargetOrigin(requestOrigin);
+  const targetOrigin = requestOrigin;
 
   const code = requestUrl.searchParams.get('code');
   const state = requestUrl.searchParams.get('state') || '';
