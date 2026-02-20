@@ -262,6 +262,18 @@ export default function SearchableContent({ members, projects, connections }: Se
                 notes: String(formData.get('notes') || ''),
             };
 
+        if (formType === 'member') {
+            const utEmail = (payload as { utEmail: string }).utEmail.trim();
+            if (!EDU_EMAIL_REGEX.test(utEmail)) {
+                setSubmitStatus({
+                    type: 'error',
+                    message: 'Please use your .edu email before submitting.',
+                });
+                setIsSubmitting(false);
+                return;
+            }
+        }
+
         if (formType === 'project') {
             const ids = (payload as { memberIds: string }).memberIds
                 .split(',')
@@ -333,7 +345,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                         >
                             request to join
                         </button>
-                        {submitStatus && (
+                        {!showJoinForm && submitStatus?.type === 'error' && (
                             <p className={`join-status join-status-${submitStatus.type}`}>{submitStatus.message}</p>
                         )}
                     </div>
