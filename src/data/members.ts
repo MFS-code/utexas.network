@@ -170,6 +170,18 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/kaustubhduddala/",
     connections: [],
   },
+  {
+    id: "praneel-seth",
+    name: "Praneel Seth",
+    website: "https://praneelseth.com",
+    profilePic: "https://drive.google.com/file/d/162GAO_pzsZZ3EpkxstHXN6jT7J1Z-cny/view?usp=sharing",
+    program: "CS + Math",
+    year: "May 2027",
+    instagram: "https://instagram.com/praneelseth",
+    twitter: "https://x.com/praneelseth",
+    linkedin: "https://linkedin.com/in/praneelseth",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
