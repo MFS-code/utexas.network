@@ -34,10 +34,16 @@ type JoinRequestPayload = MemberPayload | ProjectPayload;
 
 const JOIN_ALERT_TO_EMAIL = 'miguelfserna@gmail.com';
 
+function isEduEmail(email: string): boolean {
+  return /\.edu$/i.test(email.trim());
+}
+
 function isValidMemberPayload(p: Record<string, unknown>): boolean {
+  const utEmail = typeof p.utEmail === 'string' ? p.utEmail.trim() : '';
   return (
     typeof p.fullName === 'string' && p.fullName.trim().length > 0 &&
-    typeof p.utEmail === 'string' && p.utEmail.trim().length > 0 &&
+    utEmail.length > 0 &&
+    isEduEmail(utEmail) &&
     typeof p.website === 'string' && p.website.trim().length > 0 &&
     typeof p.profilePic === 'string' && p.profilePic.trim().length > 0
   );
@@ -220,7 +226,7 @@ export async function POST(request: Request) {
     const isProject = payload.type === 'project';
 
     if (isProject ? !isValidProjectPayload(payload) : !isValidMemberPayload(payload)) {
-      return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
+      return NextResponse.json({ error: 'Missing required fields or invalid .edu email.' }, { status: 400 });
     }
 
     const token = process.env.GITHUB_JOIN_BOT_TOKEN;

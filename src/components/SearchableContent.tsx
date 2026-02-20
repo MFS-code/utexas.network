@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Member, Project, Connection } from '@/data/members';
 import MembersTable from './MembersTable';
 import NetworkGraph from './NetworkGraph';
 import AsciiBackground from './AsciiBackground';
 import { Search } from 'lucide-react';
+import { FcGoogle } from 'react-icons/fc';
 
 // Fisher-Yates shuffle
 function shuffleArray<T>(array: T[]): T[] {
@@ -24,6 +25,22 @@ interface SearchableContentProps {
 }
 
 const PINNED_MEMBER_ID = 'miguel-serna';
+const GOOGLE_OAUTH_SOURCE = 'google-oauth';
+const EDU_EMAIL_REGEX = /\.edu$/i;
+
+interface GoogleOAuthProfile {
+    name: string;
+    email: string;
+    picture: string;
+}
+
+interface GoogleOAuthMessage {
+    source: string;
+    success: boolean;
+    state?: string;
+    error?: string;
+    profile?: GoogleOAuthProfile;
+}
 
 function prioritizePinnedMember(memberList: Member[]): Member[] {
     const pinnedMember = memberList.find((member) => member.id === PINNED_MEMBER_ID);
@@ -38,7 +55,12 @@ export default function SearchableContent({ members, projects, connections }: Se
     const [showJoinForm, setShowJoinForm] = useState(false);
     const [formType, setFormType] = useState<'member' | 'project'>('member');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isGoogleLoading, setIsGoogleLoading] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+    const joinFormRef = useRef<HTMLFormElement | null>(null);
+    const oauthPopupRef = useRef<Window | null>(null);
+    const oauthPopupTimerRef = useRef<number | null>(null);
+    const oauthStateRef = useRef<string | null>(null);
     
     // Shuffle members only on client side after hydration
     useEffect(() => {
@@ -61,6 +83,146 @@ export default function SearchableContent({ members, projects, connections }: Se
             project.website?.toLowerCase().includes(searchQuery.toLowerCase())
         )
         : projects;
+
+    const clearOAuthPopupWatcher = () => {
+        if (oauthPopupTimerRef.current !== null) {
+            window.clearInterval(oauthPopupTimerRef.current);
+            oauthPopupTimerRef.current = null;
+        }
+    };
+
+    const setJoinInputValue = (name: string, value: string) => {
+        const field = joinFormRef.current?.elements.namedItem(name);
+        if (
+            !field ||
+            !(
+                field instanceof HTMLInputElement ||
+                field instanceof HTMLTextAreaElement ||
+                field instanceof HTMLSelectElement
+            )
+        ) {
+            return;
+        }
+        field.value = value;
+    };
+
+    useEffect(() => {
+        const onOAuthMessage = (event: MessageEvent) => {
+            if (event.origin !== window.location.origin) {
+                return;
+            }
+
+            const data = event.data as GoogleOAuthMessage;
+            if (!data || data.source !== GOOGLE_OAUTH_SOURCE) {
+                return;
+            }
+
+            if (data.state && oauthStateRef.current && data.state !== oauthStateRef.current) {
+                return;
+            }
+
+            clearOAuthPopupWatcher();
+            oauthPopupRef.current = null;
+            oauthStateRef.current = null;
+            setIsGoogleLoading(false);
+
+            if (!data.success) {
+                setSubmitStatus({
+                    type: 'error',
+                    message: data.error || 'Google sign-in failed. You can still fill the form manually.',
+                });
+                return;
+            }
+
+            const profile = data.profile;
+            if (!profile) {
+                setSubmitStatus({
+                    type: 'error',
+                    message: 'Google profile was empty. Please fill the form manually.',
+                });
+                return;
+            }
+
+            setJoinInputValue('fullName', profile.name || '');
+            setJoinInputValue('utEmail', profile.email || '');
+            setJoinInputValue('profilePic', profile.picture || '');
+
+            if (profile.email && !EDU_EMAIL_REGEX.test(profile.email)) {
+                setSubmitStatus({
+                    type: 'success',
+                    message: 'Google profile imported. Please use your .edu email before submitting.',
+                });
+                return;
+            }
+
+            setSubmitStatus({
+                type: 'success',
+                message: 'Google profile imported. Please complete the remaining fields.',
+            });
+        };
+
+        window.addEventListener('message', onOAuthMessage);
+        return () => {
+            window.removeEventListener('message', onOAuthMessage);
+            clearOAuthPopupWatcher();
+        };
+    }, []);
+
+    const handleGoogleSignIn = () => {
+        setSubmitStatus(null);
+
+        const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+        if (!clientId) {
+            setSubmitStatus({
+                type: 'error',
+                message: 'Google sign-in is not configured yet.',
+            });
+            return;
+        }
+
+        const redirectUri = `${window.location.origin}/api/auth/google/callback`;
+        const state = typeof crypto.randomUUID === 'function'
+            ? crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        oauthStateRef.current = state;
+
+        const params = new URLSearchParams({
+            client_id: clientId,
+            redirect_uri: redirectUri,
+            response_type: 'code',
+            scope: 'openid email profile',
+            state,
+            prompt: 'select_account',
+        });
+
+        const popup = window.open(
+            `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`,
+            'google-oauth-popup',
+            'width=500,height=650,menubar=no,toolbar=no,location=no,status=no'
+        );
+
+        if (!popup) {
+            setSubmitStatus({
+                type: 'error',
+                message: 'Popup blocked. Allow popups to use Google sign-in.',
+            });
+            oauthStateRef.current = null;
+            return;
+        }
+
+        oauthPopupRef.current = popup;
+        setIsGoogleLoading(true);
+
+        clearOAuthPopupWatcher();
+        oauthPopupTimerRef.current = window.setInterval(() => {
+            if (!oauthPopupRef.current || oauthPopupRef.current.closed) {
+                clearOAuthPopupWatcher();
+                oauthPopupRef.current = null;
+                oauthStateRef.current = null;
+                setIsGoogleLoading(false);
+            }
+        }, 500);
+    };
 
     const handleJoinSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -253,12 +415,37 @@ export default function SearchableContent({ members, projects, connections }: Se
                             </button>
                         </div>
 
-                        <form className="join-form" onSubmit={handleJoinSubmit}>
+                        <form className="join-form" onSubmit={handleJoinSubmit} ref={joinFormRef}>
                             {formType === 'member' ? (
                                 <>
+                                    <div className="google-auth-cta">
+                                        <button
+                                            type="button"
+                                            className="google-auth-btn"
+                                            onClick={handleGoogleSignIn}
+                                            disabled={isSubmitting || isGoogleLoading}
+                                        >
+                                            <FcGoogle size={20} aria-hidden="true" />
+                                            <span>{isGoogleLoading ? 'connecting google...' : 'continue with google'}</span>
+                                        </button>
+                                        <p className="google-auth-note">Prefills name, email, and profile photo.</p>
+                                    </div>
+                                    {submitStatus && (
+                                        <p className={`join-status join-status-${submitStatus.type} join-modal-status`}>
+                                            {submitStatus.message}
+                                        </p>
+                                    )}
                                     <div className="join-form-grid">
                                         <input className="join-input" name="fullName" required placeholder="Full name *" />
-                                        <input className="join-input" name="utEmail" required type="email" placeholder="UT email *" />
+                                        <input
+                                            className="join-input"
+                                            name="utEmail"
+                                            required
+                                            type="email"
+                                            pattern=".+\\.edu$"
+                                            placeholder="UT .edu email *"
+                                            title="Please use your .edu email address."
+                                        />
                                         <input className="join-input" name="website" required type="url" placeholder="Personal website URL *" />
                                         <input className="join-input" name="profilePic" required type="url" placeholder="Profile photo URL (direct link, Google Drive) *" />
                                         <input className="join-input" name="program" placeholder="Program / major" />
