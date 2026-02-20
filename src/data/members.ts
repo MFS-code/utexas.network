@@ -190,6 +190,13 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/neevgupta",
     connections: [],
   },
+  {
+    id: "test",
+    name: "test",
+    website: "https://mfserna.dev",
+    profilePic: "https://lh3.googleusercontent.com/a/ACg8ocIK4_snyHSQID9snsNRg1ZuJ-pjTDjcUF2TYtiUCFQqyYZag9EO=s96-c",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
