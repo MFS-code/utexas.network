@@ -70,18 +70,6 @@ export interface Connection {
 }
 
 export const members: Member[] = [
-  // Example entry:
-  // {
-  //   id: "john-doe",
-  //   name: "John Doe",
-  //   website: "https://johndoe.com",
-  //   profilePic: "/photos/john-doe.jpg",
-  //   program: "Computer Science",
-  //   year: "2028",
-  //   twitter: "https://x.com/johndoe",
-  //   linkedin: "https://linkedin.com/in/johndoe",
-  //   connections: [],
-  // },
   {
     id: "miguel-serna",
     name: "Miguel Serna",
@@ -132,7 +120,7 @@ export const members: Member[] = [
     name: "anush sonone",
     website: "https://anush.wiki/",
     profilePic: "https://media.licdn.com/dms/image/v2/D5603AQFo2Yd18XnCOw/profile-displayphoto-scale_200_200/B56ZsEvEd2JQAY-/0/1765311013583?e=1773273600&v=beta&t=KNQ-wcM5t32W7Je8jt2n-gFgCUESsxG175Oq32tu4ck",
-    program: "CS",
+    program: "Computer Science",
     year: "2028",
     instagram: "https://noinsta",
     twitter: "https://notwitter",
@@ -154,7 +142,7 @@ export const members: Member[] = [
     name: "Colin Angel",
     website: "https://colinangel.com",
     profilePic: "https://drive.google.com/file/d/1vWuhBr-we8sFr6glR7Q4_wtaEtgZBP1w/view?usp=sharing",
-    program: "ECE",
+    program: "Electrical & Computer Engineering",
     year: "2025",
     linkedin: "https://www.linkedin.com/in/colinjangel/",
     connections: [],
@@ -175,12 +163,12 @@ export const members: Member[] = [
     name: "Praneel Seth",
     website: "https://praneelseth.com",
     profilePic: "https://drive.google.com/file/d/162GAO_pzsZZ3EpkxstHXN6jT7J1Z-cny/view?usp=sharing",
-    program: "CS + Math",
+    program: "Computer Science & Mathematics",
     year: "May 2027",
     instagram: "https://instagram.com/praneelseth",
     twitter: "https://x.com/praneelseth",
     linkedin: "https://linkedin.com/in/praneelseth",
-    connections: [],
+    connections: ["miguel-serna", "gabriel-keller"],
   },
 ];
 

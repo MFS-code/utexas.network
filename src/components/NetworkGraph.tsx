@@ -96,13 +96,13 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 line.setAttribute('y1', y1.toString());
                 line.setAttribute('x2', x2.toString());
                 line.setAttribute('y2', y2.toString());
-                line.setAttribute('stroke', dark ? '#404040' : '#333');
-                line.setAttribute('stroke-width', '1');
-                line.setAttribute('opacity', '0.3');
+                line.setAttribute('stroke', dark ? '#555' : '#333');
+                line.setAttribute('stroke-width', '1.5');
+                line.setAttribute('opacity', '0.5');
                 if (conn.dotted) {
                     line.setAttribute('stroke-dasharray', '4 4');
                     line.setAttribute('stroke', '#bf5700');
-                    line.setAttribute('opacity', '0.45');
+                    line.setAttribute('opacity', '0.6');
                 }
                 svg.appendChild(line);
             }
