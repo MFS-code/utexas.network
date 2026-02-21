@@ -12,8 +12,11 @@ interface MembersTableProps {
 
 export default function MembersTable({ members, projects, searchQuery }: MembersTableProps) {
     const getProjectAccentColor = (accentItem?: Project['accentItem']) => {
-        if (typeof accentItem === 'string' && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(accentItem)) {
-            return accentItem;
+        if (typeof accentItem === 'string') {
+            const hexMatch = accentItem.trim().match(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i);
+            if (hexMatch) {
+                return `#${hexMatch[1]}`;
+            }
         }
         switch (accentItem) {
             case 'yellow':

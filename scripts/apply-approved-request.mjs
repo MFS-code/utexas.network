@@ -44,7 +44,8 @@ const sanitizeAccentItem = (value) => {
   const normalized = String(value || '').trim().toLowerCase();
   const allowed = new Set(['default', 'red', 'yellow', 'white', 'black']);
   if (allowed.has(normalized)) return normalized;
-  if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(normalized)) return normalized;
+  const hexMatch = normalized.match(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (hexMatch) return `#${hexMatch[1]}`;
   return '';
 };
 

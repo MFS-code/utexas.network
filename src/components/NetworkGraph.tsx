@@ -48,8 +48,11 @@ export default function NetworkGraph({ members, projects, connections, highlight
     searchQueryRef.current = searchQuery;
 
     function getProjectAccentColor(accentItem?: Project['accentItem']) {
-        if (typeof accentItem === 'string' && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(accentItem)) {
-            return accentItem;
+        if (typeof accentItem === 'string') {
+            const hexMatch = accentItem.trim().match(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i);
+            if (hexMatch) {
+                return `#${hexMatch[1]}`;
+            }
         }
         switch (accentItem) {
             case 'yellow':

@@ -47,7 +47,7 @@ export interface Member {
  * - description: Short blurb
  * - website: Project / org URL
  * - profilePic: Logo or image URL
- * - accentItem: Optional accent style for project cards/graph (named color or #hex)
+ * - accentItem: Optional accent style for project cards/graph (named color or hex)
  * - instagram, twitter, linkedin, github: Social links
  */
 export interface Project {
@@ -57,7 +57,7 @@ export interface Project {
   description?: string;
   website?: string;
   profilePic?: string;
-  accentItem?: 'default' | 'red' | 'yellow' | 'white' | 'black' | `#${string}`;
+  accentItem?: string;
   instagram?: string;
   twitter?: string;
   linkedin?: string;
@@ -269,6 +269,7 @@ export const projects: Project[] = [
     instagram: "https://www.instagram.com/ut_ieee_ras/",
     linkedin: "https://www.linkedin.com/in/ut-ieee-ras/",
     github: "https://github.com/ut-ras/",
+    accentItem: "#CC5500",
   },
 ];
 
