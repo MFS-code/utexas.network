@@ -259,6 +259,17 @@ export const projects: Project[] = [
     linkedin: "https://www.linkedin.com/company/helm-pm/",
     accentItem: "#2E4258",
   },
+  {
+    id: "robotics-and-automation-society",
+    name: "Robotics and Automation Society",
+    memberIds: ["karmanyaah-malhotra"],
+    description: "We support robotics competition teams and also build cool robots for fun!",
+    website: "https://ras.ece.utexas.edu/",
+    profilePic: "https://ras.ece.utexas.edu/images/ras_logo.png",
+    instagram: "https://www.instagram.com/ut_ieee_ras/",
+    linkedin: "https://www.linkedin.com/in/ut-ieee-ras/",
+    github: "https://github.com/ut-ras/",
+  },
 ];
 
 // Helper to get all connections for the network graph
