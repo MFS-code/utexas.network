@@ -225,6 +225,16 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/abdelgadir-osman/",
     connections: [],
   },
+  {
+    id: "karmanyaah-malhotra",
+    name: "Karmanyaah Malhotra",
+    website: "https://karmanyaah.com",
+    profilePic: "https://drive.google.com/file/d/1u2_pzgH2nZjcgSX76PRqo_k2WqDRaMvV/view?usp=sharing",
+    program: "Computer Science",
+    year: "2027",
+    linkedin: "https://www.linkedin.com/in/karmanyaahm/",
+    connections: ["praneel-seth","nicolas-garza","nathan-brown","gabriel-keller"],
+  },
 ];
 
 export const projects: Project[] = [
