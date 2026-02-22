@@ -235,6 +235,18 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/karmanyaahm/",
     connections: ["praneel-seth","nicolas-garza","nathan-brown","gabriel-keller"],
   },
+  {
+    id: "siddhartha-venkatayogi",
+    name: "Siddhartha Venkatayogi",
+    website: "https://sidvenkatayogi.github.io/",
+    profilePic: "https://drive.google.com/file/d/1OYaciysUGvPgWF44bFLN63qBFv2qLDIs/view?usp=sharing",
+    program: "Computer Science",
+    year: "2029",
+    instagram: "https://www.instagram.com/sidvenkatayogi/",
+    twitter: "https://x.com/sidvenkatayogi",
+    linkedin: "https://www.linkedin.com/in/sidvenkatayogi/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
