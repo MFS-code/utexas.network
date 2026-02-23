@@ -255,7 +255,7 @@ export const members: Member[] = [
     program: "Computer Science",
     year: "2025",
     linkedin: "https://www.linkedin.com/in/sai-kurelli",
-    connections: [],
+    connections: ["gabriel-keller"],
   },
 ];
 
