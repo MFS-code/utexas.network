@@ -257,6 +257,17 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/sai-kurelli",
     connections: ["gabriel-keller"],
   },
+  {
+    id: "nick-khami",
+    name: "Nick Khami",
+    website: "https://www.skeptrune.com",
+    profilePic: "https://x.com/skeptrune",
+    program: "CS",
+    year: "2022",
+    twitter: "https://x.com/skeptrune",
+    linkedin: "https://linkedin.com/in/nkhami",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
