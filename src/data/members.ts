@@ -137,7 +137,7 @@ export const members: Member[] = [
     program: "Computer Science",
     year: "2028",
     linkedin: "https://www.linkedin.com/in/jaydenruddock/",
-    connections: [],
+    connections: ["miguel-serna"],
   },
   {
     id: "colin-angel",
