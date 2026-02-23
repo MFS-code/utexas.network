@@ -247,6 +247,16 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/sidvenkatayogi/",
     connections: [],
   },
+  {
+    id: "sairaja-kurelli",
+    name: "Sairaja Kurelli",
+    website: "https://saikurelli.github.io/",
+    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQHxZ9jogMj5ew/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1684681830844?e=2147483647&v=beta&t=dXjEerg8JKQUlmK8Mer1h7Hhw53EUdnLyz6HOqqKS-E",
+    program: "Computer Science",
+    year: "2025",
+    linkedin: "https://www.linkedin.com/in/sai-kurelli",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
