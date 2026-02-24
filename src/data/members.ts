@@ -277,7 +277,7 @@ export const members: Member[] = [
     year: "2027",
     instagram: "https://www.instagram.com/terence_le_bo/",
     linkedin: "https://www.linkedin.com/in/dumast/",
-    connections: [],
+    connections: ["miguel-serna"],
   },
 ];
 
