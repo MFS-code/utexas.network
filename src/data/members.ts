@@ -268,6 +268,17 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/nkhami",
     connections: [],
   },
+  {
+    id: "terence-dumas",
+    name: "Terence Dumas",
+    website: "https://www.terencedumas.com/",
+    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQFabjy09k4MMw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1698129747921?e=1773273600&v=beta&t=cNpJhr-K4UoDm_docdtH4DhiDKo7kAzXXdMin02uD3M",
+    program: "Computer Science & Mathematics",
+    year: "2027",
+    instagram: "https://www.instagram.com/terence_le_bo/",
+    linkedin: "https://www.linkedin.com/in/dumast/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
