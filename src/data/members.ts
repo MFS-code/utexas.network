@@ -127,7 +127,7 @@ export const members: Member[] = [
     instagram: "https://noinsta",
     twitter: "https://notwitter",
     linkedin: "https://www.linkedin.com/in/anushse/",
-    connections: [],
+    connections: ["miguel-serna"],
   },
   {
     id: "jayden-ruddock",
@@ -213,7 +213,7 @@ export const members: Member[] = [
     instagram: "https://www.instagram.com/aymanmahfuz05/",
     twitter: "https://x.com/AymanMahfuz10",
     linkedin: "https://www.linkedin.com/in/aymanmahfuz/",
-    connections: [],
+    connections: ["miguel-serna"],
   },
   {
     id: "abdelgadir-osman",

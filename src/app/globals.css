@@ -487,6 +487,10 @@ a {
   vertical-align: middle;
 }
 
+.members-table td:nth-child(3) {
+  overflow: hidden;
+}
+
 .members-table td:nth-child(4) {
   padding-left: 1rem;
   padding-right: 2rem;
@@ -522,6 +526,11 @@ a {
 .site-link {
   color: var(--foreground);
   transition: opacity 0.2s;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .site-link:hover {
@@ -727,7 +736,7 @@ a {
   
   
   .members-table {
-    table-layout: auto;
+    table-layout: fixed;
   }
   
   .members-table th,
