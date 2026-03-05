@@ -5,8 +5,9 @@ import { Member, Project, Connection } from '@/data/members';
 import MembersTable from './MembersTable';
 import NetworkGraph from './NetworkGraph';
 import AsciiBackground from './AsciiBackground';
-import { Search } from 'lucide-react';
+import { Search, ArrowRight } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
+import Link from 'next/link';
 
 // Fisher-Yates shuffle
 function shuffleArray<T>(array: T[]): T[] {
@@ -348,6 +349,9 @@ export default function SearchableContent({ members, projects, connections }: Se
                         >
                             request to join
                         </button>
+                        <Link href="/projects" className="nav-link">
+                            projects <ArrowRight size={14} />
+                        </Link>
                         {!showJoinForm && submitStatus?.type === 'error' && (
                             <p className={`join-status join-status-${submitStatus.type}`}>{submitStatus.message}</p>
                         )}

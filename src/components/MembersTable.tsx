@@ -66,7 +66,7 @@ export default function MembersTable({ members, projects, searchQuery }: Members
                 </thead>
                 <tbody>
                     {members.map((member, index) => (
-                        <tr key={member.id}>
+                        <tr key={member.id} id={`member-${member.id}`}>
                             <td className="user-cell">
                                 {member.profilePic ? (
                                     <img 
