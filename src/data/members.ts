@@ -133,7 +133,7 @@ export const members: Member[] = [
     id: "jayden-ruddock",
     name: "Jayden Ruddock",
     website: "https://spacewalker215.github.io/MyPortfolio/",
-    profilePic: "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.linkedin.com%2Fposts%2Fjaydenruddock_our-teams-project-skylore-won-best-celestial-themed-activity-7388329377383526401-_Rvh&ved=0CBYQjRxqFwoTCPjKv4HolZMDFQAAAAAdAAAAABAH&opi=89978449",
+    profilePic: "https://media.licdn.com/dms/image/v2/D4E22AQFOT7Uln_C8Mg/feedshare-shrink_800/B4EZoieajlIUAk-/0/1761514990271?e=2147483647&v=beta&t=QMtCRzVDBVrGVq2G2PSprIUYlYU-YtgG3_ZIXtxEsQs",
     program: "Computer Science",
     year: "2028",
     linkedin: "https://www.linkedin.com/in/jaydenruddock/",
