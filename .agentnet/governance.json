@@ -1,0 +1,266 @@
+{
+  "agents": [
+    {
+      "id": "agent:leaf:0001",
+      "kind": "leaf",
+      "level": 0,
+      "label": "Leaf 1",
+      "tokenBudget": 60000,
+      "estimatedTokens": 18820,
+      "fillRatio": 0.31366666666666665,
+      "filePaths": [
+        "src/app/api/auth/google/callback/route.ts",
+        "src/app/api/join-request/route.ts",
+        "src/app/api/webring/route.ts",
+        "src/app/embed.js/route.ts",
+        "src/app/layout.tsx",
+        "src/app/opengraph-image.tsx",
+        "src/app/page.tsx",
+        "src/app/twitter-image.tsx",
+        "src/components/AsciiBackground.tsx",
+        "src/components/MembersTable.tsx",
+        "src/components/NetworkGraph.tsx",
+        "src/components/SearchableContent.tsx",
+        "src/contexts/ThemeContext.tsx"
+      ],
+      "childAgentIds": [],
+      "abstraction": {
+        "interfaces": [],
+        "contracts": [
+          "(payload as { memberIds: string }).memberIds\n                .split",
+          "(payload as { memberIds: string }).memberIds\n                .split(',')\n                .map",
+          "(payload as { memberIds: string }).memberIds\n                .split(',')\n                .map(s => s.trim())\n                .filter",
+          "(payload as { utEmail: string }).utEmail.trim",
+          "buildMemberIssue",
+          "buildPopupHtml",
+          "buildProjectIssue",
+          "container.getBoundingClientRect",
+          "createContext",
+          "document.createElement",
+          "document.createElementNS",
+          "document.documentElement.getAttribute",
+          "document.documentElement.setAttribute",
+          "fetch",
+          "form.reset",
+          "formData.get",
+          "getConnections",
+          "getProjectAccentColor",
+          "import \"./globals.css\";",
+          "import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';",
+          "import { FaXTwitter } from 'react-icons/fa6';",
+          "import { FcGoogle } from 'react-icons/fc';"
+        ],
+        "invariants": [
+          "checkDarkMode"
+        ]
+      },
+      "provenance": {
+        "filePaths": [
+          "src/app/api/auth/google/callback/route.ts",
+          "src/app/api/join-request/route.ts",
+          "src/app/api/webring/route.ts",
+          "src/app/embed.js/route.ts",
+          "src/app/layout.tsx",
+          "src/app/opengraph-image.tsx",
+          "src/app/page.tsx",
+          "src/app/twitter-image.tsx",
+          "src/components/AsciiBackground.tsx",
+          "src/components/MembersTable.tsx",
+          "src/components/NetworkGraph.tsx",
+          "src/components/SearchableContent.tsx",
+          "src/contexts/ThemeContext.tsx"
+        ],
+        "sourceFileCount": 13,
+        "childAgentIds": []
+      },
+      "metadata": {}
+    },
+    {
+      "id": "agent:leaf:0002",
+      "kind": "leaf",
+      "level": 0,
+      "label": "Leaf 2",
+      "tokenBudget": 60000,
+      "estimatedTokens": 6124,
+      "fillRatio": 0.10206666666666667,
+      "filePaths": [
+        "eslint.config.mjs",
+        "next-env.d.ts",
+        "next.config.ts",
+        "scripts/apply-approved-request.mjs",
+        "scripts/send-approval-email.mjs",
+        "src/data/members.ts",
+        "src/utils/profileImage.ts"
+      ],
+      "childAgentIds": [],
+      "abstraction": {
+        "interfaces": [],
+        "contracts": [
+          "[\n  `Hi ${fullName || 'there'},`,\n  '',\n  \"You're officially in the utexas.network webring.\",\n  '',\n  'Add this widget snippet to your site:',\n  '',\n  '<script',\n  `  src=\"${scriptSrc}\"`,\n  '  data-webring',\n  `  data-user=\"${memberId || 'your-id'}\"`,\n  '></script>',\n  '',\n  'Important: ',\n  '- data-user is prefilled with your generated member id.',\n  '- The center icon links to utexas.network.',\n  '- The arrows navigate to your webring connections.',\n  '',\n  `Directory: ${siteUrl.replace(/\\/+$/, '')}`,\n  '',\n  'If you have any questions, trouble with the setup, or just want to say hi, please contact me at miguelfserna@gmail.com or any of my socials (expect instagram) listed on the website.',\n  '',\n  'Welcome aboard,',\n  'Miguel F. Serna',\n].join",
+          "fetch",
+          "import \"./.next/dev/types/routes.d.ts\";",
+          "import { defineConfig, globalIgnores } from \"eslint/config\";",
+          "import fs from 'node:fs';",
+          "import nextTs from \"eslint-config-next/typescript\";",
+          "import nextVitals from \"eslint-config-next/core-web-vitals\";",
+          "import path from 'node:path';",
+          "import type { NextConfig } from \"next\";",
+          "JSON.parse",
+          "sanitizeText(payload.connections)\n    .split",
+          "sanitizeText(payload.connections)\n    .split(',')\n    .map",
+          "sanitizeText(payload.connections)\n    .split(',')\n    .map((v) => v.trim())\n    .filter",
+          "sanitizeText(payload.memberIds)\n    .split",
+          "sanitizeText(payload.memberIds)\n    .split(',')\n    .map",
+          "sanitizeText(payload.memberIds)\n    .split(',')\n    .map((v) => v.trim())\n    .filter",
+          "String(payload.fullName || '').trim",
+          "String(payload.utEmail || '').trim"
+        ],
+        "invariants": []
+      },
+      "provenance": {
+        "filePaths": [
+          "eslint.config.mjs",
+          "next-env.d.ts",
+          "next.config.ts",
+          "scripts/apply-approved-request.mjs",
+          "scripts/send-approval-email.mjs",
+          "src/data/members.ts",
+          "src/utils/profileImage.ts"
+        ],
+        "sourceFileCount": 7,
+        "childAgentIds": []
+      },
+      "metadata": {}
+    },
+    {
+      "id": "agent:root:0001",
+      "kind": "root",
+      "level": 1,
+      "label": "Root",
+      "tokenBudget": 60000,
+      "estimatedTokens": 1700,
+      "fillRatio": 0.028333333333333332,
+      "filePaths": [
+        "eslint.config.mjs",
+        "next-env.d.ts",
+        "next.config.ts",
+        "scripts/apply-approved-request.mjs",
+        "scripts/send-approval-email.mjs",
+        "src/app/api/auth/google/callback/route.ts",
+        "src/app/api/join-request/route.ts",
+        "src/app/api/webring/route.ts",
+        "src/app/embed.js/route.ts",
+        "src/app/layout.tsx",
+        "src/app/opengraph-image.tsx",
+        "src/app/page.tsx",
+        "src/app/twitter-image.tsx",
+        "src/components/AsciiBackground.tsx",
+        "src/components/MembersTable.tsx",
+        "src/components/NetworkGraph.tsx",
+        "src/components/SearchableContent.tsx",
+        "src/contexts/ThemeContext.tsx",
+        "src/data/members.ts",
+        "src/utils/profileImage.ts"
+      ],
+      "childAgentIds": [
+        "agent:leaf:0001",
+        "agent:leaf:0002"
+      ],
+      "abstraction": {
+        "interfaces": [],
+        "contracts": [
+          "fetch",
+          "(payload as { memberIds: string }).memberIds\n                .split",
+          "(payload as { memberIds: string }).memberIds\n                .split(',')\n                .map",
+          "(payload as { memberIds: string }).memberIds\n                .split(',')\n                .map(s => s.trim())\n                .filter",
+          "(payload as { utEmail: string }).utEmail.trim",
+          "[\n  `Hi ${fullName || 'there'},`,\n  '',\n  \"You're officially in the utexas.network webring.\",\n  '',\n  'Add this widget snippet to your site:',\n  '',\n  '<script',\n  `  src=\"${scriptSrc}\"`,\n  '  data-webring',\n  `  data-user=\"${memberId || 'your-id'}\"`,\n  '></script>',\n  '',\n  'Important: ',\n  '- data-user is prefilled with your generated member id.',\n  '- The center icon links to utexas.network.',\n  '- The arrows navigate to your webring connections.',\n  '',\n  `Directory: ${siteUrl.replace(/\\/+$/, '')}`,\n  '',\n  'If you have any questions, trouble with the setup, or just want to say hi, please contact me at miguelfserna@gmail.com or any of my socials (expect instagram) listed on the website.',\n  '',\n  'Welcome aboard,',\n  'Miguel F. Serna',\n].join",
+          "buildMemberIssue",
+          "buildPopupHtml",
+          "buildProjectIssue",
+          "container.getBoundingClientRect",
+          "createContext",
+          "document.createElement",
+          "document.createElementNS",
+          "document.documentElement.getAttribute",
+          "document.documentElement.setAttribute",
+          "form.reset",
+          "formData.get",
+          "getConnections",
+          "getProjectAccentColor",
+          "import \"./.next/dev/types/routes.d.ts\";",
+          "import \"./globals.css\";",
+          "import { defineConfig, globalIgnores } from \"eslint/config\";",
+          "import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';",
+          "import { FaXTwitter } from 'react-icons/fa6';",
+          "import { FcGoogle } from 'react-icons/fc';",
+          "import fs from 'node:fs';",
+          "import nextTs from \"eslint-config-next/typescript\";",
+          "import nextVitals from \"eslint-config-next/core-web-vitals\";",
+          "import path from 'node:path';",
+          "import type { NextConfig } from \"next\";",
+          "JSON.parse",
+          "sanitizeText(payload.connections)\n    .split",
+          "sanitizeText(payload.connections)\n    .split(',')\n    .map",
+          "sanitizeText(payload.connections)\n    .split(',')\n    .map((v) => v.trim())\n    .filter",
+          "sanitizeText(payload.memberIds)\n    .split",
+          "sanitizeText(payload.memberIds)\n    .split(',')\n    .map",
+          "sanitizeText(payload.memberIds)\n    .split(',')\n    .map((v) => v.trim())\n    .filter",
+          "String(payload.fullName || '').trim",
+          "String(payload.utEmail || '').trim"
+        ],
+        "invariants": [
+          "checkDarkMode"
+        ]
+      },
+      "provenance": {
+        "filePaths": [
+          "eslint.config.mjs",
+          "next-env.d.ts",
+          "next.config.ts",
+          "scripts/apply-approved-request.mjs",
+          "scripts/send-approval-email.mjs",
+          "src/app/api/auth/google/callback/route.ts",
+          "src/app/api/join-request/route.ts",
+          "src/app/api/webring/route.ts",
+          "src/app/embed.js/route.ts",
+          "src/app/layout.tsx",
+          "src/app/opengraph-image.tsx",
+          "src/app/page.tsx",
+          "src/app/twitter-image.tsx",
+          "src/components/AsciiBackground.tsx",
+          "src/components/MembersTable.tsx",
+          "src/components/NetworkGraph.tsx",
+          "src/components/SearchableContent.tsx",
+          "src/contexts/ThemeContext.tsx",
+          "src/data/members.ts",
+          "src/utils/profileImage.ts"
+        ],
+        "sourceFileCount": 20,
+        "childAgentIds": [
+          "agent:leaf:0001",
+          "agent:leaf:0002"
+        ]
+      },
+      "metadata": {
+        "bridgeDepth": 0,
+        "estimatedScopeTokens": 24944,
+        "fillPolicy": {
+          "target": 0.3,
+          "min": 0.2,
+          "max": 0.4
+        }
+      }
+    }
+  ],
+  "report": {
+    "contextWindowTokens": 200000,
+    "scannedFileCount": 20,
+    "coveredFileCount": 20,
+    "coverageRatio": 1,
+    "orphanFiles": [],
+    "leafAgentCount": 2,
+    "bridgeAgentCount": 0,
+    "rootAgentCount": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "contextWindowTokens": 200000,
+  "scannedFileCount": 20,
+  "coveredFileCount": 20,
+  "coverageRatio": 1,
+  "orphanFiles": [],
+  "leafAgentCount": 2,
+  "bridgeAgentCount": 0,
+  "rootAgentCount": 1
+}

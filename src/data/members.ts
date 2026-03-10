@@ -133,7 +133,7 @@ export const members: Member[] = [
     id: "jayden-ruddock",
     name: "Jayden Ruddock",
     website: "https://spacewalker215.github.io/MyPortfolio/",
-    profilePic: "https://media.licdn.com/dms/image/v2/D4D35AQFoPY0aSILmXA/profile-framedphoto-shrink_400_400/B4DZv25oFcK0Ac-/0/1769373860534?e=1772211600&v=beta&t=KWTV271PtMMMywp4nbZFKWwatb6ulRyddMohi5Ng1oo",
+    profilePic: "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.linkedin.com%2Fposts%2Fjaydenruddock_our-teams-project-skylore-won-best-celestial-themed-activity-7388329377383526401-_Rvh&ved=0CBYQjRxqFwoTCPjKv4HolZMDFQAAAAAdAAAAABAH&opi=89978449",
     program: "Computer Science",
     year: "2028",
     linkedin: "https://www.linkedin.com/in/jaydenruddock/",
@@ -147,7 +147,7 @@ export const members: Member[] = [
     program: "Electrical & Computer Engineering",
     year: "2025",
     linkedin: "https://www.linkedin.com/in/colinjangel/",
-    connections: [],
+    connections: ["miguel-serna"],
   },
   {
     id: "kaustubh-duddala",
@@ -245,7 +245,7 @@ export const members: Member[] = [
     instagram: "https://www.instagram.com/sidvenkatayogi/",
     twitter: "https://x.com/sidvenkatayogi",
     linkedin: "https://www.linkedin.com/in/sidvenkatayogi/",
-    connections: [],
+    connections: ["miguel-serna"],
   },
   {
     id: "sairaja-kurelli",
