@@ -1,0 +1,21 @@
+name: Trigger Production Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deploy hook
+        if: ${{ secrets.DEPLOY_HOOK_URL != '' }}
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }}
+        run: |
+          curl --fail --silent --show-error --request POST "$DEPLOY_HOOK_URL"
+
+      - name: Deploy hook not configured
+        if: ${{ secrets.DEPLOY_HOOK_URL == '' }}
+        run: |
+          echo "DEPLOY_HOOK_URL is not set. Skipping deploy trigger."

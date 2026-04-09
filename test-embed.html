@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Embed Test</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            padding: 40px;
+        }
+        .test-section {
+            margin: 40px 0;
+            padding: 20px;
+        }
+        .dark-bg {
+            background: #1a1a1a;
+            color: white;
+        }
+        .light-bg {
+            background: #f5f5f5;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body>
+    <h1>Webring Embed Test</h1>
+    
+    <h2>Default (no background)</h2>
+    <div class="test-section">
+        <script src="https://utexas.network/embed.js" data-webring></script>
+    </div>
+
+    <h2>On dark background</h2>
+    <div class="test-section dark-bg">
+        <script src="https://utexas.network/embed.js" data-webring data-color="white"></script>
+    </div>
+
+    <h2>On light background</h2>
+    <div class="test-section light-bg">
+        <script src="https://utexas.network/embed.js" data-webring data-color="black"></script>
+    </div>
+
+    <h2>On gradient background</h2>
+    <div class="test-section gradient-bg">
+        <script src="https://utexas.network/embed.js" data-webring data-color="white" data-arrow="chevron"></script>
+    </div>
+
+    <h2>With explicit background set</h2>
+    <div class="test-section">
+        <script src="https://utexas.network/embed.js" data-webring data-background="#f9f9f9" data-border="#e0e0e0"></script>
+    </div>
+
+    <h2>Compact spacing + smaller arrows</h2>
+    <div class="test-section">
+        <script src="https://utexas.network/embed.js" data-webring data-icon-size="48" data-arrow-size="18" data-gap="6"></script>
+    </div>
+</body>
+</html>
