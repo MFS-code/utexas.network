@@ -311,6 +311,18 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/arjansuri",
     connections: [],
   },
+  {
+    id: "derek-chen",
+    name: "Derek Chen",
+    website: "http://derekchen.dev/",
+    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQF4b6xexBuGcw/profile-displayphoto-scale_400_400/profile-displayphoto-shrink_400_400/0/1702837963429?e=1777507200&v=beta&t=dabAOk3fM92ONB1vHvfHJR4SrOgR-cs-IwA5Lwejt6w",
+    program: "Computer Science & Business",
+    instagram: "https://www.instagram.com/ramen__is__good/",
+    twitter: "",
+    linkedin: "https://www.linkedin.com/in/derekyujirchen/",
+    connections: ["miguel-serna", "gabriel-keller"],
+  },
+  
 ];
 
 export const projects: Project[] = [
