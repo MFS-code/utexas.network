@@ -315,12 +315,12 @@ export const members: Member[] = [
     id: "derek-chen",
     name: "Derek Chen",
     website: "http://derekchen.dev/",
-    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQH7qeTDu1xXPQ/profile-displayphoto-scale_400_400/B56Zx3.RXPJQAg-/0/1771539350722?e=1775088000&v=beta&t=dt6KWoIvThxm4GO0tObSD1Q85iIMHp9pGXfVqmGMwvU",
+    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQF4b6xexBuGcw/profile-displayphoto-scale_400_400/profile-displayphoto-shrink_400_400/0/1702837963429?e=1777507200&v=beta&t=dabAOk3fM92ONB1vHvfHJR4SrOgR-cs-IwA5Lwejt6w",
     program: "Computer Science & Business",
     instagram: "https://www.instagram.com/ramen__is__good/",
     twitter: "",
     linkedin: "https://www.linkedin.com/in/derekyujirchen/",
-    connections: [],
+    connections: ["miguel-serna", "gabriel-keller"],
   },
   
 ];
