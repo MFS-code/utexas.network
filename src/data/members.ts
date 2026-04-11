@@ -376,12 +376,12 @@ export const projects: Project[] = [
     name: "UT Registration Plus",
     memberIds: ["derek-chen"],
     description: "An open-source Chrome extension that enhances UT Austin’s course registration for over 60k students",
-    website: "https://github.com/Longhorn-Developers/UT-Registration-Plus/",
+    website: "https://chromewebstore.google.com/detail/ut-registration-plus/hboadpjkoaieogjimneceaahlppnipaa?utm_source=item-share-cb",
     profilePic: "https://raw.githubusercontent.com/Longhorn-Developers/UT-Registration-Plus/refs/heads/main/public/icons/icon_production.svg",
     instagram: "https://www.instagram.com/longhorndevelopers/",
     linkedin: "https://www.linkedin.com/company/longhorn-developers",
-    github: "https://github.com/ut-ras/",
-    accentItem: "#CC5500",
+    github: "https://github.com/Longhorn-Developers/UT-Registration-Plus",
+    accentItem: "#bf5700",
   },
 ];
 
