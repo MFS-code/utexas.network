@@ -359,6 +359,30 @@ export const projects: Project[] = [
     github: "https://github.com/ut-ras/",
     accentItem: "#CC5500",
   },
+  {
+    id: "robotics-and-automation-society",
+    name: "Robotics and Automation Society",
+    memberIds: ["derek-chen"],
+    description: "We support robotics competition teams and also build cool robots for fun!",
+    website: "https://ras.ece.utexas.edu/",
+    profilePic: "https://ras.ece.utexas.edu/images/ras_logo.png",
+    instagram: "https://www.instagram.com/ut_ieee_ras/",
+    linkedin: "https://www.linkedin.com/in/ut-ieee-ras/",
+    github: "https://github.com/ut-ras/",
+    accentItem: "#CC5500",
+  },
+  {
+    id: "ut-registration-plus",
+    name: "UT Registration Plus",
+    memberIds: ["derek-chen"],
+    description: "An open-source Chrome extension that enhances UT Austin’s course registration for over 60k students",
+    website: "https://github.com/Longhorn-Developers/UT-Registration-Plus/",
+    profilePic: "https://raw.githubusercontent.com/Longhorn-Developers/UT-Registration-Plus/refs/heads/main/public/icons/icon_production.svg",
+    instagram: "https://www.instagram.com/longhorndevelopers/",
+    linkedin: "https://www.linkedin.com/company/longhorn-developers",
+    github: "https://github.com/ut-ras/",
+    accentItem: "#CC5500",
+  },
 ];
 
 // Helper to get all connections for the network graph
