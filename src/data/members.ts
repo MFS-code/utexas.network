@@ -311,6 +311,18 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/arjansuri",
     connections: [],
   },
+  {
+    id: "derek-chen",
+    name: "Derek Chen",
+    website: "http://derekchen.dev/",
+    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQF4b6xexBuGcw/profile-displayphoto-scale_400_400/profile-displayphoto-shrink_400_400/0/1702837963429?e=1777507200&v=beta&t=dabAOk3fM92ONB1vHvfHJR4SrOgR-cs-IwA5Lwejt6w",
+    program: "Computer Science & Business",
+    instagram: "https://www.instagram.com/ramen__is__good/",
+    twitter: "",
+    linkedin: "https://www.linkedin.com/in/derekyujirchen/",
+    connections: ["miguel-serna", "gabriel-keller"],
+  },
+  
 ];
 
 export const projects: Project[] = [
@@ -346,6 +358,30 @@ export const projects: Project[] = [
     linkedin: "https://www.linkedin.com/in/ut-ieee-ras/",
     github: "https://github.com/ut-ras/",
     accentItem: "#CC5500",
+  },
+  {
+    id: "longhorn-developers",
+    name: "Longhorn Developers",
+    memberIds: ["derek-chen"],
+    description: "Home to the UT Reg. Plus Extension! We are a student organization aimed at addressing student issues at UT through technology and design solutions.",
+    website: "https://chromewebstore.google.com/detail/ut-registration-plus/hboadpjkoaieogjimneceaahlppnipaa?utm_source=item-share-cb",
+    profilePic: "https://avatars.githubusercontent.com/u/71949018?s=800&v=4",
+    instagram: "https://www.instagram.com/longhorndevelopers/",
+    linkedin: "https://www.linkedin.com/company/longhorn-developers",
+    github: "https://github.com/Longhorn-Developers",
+    accentItem: "#bf5700",
+  },
+  {
+    id: "ut-registration-plus",
+    name: "UT Registration Plus",
+    memberIds: ["derek-chen"],
+    description: "An open-source Chrome extension that enhances UT Austin’s course registration for over 60k students",
+    website: "https://chromewebstore.google.com/detail/ut-registration-plus/hboadpjkoaieogjimneceaahlppnipaa?utm_source=item-share-cb",
+    profilePic: "https://raw.githubusercontent.com/Longhorn-Developers/UT-Registration-Plus/refs/heads/main/public/icons/icon_production.svg",
+    instagram: "https://www.instagram.com/longhorndevelopers/",
+    linkedin: "https://www.linkedin.com/company/longhorn-developers",
+    github: "https://github.com/Longhorn-Developers/UT-Registration-Plus",
+    accentItem: "#bf5700",
   },
 ];
 
