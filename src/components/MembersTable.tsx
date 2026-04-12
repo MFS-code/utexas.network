@@ -73,6 +73,9 @@ export default function MembersTable({ members, projects, searchQuery }: Members
                                         src={normalizeImageUrl(member.profilePic)} 
                                         alt={member.name || 'Member'} 
                                         className={`avatar ${searchQuery && index === 0 ? 'avatar-highlighted' : ''}`}
+                                        loading="lazy"
+                                        decoding="async"
+                                        fetchPriority="low"
                                         onError={(e) => {
                                             (e.currentTarget as HTMLImageElement).style.display = 'none';
                                             const fallback = e.currentTarget.nextElementSibling as HTMLElement | null;
@@ -186,6 +189,9 @@ export default function MembersTable({ members, projects, searchQuery }: Members
                                                 alt={project.name}
                                                 className="avatar avatar-project"
                                                 style={{ borderColor: getProjectAccentColor(project.accentItem) }}
+                                                loading="lazy"
+                                                decoding="async"
+                                                fetchPriority="low"
                                                 onError={(e) => {
                                                     (e.currentTarget as HTMLImageElement).style.display = 'none';
                                                     const fallback = e.currentTarget.nextElementSibling as HTMLElement | null;
