@@ -364,7 +364,7 @@ export const projects: Project[] = [
     name: "Longhorn Developers",
     memberIds: ["derek-chen"],
     description: "Home to the UT Reg. Plus Extension! We are a student organization aimed at addressing student issues at UT through technology and design solutions.",
-    website: "https://chromewebstore.google.com/detail/ut-registration-plus/hboadpjkoaieogjimneceaahlppnipaa?utm_source=item-share-cb",
+    website: "https://www.linkedin.com/company/longhorn-developers/",
     profilePic: "https://avatars.githubusercontent.com/u/71949018?s=800&v=4",
     instagram: "https://www.instagram.com/longhorndevelopers/",
     linkedin: "https://www.linkedin.com/company/longhorn-developers",
