@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const ALLOWED_HOSTS = new Set([
+  'drive.google.com',
   'drive.usercontent.google.com',
 ]);
+
+const DEFAULT_CACHE_CONTROL = 'public, max-age=86400, s-maxage=2592000, stale-while-revalidate=86400';
 
 export async function GET(request: NextRequest) {
   const remoteUrl = request.nextUrl.searchParams.get('url');
@@ -28,6 +31,7 @@ export async function GET(request: NextRequest) {
       Accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
     },
     cache: 'force-cache',
+    next: { revalidate: 86400 },
   });
 
   if (!upstreamResponse.ok) {
@@ -35,13 +39,13 @@ export async function GET(request: NextRequest) {
   }
 
   const contentType = upstreamResponse.headers.get('content-type') ?? 'application/octet-stream';
-  const cacheControl = upstreamResponse.headers.get('cache-control') ?? 'public, max-age=86400, s-maxage=86400';
-  const body = await upstreamResponse.arrayBuffer();
+  const cacheControl = upstreamResponse.headers.get('cache-control') ?? DEFAULT_CACHE_CONTROL;
 
-  return new NextResponse(body, {
+  return new NextResponse(upstreamResponse.body, {
     headers: {
       'Content-Type': contentType,
       'Cache-Control': cacheControl,
+      Vary: 'Accept',
     },
   });
 }

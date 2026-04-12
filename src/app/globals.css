@@ -93,6 +93,19 @@ a {
   position: relative;
 }
 
+.network-graph-placeholder {
+  width: 100%;
+  height: 400px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
 /* Header Section */
 .header-section {
   display: flex;

@@ -256,6 +256,9 @@ export default function NetworkGraph({ members, projects, connections, highlight
         const container = containerRef.current;
         const width = container.clientWidth;
         const height = container.clientHeight;
+        let cancelled = false;
+        let loadTimer: number | null = null;
+        const deferredImageLoads: Array<() => Promise<void>> = [];
 
         container.innerHTML = '';
         nodeElementsRef.current.clear();
@@ -325,23 +328,51 @@ export default function NetworkGraph({ members, projects, connections, highlight
             applyFallbackTheme(fallback, node);
 
             const img = document.createElement('img');
-            img.src = normalizeImageUrl(node.profilePic) || '/icon.svg';
+            img.loading = 'eager';
+            img.decoding = 'async';
+            img.fetchPriority = 'low';
             img.style.width = avatarSize;
             img.style.height = avatarSize;
             img.style.borderRadius = node.isProject ? '6px' : '50%';
             img.style.objectFit = 'cover';
             img.style.filter = 'grayscale(100%)';
-            img.style.display = 'block';
+            img.style.display = 'none';
             img.draggable = false;
             img.style.transition = 'filter 0.3s ease, opacity 0.3s ease';
-            img.onload = () => {
+            fallback.style.display = 'flex';
+
+            const imageSrc = normalizeImageUrl(node.profilePic) || '/icon.svg';
+            const revealImage = () => {
                 fallback.style.display = 'none';
                 img.style.display = 'block';
             };
-            img.onerror = () => {
+            const revealFallback = () => {
                 img.style.display = 'none';
                 fallback.style.display = 'flex';
             };
+
+            if (imageSrc === '/icon.svg') {
+                img.onload = revealImage;
+                img.onerror = revealFallback;
+                img.src = imageSrc;
+            } else {
+                deferredImageLoads.push(() => new Promise((resolve) => {
+                    if (cancelled) {
+                        resolve();
+                        return;
+                    }
+
+                    img.onload = () => {
+                        revealImage();
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        revealFallback();
+                        resolve();
+                    };
+                    img.src = imageSrc;
+                }));
+            }
 
             if (node.isProject) {
                 nodeDiv.style.border = `2px dashed ${getProjectAccentColor(node.accentItem)}`;
@@ -527,9 +558,43 @@ export default function NetworkGraph({ members, projects, connections, highlight
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
 
+        const startDeferredLoads = () => {
+            const maxConcurrentLoads = 6;
+            let nextTaskIndex = 0;
+
+            const runWorker = async () => {
+                while (!cancelled) {
+                    const currentTaskIndex = nextTaskIndex;
+                    nextTaskIndex += 1;
+                    const task = deferredImageLoads[currentTaskIndex];
+
+                    if (!task) {
+                        return;
+                    }
+
+                    await task();
+                }
+            };
+
+            void Promise.allSettled(
+                Array.from(
+                    { length: Math.min(maxConcurrentLoads, deferredImageLoads.length) },
+                    () => runWorker()
+                )
+            );
+        };
+
+        if (deferredImageLoads.length > 0) {
+            loadTimer = window.setTimeout(startDeferredLoads, 250);
+        }
+
         updateVisuals();
 
         return () => {
+            cancelled = true;
+            if (loadTimer !== null) {
+                window.clearTimeout(loadTimer);
+            }
             container.removeEventListener('wheel', handleWheel);
             container.removeEventListener('mousedown', handleContainerMouseDown);
             document.removeEventListener('mousemove', handleMouseMove);

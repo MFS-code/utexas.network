@@ -158,7 +158,7 @@ export const members: Member[] = [
     year: "2028",
     instagram: "https://www.instagram.com/kaustubh.duddala/",
     linkedin: "https://www.linkedin.com/in/kaustubhduddala/",
-    connections: [],
+    connections: ["miguel-serna"],
   },
   {
     id: "praneel-seth",

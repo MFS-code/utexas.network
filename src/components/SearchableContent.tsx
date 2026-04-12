@@ -1,13 +1,22 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { Member, Project, Connection } from '@/data/members';
 import MembersTable from './MembersTable';
-import NetworkGraph from './NetworkGraph';
 import AsciiBackground from './AsciiBackground';
 import { Search, ArrowRight } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
+
+const NetworkGraph = dynamic(() => import('./NetworkGraph'), {
+    ssr: false,
+    loading: () => (
+        <div className="network-graph-placeholder">
+            <span>loading network...</span>
+        </div>
+    ),
+});
 
 // Fisher-Yates shuffle
 function shuffleArray<T>(array: T[]): T[] {
@@ -357,7 +366,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                 rel="noreferrer"
                                 className="join-link"
                             >
-                                GitHub
+                                GitHub 
                             </a>
                             now that the repo is open-source.
                         </p>

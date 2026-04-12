@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { members, projects, Project, Member } from '@/data/members';
+import { members, projects, Member } from '@/data/members';
 import { normalizeImageUrl } from '@/utils/profileImage';
 import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -69,6 +69,9 @@ export default function ProjectsPage() {
                       alt={project.name}
                       className="project-card-logo"
                       style={accent ? { borderColor: accent } : undefined}
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).style.display = 'none';
                         const fallback = e.currentTarget.nextElementSibling as HTMLElement | null;
@@ -122,6 +125,9 @@ export default function ProjectsPage() {
                               src={normalizeImageUrl(member.profilePic)}
                               alt={member.name}
                               className="project-card-member-avatar"
+                              loading="lazy"
+                              decoding="async"
+                              fetchPriority="low"
                               onError={(e) => {
                                 (e.currentTarget as HTMLImageElement).style.display = 'none';
                               }}

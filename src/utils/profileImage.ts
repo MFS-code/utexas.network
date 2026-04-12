@@ -18,6 +18,8 @@ export function normalizeImageUrl(url: string | undefined): string | undefined {
 
   const toAvatarProxy = (targetUrl: string) =>
     `/api/avatar?url=${encodeURIComponent(targetUrl)}`;
+  const toDriveThumbnail = (fileId: string) =>
+    toAvatarProxy(`https://drive.google.com/thumbnail?id=${fileId}&sz=w256`);
 
   // --- Google Drive ---
   // Formats:
@@ -29,26 +31,20 @@ export function normalizeImageUrl(url: string | undefined): string | undefined {
     /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/
   );
   if (driveFileMatch) {
-    return toAvatarProxy(
-      `https://drive.usercontent.google.com/download?id=${driveFileMatch[1]}&export=view`
-    );
+    return toDriveThumbnail(driveFileMatch[1]);
   }
 
   const driveOpenMatch = trimmed.match(
     /drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/
   );
   if (driveOpenMatch) {
-    return toAvatarProxy(
-      `https://drive.usercontent.google.com/download?id=${driveOpenMatch[1]}&export=view`
-    );
+    return toDriveThumbnail(driveOpenMatch[1]);
   }
 
   if (trimmed.includes('drive.google.com/uc')) {
     const idMatch = trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/);
     if (idMatch) {
-      return toAvatarProxy(
-        `https://drive.usercontent.google.com/download?id=${idMatch[1]}&export=view`
-      );
+      return toDriveThumbnail(idMatch[1]);
     }
   }
 
