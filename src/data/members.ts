@@ -394,6 +394,17 @@ export const projects: Project[] = [
     github: "https://github.com/Longhorn-Developers/UT-Dining",
     accentItem: "#bf5700",
   },
+  {
+    id: "ut-marketplace",
+    name: "UT Marketplace",
+    memberIds: [""],
+    description: "A full-featured marketplace for the UT Austin community to buy and sell items.",
+    website: "https://utmarketplace.vercel.app",
+    profilePic: "https://avatars.githubusercontent.com/u/71949018?s=800&v=4",
+    instagram: "https://www.instagram.com/longhorndevelopers/",
+    github: "https://github.com/Longhorn-Developers/UT-Marketplace",
+    accentItem: "#bf5700",
+  },
 ];
 
 // Helper to get all connections for the network graph
