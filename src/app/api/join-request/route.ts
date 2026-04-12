@@ -91,6 +91,27 @@ async function sendAlertEmail(subject: string, lines: string[]): Promise<void> {
   }
 }
 
+async function sendFallbackSubmissionEmail(
+  issue: {
+    body: string;
+    alertSubject: string;
+    alertLines: string[];
+  },
+  fallbackLines: string[],
+): Promise<void> {
+  await sendAlertEmail(
+    `[fallback] ${issue.alertSubject}`,
+    [
+      ...fallbackLines,
+      '',
+      ...issue.alertLines,
+      '',
+      'Raw moderation issue payload:',
+      issue.body,
+    ],
+  );
+}
+
 async function createModerationIssue(
   token: string,
   owner: string,
@@ -267,23 +288,46 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields or invalid .edu email.' }, { status: 400 });
     }
 
+    const issue = isProject
+      ? buildProjectIssue(payload as unknown as ProjectPayload)
+      : buildMemberIssue(payload as unknown as MemberPayload);
+
     const token = process.env.GITHUB_JOIN_BOT_TOKEN?.trim();
     const owner = process.env.GITHUB_JOIN_REPO_OWNER?.trim();
     const repo = process.env.GITHUB_JOIN_REPO_NAME?.trim();
 
     if (!token || !owner || !repo) {
-      return NextResponse.json(
-        {
-          error:
-            'Join request backend not configured. Set GITHUB_JOIN_BOT_TOKEN, GITHUB_JOIN_REPO_OWNER, and GITHUB_JOIN_REPO_NAME.',
-        },
-        { status: 500 }
-      );
-    }
+      try {
+        await sendFallbackSubmissionEmail(issue, [
+          'GitHub moderation is not configured, so this request needs manual review via email.',
+          '',
+          `GitHub token configured: ${token ? 'yes' : 'no'}`,
+          `GitHub owner configured: ${owner ? 'yes' : 'no'}`,
+          `GitHub repo configured: ${repo ? 'yes' : 'no'}`,
+        ]);
 
-    const issue = isProject
-      ? buildProjectIssue(payload as unknown as ProjectPayload)
-      : buildMemberIssue(payload as unknown as MemberPayload);
+        return NextResponse.json({
+          ok: true,
+          emailSent: true,
+          fallback: 'email',
+          message:
+            'Request received. GitHub moderation is temporarily unavailable, so your submission was emailed to the moderators for manual review.',
+        });
+      } catch (emailError) {
+        console.error(
+          'Join request backend is not configured and fallback email delivery failed',
+          emailError instanceof Error ? emailError.message : emailError,
+        );
+
+        return NextResponse.json(
+          {
+            error:
+              'Join request backend not configured. Set GITHUB_JOIN_BOT_TOKEN, GITHUB_JOIN_REPO_OWNER, and GITHUB_JOIN_REPO_NAME.',
+          },
+          { status: 500 }
+        );
+      }
+    }
 
     const githubResult = await createModerationIssue(token, owner, repo, issue);
 
@@ -296,20 +340,12 @@ export async function POST(request: Request) {
       });
 
       try {
-        await sendAlertEmail(
-          `[fallback] ${issue.alertSubject}`,
-          [
-            'GitHub moderation issue creation failed, so this request needs manual review.',
-            '',
-            `GitHub status: ${githubResult.status}`,
-            `GitHub error: ${githubResult.error}`,
-            '',
-            ...issue.alertLines,
-            '',
-            'Raw moderation issue payload:',
-            issue.body,
-          ],
-        );
+        await sendFallbackSubmissionEmail(issue, [
+          'GitHub moderation issue creation failed, so this request needs manual review.',
+          '',
+          `GitHub status: ${githubResult.status}`,
+          `GitHub error: ${githubResult.error}`,
+        ]);
 
         return NextResponse.json({
           ok: true,
