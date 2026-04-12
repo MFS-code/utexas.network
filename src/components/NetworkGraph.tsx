@@ -23,11 +23,15 @@ interface Node {
     isProject?: boolean;
 }
 
+type GraphNodeElement = HTMLDivElement & {
+    __isDragging?: boolean;
+};
+
 export default function NetworkGraph({ members, projects, connections, highlightedMemberIds = [], searchQuery = '' }: NetworkGraphProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const svgRef = useRef<SVGSVGElement | null>(null);
     const nodesRef = useRef<Node[]>([]);
-    const nodeElementsRef = useRef<Map<string, HTMLDivElement>>(new Map());
+    const nodeElementsRef = useRef<Map<string, GraphNodeElement>>(new Map());
     const dragNodeRef = useRef<string | null>(null);
     const dragOffsetRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
     const dragStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -43,11 +47,13 @@ export default function NetworkGraph({ members, projects, connections, highlight
     const highlightedRef = useRef(highlightedMemberIds);
     const searchQueryRef = useRef(searchQuery);
 
-    connectionsRef.current = connections;
-    highlightedRef.current = highlightedMemberIds;
-    searchQueryRef.current = searchQuery;
+    useEffect(() => {
+        connectionsRef.current = connections;
+        highlightedRef.current = highlightedMemberIds;
+        searchQueryRef.current = searchQuery;
+    }, [connections, highlightedMemberIds, searchQuery]);
 
-    function getProjectAccentColor(accentItem?: Project['accentItem']) {
+    const getProjectAccentColor = useCallback((accentItem?: Project['accentItem']) => {
         if (typeof accentItem === 'string') {
             const hexMatch = accentItem.trim().match(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i);
             if (hexMatch) {
@@ -66,25 +72,35 @@ export default function NetworkGraph({ members, projects, connections, highlight
             default:
                 return '#bf5700';
         }
+    }, []);
+
+    function getFallbackLabel(name: string | null, isProject?: boolean) {
+        const trimmed = name?.trim();
+        if (!trimmed) {
+            return isProject ? 'P' : '?';
+        }
+
+        const parts = trimmed.split(/\s+/).filter(Boolean);
+        if (parts.length === 1) {
+            return parts[0].slice(0, isProject ? 2 : 1).toUpperCase();
+        }
+
+        if (isProject) {
+            return parts.slice(0, 2).map(part => part[0]?.toUpperCase() ?? '').join('');
+        }
+
+        return `${parts[0][0] ?? ''}${parts[parts.length - 1][0] ?? ''}`.toUpperCase();
     }
 
-    useEffect(() => {
-        const checkDarkMode = () => {
-            const theme = document.documentElement.getAttribute('data-theme');
-            isDarkRef.current = theme === 'dark';
-            updateVisuals();
-        };
-
-        checkDarkMode();
-
-        const observer = new MutationObserver(checkDarkMode);
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ['data-theme'],
-        });
-
-        return () => observer.disconnect();
-    }, []);
+    const applyFallbackTheme = useCallback((fallback: HTMLDivElement, node: Node) => {
+        const dark = isDarkRef.current;
+        fallback.style.background = node.isProject
+            ? (dark ? 'rgba(191, 87, 0, 0.18)' : 'rgba(191, 87, 0, 0.12)')
+            : (dark ? '#2b2b2b' : '#ececec');
+        fallback.style.color = node.isProject
+            ? getProjectAccentColor(node.accentItem)
+            : (dark ? '#f5f5f5' : '#4b4b4b');
+    }, [getProjectAccentColor]);
 
     const updateVisuals = useCallback(() => {
         const svg = svgRef.current;
@@ -142,21 +158,47 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 nodeDiv.style.transform = `translate(-50%, -50%) scale(${zoom})`;
                 
                 const img = nodeDiv.querySelector('img');
+                const fallback = nodeDiv.querySelector('[data-node-fallback="true"]') as HTMLDivElement | null;
                 if (img) {
                     const isHighlighted = highlighted.length === 0 || highlighted.includes(node.id);
                     if (query && isHighlighted) {
                         img.style.filter = 'grayscale(0%)';
+                        img.style.opacity = '1';
+                        if (fallback) fallback.style.opacity = '1';
                     } else if (query && !isHighlighted) {
                         img.style.filter = 'grayscale(100%)';
                         img.style.opacity = '0.3';
+                        if (fallback) fallback.style.opacity = '0.3';
                     } else {
                         img.style.filter = 'grayscale(100%)';
                         img.style.opacity = '1';
+                        if (fallback) fallback.style.opacity = '1';
                     }
+                }
+                if (fallback) {
+                    applyFallbackTheme(fallback, node);
                 }
             }
         });
-    }, []);
+    }, [applyFallbackTheme, getProjectAccentColor]);
+
+    useEffect(() => {
+        const checkDarkMode = () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            isDarkRef.current = theme === 'dark';
+            updateVisuals();
+        };
+
+        checkDarkMode();
+
+        const observer = new MutationObserver(checkDarkMode);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme'],
+        });
+
+        return () => observer.disconnect();
+    }, [updateVisuals]);
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -259,22 +301,47 @@ export default function NetworkGraph({ members, projects, connections, highlight
         container.appendChild(svg);
 
         nodesRef.current.forEach((node) => {
-            const nodeDiv = document.createElement('div');
+            const nodeDiv = document.createElement('div') as GraphNodeElement;
             nodeDiv.style.position = 'absolute';
             nodeDiv.style.cursor = 'grab';
             nodeDiv.style.userSelect = 'none';
 
+            const avatarSize = node.isProject ? '28px' : '32px';
+            const fallback = document.createElement('div');
+            fallback.dataset.nodeFallback = 'true';
+            fallback.textContent = getFallbackLabel(node.name, node.isProject);
+            fallback.style.width = avatarSize;
+            fallback.style.height = avatarSize;
+            fallback.style.borderRadius = node.isProject ? '6px' : '50%';
+            fallback.style.display = 'none';
+            fallback.style.alignItems = 'center';
+            fallback.style.justifyContent = 'center';
+            fallback.style.fontSize = node.isProject ? '10px' : '12px';
+            fallback.style.fontWeight = '700';
+            fallback.style.letterSpacing = '0.04em';
+            fallback.style.fontFamily = 'Inter, sans-serif';
+            fallback.style.textTransform = 'uppercase';
+            fallback.style.transition = 'opacity 0.3s ease';
+            applyFallbackTheme(fallback, node);
+
             const img = document.createElement('img');
             img.src = normalizeImageUrl(node.profilePic) || '/icon.svg';
-            img.style.width = node.isProject ? '28px' : '32px';
-            img.style.height = node.isProject ? '28px' : '32px';
+            img.style.width = avatarSize;
+            img.style.height = avatarSize;
             img.style.borderRadius = node.isProject ? '6px' : '50%';
             img.style.objectFit = 'cover';
             img.style.filter = 'grayscale(100%)';
             img.style.display = 'block';
             img.draggable = false;
             img.style.transition = 'filter 0.3s ease, opacity 0.3s ease';
-            img.onerror = () => { img.src = '/icon.svg'; img.onerror = null; };
+            img.onload = () => {
+                fallback.style.display = 'none';
+                img.style.display = 'block';
+            };
+            img.onerror = () => {
+                img.style.display = 'none';
+                fallback.style.display = 'flex';
+            };
 
             if (node.isProject) {
                 nodeDiv.style.border = `2px dashed ${getProjectAccentColor(node.accentItem)}`;
@@ -309,6 +376,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
 
             nodeDiv.addEventListener('mouseenter', () => {
                 applyLabelTheme();
+                fallback.style.opacity = '1';
                 img.style.filter = 'grayscale(0%)';
                 img.style.opacity = '1';
                 nameLabel.style.opacity = '1';
@@ -320,18 +388,21 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 if (query && isHighlighted) {
                     img.style.filter = 'grayscale(0%)';
                     img.style.opacity = '1';
+                    fallback.style.opacity = '1';
                 } else if (query && !isHighlighted) {
                     img.style.filter = 'grayscale(100%)';
                     img.style.opacity = '0.3';
+                    fallback.style.opacity = '0.3';
                 } else {
                     img.style.filter = 'grayscale(100%)';
                     img.style.opacity = '1';
+                    fallback.style.opacity = '1';
                 }
                 nameLabel.style.opacity = '0';
             });
 
             nodeDiv.addEventListener('mousedown', (e) => {
-                (nodeDiv as any).__isDragging = false;
+                nodeDiv.__isDragging = false;
                 dragStartRef.current = { x: e.clientX, y: e.clientY };
                 isDraggingRef.current = false;
                 dragNodeRef.current = node.id;
@@ -351,14 +422,15 @@ export default function NetworkGraph({ members, projects, connections, highlight
             });
 
             nodeDiv.addEventListener('click', () => {
-                const wasDragging = (nodeDiv as any).__isDragging === true;
+                const wasDragging = nodeDiv.__isDragging === true;
                 if (!wasDragging && !isDraggingRef.current && node.website) {
                     const url = node.website.startsWith('http') ? node.website : `https://${node.website}`;
                     window.open(url, '_blank');
                 }
-                (nodeDiv as any).__isDragging = false;
+                nodeDiv.__isDragging = false;
             });
 
+            nodeDiv.appendChild(fallback);
             nodeDiv.appendChild(img);
             nodeDiv.appendChild(nameLabel);
             container.appendChild(nodeDiv);
@@ -386,7 +458,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
                     isDraggingRef.current = true;
                     const nodeDiv = nodeElementsRef.current.get(dragNodeRef.current);
                     if (nodeDiv) {
-                        (nodeDiv as any).__isDragging = true;
+                        nodeDiv.__isDragging = true;
                     }
                 }
 
@@ -463,7 +535,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
         };
-    }, [members, projects, connections, updateVisuals]);
+    }, [members, projects, connections, updateVisuals, applyFallbackTheme, getProjectAccentColor]);
 
     return (
         <div 

@@ -350,7 +350,16 @@ export default function SearchableContent({ members, projects, connections }: Se
                             This directory makes it easier to find and connect with fellow Longhorns and their work.
                         </p>
                         <p>
-                            want to join? request access and your submission will be reviewed manually.
+                            want to join? use the button below to submit your info for manual approval, or open a PR on{' '}
+                            <a
+                                href="https://github.com/MFS-code/utexas.network"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="join-link"
+                            >
+                                GitHub
+                            </a>
+                            now that the repo is open-source.
                         </p>
                     </div>
                     <div className="join-actions">
