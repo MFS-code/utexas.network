@@ -368,7 +368,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                             >
                                 GitHub 
                             </a>
-                            now that the repo is open-source.
+                            {' '}now that the repo is open-source.
                         </p>
                     </div>
                     <div className="join-actions">
