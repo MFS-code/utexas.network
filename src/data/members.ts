@@ -383,6 +383,17 @@ export const projects: Project[] = [
     github: "https://github.com/Longhorn-Developers/UT-Registration-Plus",
     accentItem: "#bf5700",
   },
+  {
+    id: "ut-dining",
+    name: "UT Dining",
+    memberIds: [""],
+    description: "A student-built app to browse UT Austin dining menus, hours, and locations.",
+    website: "https://longhorn-developers.github.io/ut-dining-website/",
+    profilePic: "https://avatars.githubusercontent.com/u/71949018?s=800&v=4",
+    instagram: "https://www.instagram.com/longhorndevelopers/",
+    github: "https://github.com/Longhorn-Developers/UT-Dining",
+    accentItem: "#bf5700",
+  },
 ];
 
 // Helper to get all connections for the network graph
