@@ -322,7 +322,17 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/derekyujirchen/",
     connections: ["miguel-serna", "gabriel-keller"],
   },
-  
+  {
+    id: "dhilan-shan",
+    name: "Dhilan Shah",
+    website: "https://www.dhilan.dev/",
+    profilePic: "https://www.texasventuregroup.com/images/members/dhilan_shah.png",
+    program: "Computer Science",
+    year: "2028",
+    twitter: "https://x.com/_dhilan_shah_",
+    linkedin: "https://www.linkedin.com/in/dhilan-shah-a1326820b/",
+    connections: ["miguel-serna", "gabriel-keller", "neev-gupta"],
+  },
 ];
 
 export const projects: Project[] = [
