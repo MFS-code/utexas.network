@@ -16,30 +16,44 @@ export function normalizeImageUrl(url: string | undefined): string | undefined {
   const trimmed = url.trim();
   if (!trimmed) return undefined;
 
+  const toAvatarProxy = (targetUrl: string) =>
+    `/api/avatar?url=${encodeURIComponent(targetUrl)}`;
+
   // --- Google Drive ---
   // Formats:
   //   https://drive.google.com/file/d/FILE_ID/view?usp=sharing
   //   https://drive.google.com/open?id=FILE_ID
-  //   https://drive.google.com/uc?id=FILE_ID&export=view (already direct)
+  //   https://drive.google.com/uc?id=FILE_ID&export=view
+  // Google serves these with CORP=same-site, so we proxy them through our app.
   const driveFileMatch = trimmed.match(
     /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/
   );
   if (driveFileMatch) {
-    return `https://lh3.googleusercontent.com/d/${driveFileMatch[1]}`;
+    return toAvatarProxy(
+      `https://drive.usercontent.google.com/download?id=${driveFileMatch[1]}&export=view`
+    );
   }
 
   const driveOpenMatch = trimmed.match(
     /drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/
   );
   if (driveOpenMatch) {
-    return `https://lh3.googleusercontent.com/d/${driveOpenMatch[1]}`;
+    return toAvatarProxy(
+      `https://drive.usercontent.google.com/download?id=${driveOpenMatch[1]}&export=view`
+    );
   }
 
   if (trimmed.includes('drive.google.com/uc')) {
     const idMatch = trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/);
     if (idMatch) {
-      return `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
+      return toAvatarProxy(
+        `https://drive.usercontent.google.com/download?id=${idMatch[1]}&export=view`
+      );
     }
+  }
+
+  if (trimmed.includes('drive.usercontent.google.com/')) {
+    return toAvatarProxy(trimmed);
   }
 
   // --- Dropbox ---
