@@ -516,6 +516,11 @@ export default function SearchableContent({ members, projects, connections }: Se
                                 </>
                             ) : (
                                 <>
+                                    {submitStatus && (
+                                        <p className={`join-status join-status-${submitStatus.type} join-modal-status`}>
+                                            {submitStatus.message}
+                                        </p>
+                                    )}
                                     <div className="join-form-grid">
                                         <input className="join-input" name="projectName" required placeholder="Project / org name *" />
                                         <input className="join-input" name="contactEmail" required type="email" placeholder="Contact email *" />
