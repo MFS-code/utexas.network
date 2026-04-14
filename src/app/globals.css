@@ -16,8 +16,6 @@
   --space-section: clamp(1.5rem, 1rem + 2.2vw, 4rem);
   --text-title: clamp(1.5rem, 1.05rem + 2.4vw, 2.5rem);
   --text-body: clamp(0.9rem, 0.86rem + 0.2vw, 1rem);
-  /* Longhorn watermark: scale so 800px art tracks viewport (unitless ratio) */
-  --ascii-scale: clamp(0.36, calc(94vw / 800px), 1.55);
   /* Network graph: WCAG-friendly min height + small-screen viewport */
   --graph-height: clamp(220px, 38svh, 520px);
 }
@@ -856,21 +854,40 @@ a {
   stroke: var(--foreground) !important;
 }
 
-/* ASCII Background — centered on bottom edge so the longhorn stays in view at any viewport */
+/* ASCII Background — bottom-centered; scale lives here (not :root) for Firefox calc() + transform interop */
 .ascii-art-background {
+  /* Same math as before: min of width/height "contain" × 1.55; multiply before divide for better engine support */
+  --ascii-scale: max(
+    0.28,
+    min(
+      calc((100vw * 1.55) / 800px),
+      calc((96vh * 1.55) / 816px)
+    )
+  );
   position: fixed;
   left: 50%;
   right: auto;
-  /* Sit lower on the screen so more of the art tucks under the fold */
-  bottom: min(-14vh, -4rem);
+  bottom: env(safe-area-inset-bottom, 0px);
   width: 800px;
   z-index: 0;
   pointer-events: none;
   user-select: none;
   opacity: 0.038;
   overflow: visible;
-  transform: translateX(-50%) scale(var(--ascii-scale));
+  transform: translate3d(-50%, 0, 0) scale3d(var(--ascii-scale), var(--ascii-scale), 1);
   transform-origin: center bottom;
+}
+
+@supports (height: 1svh) {
+  .ascii-art-background {
+    --ascii-scale: max(
+      0.28,
+      min(
+        calc((100vw * 1.55) / 800px),
+        calc((96svh * 1.55) / 816px)
+      )
+    );
+  }
 }
 
 [data-theme='dark'] .ascii-art-background {

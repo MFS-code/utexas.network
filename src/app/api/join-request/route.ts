@@ -112,6 +112,64 @@ async function sendFallbackSubmissionEmail(
   );
 }
 
+const githubJsonHeaders = (token: string) => ({
+  Authorization: `Bearer ${token}`,
+  Accept: 'application/vnd.github+json',
+  'X-GitHub-Api-Version': GITHUB_API_VERSION,
+});
+
+async function ensureGithubLabel(
+  token: string,
+  owner: string,
+  repo: string,
+  name: string,
+  color: string,
+): Promise<void> {
+  const labelPath = `${GITHUB_API_URL}/repos/${owner}/${repo}/labels/${encodeURIComponent(name)}`;
+  const existing = await fetch(labelPath, {
+    method: 'GET',
+    headers: githubJsonHeaders(token),
+  });
+
+  if (existing.ok) {
+    return;
+  }
+
+  if (existing.status !== 404) {
+    const detail = await existing.text();
+    console.warn(`ensureGithubLabel("${name}") lookup returned ${existing.status}: ${detail}`);
+    return;
+  }
+
+  const response = await fetch(`${GITHUB_API_URL}/repos/${owner}/${repo}/labels`, {
+    method: 'POST',
+    headers: {
+      ...githubJsonHeaders(token),
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name,
+      color,
+      description: 'utexas.network moderation',
+    }),
+  });
+
+  if (response.ok || response.status === 422) {
+    return;
+  }
+
+  const raw = await response.text();
+  console.warn(`ensureGithubLabel("${name}") create returned ${response.status}: ${raw}`);
+}
+
+async function ensureJoinModerationLabels(token: string, owner: string, repo: string): Promise<void> {
+  await Promise.all([
+    ensureGithubLabel(token, owner, repo, 'join-request', '0E8A16'),
+    ensureGithubLabel(token, owner, repo, 'pending', 'FBCA04'),
+    ensureGithubLabel(token, owner, repo, 'project-request', '1D76DB'),
+  ]);
+}
+
 async function createModerationIssue(
   token: string,
   owner: string,
@@ -329,6 +387,7 @@ export async function POST(request: Request) {
       }
     }
 
+    await ensureJoinModerationLabels(token, owner, repo);
     const githubResult = await createModerationIssue(token, owner, repo, issue);
 
     if (!githubResult.ok) {
