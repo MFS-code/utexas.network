@@ -11,6 +11,15 @@
   --input-bg: #ffffff;
   --hover-bg: #f5f5f5;
   --hover-color: #bf5700;
+  /* Fluid layout (rem + viewport); spacing aligns to ~8px steps at default 16px root */
+  --space-page: clamp(1.25rem, 0.65rem + 2.8vw, 4rem);
+  --space-section: clamp(1.5rem, 1rem + 2.2vw, 4rem);
+  --text-title: clamp(1.5rem, 1.05rem + 2.4vw, 2.5rem);
+  --text-body: clamp(0.9rem, 0.86rem + 0.2vw, 1rem);
+  /* Longhorn watermark: scale so 800px art tracks viewport (unitless ratio) */
+  --ascii-scale: clamp(0.36, calc(94vw / 800px), 1.55);
+  /* Network graph: WCAG-friendly min height + small-screen viewport */
+  --graph-height: clamp(220px, 38svh, 520px);
 }
 
 [data-theme='dark'] {
@@ -43,6 +52,11 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+body {
+  min-height: 100dvh;
+  min-height: 100svh;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -50,11 +64,15 @@ a {
 
 /* Main Layout */
 .main-container {
-  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  padding: 4rem;
-  gap: 4rem;
+  padding: max(var(--space-page), env(safe-area-inset-top, 0px))
+    max(var(--space-page), env(safe-area-inset-right, 0px))
+    max(var(--space-page), env(safe-area-inset-bottom, 0px))
+    max(var(--space-page), env(safe-area-inset-left, 0px));
+  gap: var(--space-section);
   position: relative;
 }
 
@@ -69,14 +87,15 @@ a {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: var(--space-section);
   position: relative;
   z-index: 1;
 }
 
 .graph-section {
   flex: 1;
-  max-width: 600px;
+  max-width: min(600px, 100%);
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -91,11 +110,15 @@ a {
   background: var(--input-bg);
   border: 1px solid var(--border);
   position: relative;
+  width: 100%;
+  height: var(--graph-height);
+  min-height: var(--graph-height);
 }
 
 .network-graph-placeholder {
   width: 100%;
-  height: 400px;
+  height: var(--graph-height);
+  min-height: var(--graph-height);
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--input-bg);
@@ -111,7 +134,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 800px;
+  max-width: min(800px, 100%);
 }
 
 .title-row {
@@ -123,9 +146,10 @@ a {
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: var(--text-title);
   font-weight: 500;
   letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .github-link {
@@ -148,7 +172,7 @@ a {
 }
 
 .description {
-  font-size: 1rem;
+  font-size: var(--text-body);
   line-height: 1.6;
   color: var(--secondary);
   display: flex;
@@ -260,7 +284,8 @@ a {
 
 .join-modal-content {
   width: min(760px, 100%);
-  max-height: 90vh;
+  max-height: min(90vh, 900px);
+  max-height: min(90dvh, 900px);
   overflow-y: auto;
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -399,8 +424,8 @@ a {
 
 .template-credit {
   position: absolute;
-  bottom: 1.25rem;
-  right: 1.25rem;
+  bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+  right: max(1.25rem, env(safe-area-inset-right, 0px));
   font-size: 0.72rem;
   color: var(--tertiary);
   opacity: 0.7;
@@ -831,22 +856,25 @@ a {
   stroke: var(--foreground) !important;
 }
 
-/* ASCII Background */
+/* ASCII Background — centered on bottom edge so the longhorn stays in view at any viewport */
 .ascii-art-background {
   position: fixed;
-  bottom: -40%;
-  right: -20%;
+  left: 50%;
+  right: auto;
+  /* Sit lower on the screen so more of the art tucks under the fold */
+  bottom: min(-14vh, -4rem);
+  width: 800px;
   z-index: 0;
   pointer-events: none;
   user-select: none;
-  opacity: 0.03;
-  overflow: hidden;
-  transform: scale(2.2);
-  transform-origin: bottom right;
+  opacity: 0.038;
+  overflow: visible;
+  transform: translateX(-50%) scale(var(--ascii-scale));
+  transform-origin: center bottom;
 }
 
 [data-theme='dark'] .ascii-art-background {
-  opacity: 0.06;
+  opacity: 0.07;
 }
 
 .ascii-art-background img {
@@ -942,19 +970,6 @@ a {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .main-container {
-    padding: 2rem;
-    gap: 2rem;
-  }
-  
-  .content-wrapper {
-    gap: 2rem;
-  }
-  
-  .title {
-    font-size: 1.8rem;
-  }
-  
   .title-row {
     flex-direction: column;
     align-items: flex-start;
@@ -982,9 +997,11 @@ a {
   }
   
   .ascii-art-background {
-    transform: scale(1.8);
-    opacity: 0.025;
-    bottom: -34%;
+    opacity: 0.034;
+  }
+  
+  [data-theme='dark'] .ascii-art-background {
+    opacity: 0.065;
   }
   
   .join-form-grid {
@@ -1007,23 +1024,6 @@ a {
 }
 
 @media (max-width: 480px) {
-  .main-container {
-    padding: 1.25rem;
-    gap: 1.5rem;
-  }
-  
-  .content-wrapper {
-    gap: 1.5rem;
-  }
-  
-  .title {
-    font-size: 1.5rem;
-  }
-  
-  .description {
-    font-size: 0.9rem;
-  }
-  
   .github-link {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
@@ -1077,13 +1077,10 @@ a {
   }
   
   .ascii-art-background {
-    transform: scale(2.2);
-    opacity: 0.02;
-    bottom: -30%;
-    right: -60%;
+    opacity: 0.042;
   }
   
   [data-theme='dark'] .ascii-art-background {
-    opacity: 0.05;
+    opacity: 0.078;
   }
 }
