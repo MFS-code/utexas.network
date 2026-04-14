@@ -603,13 +603,10 @@ export default function NetworkGraph({ members, projects, connections, highlight
     }, [members, projects, connections, updateVisuals, applyFallbackTheme, getProjectAccentColor]);
 
     return (
-        <div 
+        <div
             ref={containerRef}
-            className="network-graph-container" 
-            style={{ 
-                width: '100%', 
-                height: '400px'
-            }}
+            className="network-graph-container"
+            style={{ width: '100%' }}
         />
     );
 }
