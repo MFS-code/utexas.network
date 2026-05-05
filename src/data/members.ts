@@ -333,6 +333,16 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/dhilan-shah-a1326820b/",
     connections: ["miguel-serna", "gabriel-keller", "neev-gupta"],
   },
+  {
+    id: "wyatt-hansen",
+    name: "Wyatt Hansen",
+    website: "https://wyatthansen.dev/",
+    profilePic: "https://drive.google.com/file/d/1oUxHVCNqpf7unFBYtBxC4A3StxFVdhZM/view?usp=sharing",
+    program: "Mathematics",
+    year: "2027",
+    linkedin: "https://www.linkedin.com/in/wyatt-c-hansen/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
