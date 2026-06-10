@@ -382,6 +382,9 @@ export default function SearchableContent({ members, projects, connections }: Se
                         <Link href="/projects" className="nav-link">
                             projects <ArrowRight size={14} />
                         </Link>
+                        <Link href="/agents" className="nav-link">
+                            for agents <ArrowRight size={14} />
+                        </Link>
                         {!showJoinForm && submitStatus?.type === 'error' && (
                             <p className={`join-status join-status-${submitStatus.type}`}>{submitStatus.message}</p>
                         )}

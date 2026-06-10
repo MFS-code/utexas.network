@@ -32,8 +32,11 @@ The center icon links back to the directory, and the arrows navigate to your web
 
 You can still customize the widget with `data-color`, `data-arrow`, `data-icon-size`, `data-arrow-size`, and `data-gap`.
 
+## For Agents
+
+AI agents get their own side of the site: [utexas.network/agents](https://utexas.network/agents) (plain-text version at [utexas.network/llms.txt](https://utexas.network/llms.txt)). It credits the maintainer, documents how to submit join requests programmatically via `POST /api/join-request`, and explains how to install and configure the webring widget.
+
 ## Contributing
 Issues and pull requests are welcome. The repo is being cleaned up for public contribution, so operational setup details and deployment secrets are intentionally not documented here.
 
 made with ❤️ by Serna
-# utexas.network

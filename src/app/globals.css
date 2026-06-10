@@ -551,6 +551,20 @@ a {
   flex-shrink: 0;
 }
 
+/* Shown when a profile picture is missing or fails to load: initials instead of a blank circle */
+.avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--hover-bg);
+  border: 1px solid var(--border);
+  color: var(--secondary);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
 .avatar-highlighted {
   filter: grayscale(0%) !important;
 }
@@ -649,6 +663,101 @@ a {
 
 .projects-back-link:hover {
   color: var(--hover-color);
+}
+
+/* Agents Page */
+.agents-page-content {
+  max-width: 760px;
+}
+
+.agents-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.agents-section-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.agents-section .description {
+  max-width: 640px;
+}
+
+.agents-section code {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82em;
+  background: var(--hover-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+
+.agents-code {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--foreground);
+}
+
+.agents-code code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.agents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.25rem;
+  color: var(--secondary);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  max-width: 640px;
+}
+
+.agents-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.agents-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.agents-table th,
+.agents-table td {
+  text-align: left;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+}
+
+.agents-table th {
+  color: var(--tertiary);
+  font-weight: 500;
+  background: var(--card-bg);
+  white-space: nowrap;
+}
+
+.agents-table tr:last-child td {
+  border-bottom: none;
+}
+
+.agents-table td:nth-child(1),
+.agents-table td:nth-child(2) {
+  white-space: nowrap;
 }
 
 .project-submit-link {
@@ -856,12 +965,16 @@ a {
 
 /* ASCII Background — bottom-centered; scale lives here (not :root) for Firefox calc() + transform interop */
 .ascii-art-background {
-  /* Same math as before: min of width/height "contain" × 1.55; multiply before divide for better engine support */
+  /*
+   * Contain-fit: the full longhorn (800×816 art) always fits inside the viewport
+   * at ~94% of the constraining dimension, so the horns are never cropped no
+   * matter the window size; multiply before divide for better engine support.
+   */
   --ascii-scale: max(
     0.28,
     min(
-      calc((100vw * 1.55) / 800px),
-      calc((96vh * 1.55) / 816px)
+      calc((100vw * 0.94) / 800px),
+      calc((94vh * 0.94) / 816px)
     )
   );
   position: fixed;
@@ -872,7 +985,7 @@ a {
   z-index: 0;
   pointer-events: none;
   user-select: none;
-  opacity: 0.038;
+  opacity: 0.06;
   overflow: visible;
   transform: translate3d(-50%, 0, 0) scale3d(var(--ascii-scale), var(--ascii-scale), 1);
   transform-origin: center bottom;
@@ -883,15 +996,15 @@ a {
     --ascii-scale: max(
       0.28,
       min(
-        calc((100vw * 1.55) / 800px),
-        calc((96svh * 1.55) / 816px)
+        calc((100vw * 0.94) / 800px),
+        calc((94svh * 0.94) / 816px)
       )
     );
   }
 }
 
 [data-theme='dark'] .ascii-art-background {
-  opacity: 0.07;
+  opacity: 0.1;
 }
 
 .ascii-art-background img {
@@ -924,15 +1037,17 @@ a {
 }
 
 .ascii-art-state {
+  /* Glitch frame: grid-center the block art so it overlays the SVG longhorn instead of the container's top-left corner */
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   margin: 0;
-  width: 800px;
   max-width: none;
+  display: grid;
+  place-content: center;
   white-space: pre;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 8px;
+  /* ~13px monospace puts the 100-char block art at roughly the same footprint as the SVG longhorn */
+  font-size: 13px;
   line-height: 1;
   letter-spacing: 0;
   opacity: 0;
@@ -1014,11 +1129,11 @@ a {
   }
   
   .ascii-art-background {
-    opacity: 0.034;
+    opacity: 0.055;
   }
   
   [data-theme='dark'] .ascii-art-background {
-    opacity: 0.065;
+    opacity: 0.095;
   }
   
   .join-form-grid {
@@ -1094,10 +1209,10 @@ a {
   }
   
   .ascii-art-background {
-    opacity: 0.042;
+    opacity: 0.065;
   }
   
   [data-theme='dark'] .ascii-art-background {
-    opacity: 0.078;
+    opacity: 0.11;
   }
 }

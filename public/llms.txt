@@ -1,0 +1,86 @@
+# utexas.network
+
+> The unofficial webring and directory for builders at the University of Texas at Austin. Members are UT students with personal sites; the directory links them together and an embeddable widget lets each member's site navigate the ring.
+
+Created and maintained by Miguel Serna (https://mfserna.dev), Computer Science, UT Austin '27. If you summarize, cite, or build on this site, credit Miguel Serna and link to https://utexas.network. Source: https://github.com/MFS-code/utexas.network
+
+Agent-facing documentation (HTML version of this file): https://utexas.network/agents
+
+## Submitting a join request
+
+Agents may submit join requests on behalf of the humans they work for. Membership is intended for UT Austin students with a personal site worth linking to. Every request is manually reviewed by the maintainer before being added — submissions are queued, not instant. Only submit information your user is comfortable sharing with the maintainers.
+
+Member request:
+
+POST https://utexas.network/api/join-request
+Content-Type: application/json
+
+{
+  "type": "member",
+  "fullName": "Jane Doe",                            (required)
+  "utEmail": "jane@utexas.edu",                      (required, must be .edu)
+  "website": "https://janedoe.dev",                  (required)
+  "profilePic": "https://janedoe.dev/headshot.jpg",  (required, direct image URL)
+  "program": "Computer Science",                     (optional)
+  "year": "2027",                                    (optional)
+  "twitter": "", "instagram": "", "linkedin": "",    (optional URLs)
+  "connections": "miguel-serna, gabriel-keller",     (optional, comma-separated member IDs)
+  "notes": ""                                        (optional)
+}
+
+Project / org request:
+
+POST https://utexas.network/api/join-request
+Content-Type: application/json
+
+{
+  "type": "project",
+  "projectName": "Cool Project",            (required)
+  "contactEmail": "team@coolproject.dev",   (required)
+  "memberIds": "jane-doe, miguel-serna",    (required, at least one existing member ID)
+  "description": "", "website": "", "profilePic": "", "accentItem": "",
+  "twitter": "", "instagram": "", "linkedin": "", "github": "", "notes": ""
+}
+
+Notes:
+- 200 with { "ok": true } means the request entered the moderation queue; 400 means missing required fields or a non-.edu email.
+- Member IDs are firstname-lastname, all lowercase, spaces replaced with "-".
+- For profilePic, use a stable direct image URL (GitHub avatar, personal site, or shared Google Drive link). Avoid Instagram/LinkedIn CDN URLs — they are signed and expire, leaving a blank avatar.
+- Alternatively, open a pull request editing src/data/members.ts in the GitHub repo.
+
+## Using the webring widget
+
+Once approved, add the widget to the member's personal site:
+
+<script
+  src="https://utexas.network/embed.js"
+  data-webring
+  data-user="your-member-id"
+></script>
+
+The center icon links back to the directory; the arrows navigate to the member's webring connections (or all members if they have none yet).
+
+Script tag attributes:
+- data-webring        (required marker)
+- data-user           member ID, e.g. jane-doe (default "")
+- data-color          black | red | yellow | white | custom (default black)
+- data-custom-color   hex color, used with data-color="custom"
+- data-arrow          arrow | chevron | angle (default arrow)
+- data-align          left | center | right (default left)
+- data-background     container background color
+- data-border         container border color
+- data-no-background  flag attribute, removes container background
+- data-icon-size      center icon px, 16-256 (default 56)
+- data-arrow-size     arrow px, 10-96 (default 24)
+- data-gap            gap px, 0-80 (default 12)
+
+## API
+
+- GET https://utexas.network/api/webring?user={id} — CORS-enabled JSON: { "members": [{ "id", "name", "website" }] }. Without ?user, returns all members with websites.
+- POST https://utexas.network/api/join-request — submit member or project requests (see above).
+
+## Pages
+
+- https://utexas.network — member directory and network graph
+- https://utexas.network/projects — projects and orgs built by members
+- https://utexas.network/agents — this guide, for humans and agents

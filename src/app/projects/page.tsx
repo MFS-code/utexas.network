@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { members, projects, Member } from '@/data/members';
-import { normalizeImageUrl } from '@/utils/profileImage';
+import { getAvatarFallbackLabel, normalizeImageUrl } from '@/utils/profileImage';
 import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { ArrowLeft, ExternalLink, Plus } from 'lucide-react';
@@ -79,17 +79,16 @@ export default function ProjectsPage() {
                       }}
                     />
                   ) : null}
-                  {!project.profilePic ? (
-                    <div
-                      className="project-card-logo"
-                      style={{ backgroundColor: '#e0e0e0', ...(accent ? { borderColor: accent } : {}) }}
-                    />
-                  ) : (
-                    <div
-                      className="project-card-logo"
-                      style={{ backgroundColor: '#e0e0e0', display: 'none', ...(accent ? { borderColor: accent } : {}) }}
-                    />
-                  )}
+                  <div
+                    className="project-card-logo avatar-fallback"
+                    style={{
+                      ...(accent ? { borderColor: accent } : {}),
+                      ...(project.profilePic ? { display: 'none' } : {}),
+                    }}
+                    aria-hidden="true"
+                  >
+                    {getAvatarFallbackLabel(project.name, true)}
+                  </div>
                   <div className="project-card-title-group">
                     <h2 className="project-card-name">{project.name}</h2>
                     {project.description && (

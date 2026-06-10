@@ -10,6 +10,28 @@
  *  - Already-direct URLs (*.jpg, *.png, etc.) are passed through unchanged.
  */
 
+/**
+ * Initials shown in place of an avatar when the image is missing or fails to
+ * load, so broken profile pictures never render as blank circles.
+ */
+export function getAvatarFallbackLabel(name: string | null | undefined, isProject?: boolean): string {
+  const trimmed = name?.trim();
+  if (!trimmed) {
+    return isProject ? 'P' : '?';
+  }
+
+  const parts = trimmed.split(/\s+/).filter(Boolean);
+  if (parts.length === 1) {
+    return parts[0].slice(0, isProject ? 2 : 1).toUpperCase();
+  }
+
+  if (isProject) {
+    return parts.slice(0, 2).map(part => part[0]?.toUpperCase() ?? '').join('');
+  }
+
+  return `${parts[0][0] ?? ''}${parts[parts.length - 1][0] ?? ''}`.toUpperCase();
+}
+
 export function normalizeImageUrl(url: string | undefined): string | undefined {
   if (!url) return url;
 
