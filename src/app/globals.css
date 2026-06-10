@@ -968,15 +968,15 @@ a {
 /* ASCII Background — bottom-centered; scale lives here (not :root) for Firefox calc() + transform interop */
 .ascii-art-background {
   /*
-   * Contain-fit: the full longhorn (800×816 art) always fits inside the viewport
-   * at ~94% of the constraining dimension, so the horns are never cropped no
-   * matter the window size; multiply before divide for better engine support.
+   * Oversized backdrop (like uwaterloo.network): the longhorn renders at ~1.55×
+   * the constraining viewport dimension, intentionally clipping off-screen;
+   * multiply before divide for better engine support.
    */
   --ascii-scale: max(
     0.28,
     min(
-      calc((100vw * 0.94) / 800px),
-      calc((94vh * 0.94) / 816px)
+      calc((100vw * 1.55) / 800px),
+      calc((96vh * 1.55) / 816px)
     )
   );
   position: fixed;
@@ -998,8 +998,8 @@ a {
     --ascii-scale: max(
       0.28,
       min(
-        calc((100vw * 0.94) / 800px),
-        calc((94svh * 0.94) / 816px)
+        calc((100vw * 1.55) / 800px),
+        calc((96svh * 1.55) / 816px)
       )
     );
   }
