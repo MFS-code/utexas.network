@@ -11,7 +11,11 @@
  * Optional fields:
  * - program: Program or major
  * - year: Graduation year
- * - profilePic: Path to photo in /public/photos
+ * - profilePic: Direct image URL (or a Google Drive share link, which gets proxied)
+ *   NOTE: avoid Instagram/LinkedIn CDN URLs (scontent-*.cdninstagram.com,
+ *   media.licdn.com) — they are signed and expire after a few weeks, which
+ *   leaves the member with a blank avatar. Prefer GitHub avatars, personal
+ *   site images, or Google Drive links.
  * - instagram: Full URL
  * - twitter: Full URL
  * - linkedin: Full URL
@@ -153,7 +157,7 @@ export const members: Member[] = [
     id: "kaustubh-duddala",
     name: "Kaustubh Duddala",
     website: "https://kaustubh.duddala.com",
-    profilePic: "https://scontent-dfw6-1.cdninstagram.com/v/t51.82787-19/588736226_18165472369383009_4175213519499641579_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=101&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42MTMuQzMifQ%3D%3D&_nc_ohc=_C2rOfbyth8Q7kNvwHQEZk0&_nc_oc=Adrc6IzYVtIo3ryCNmM9OBzQZLDcOyaa-ENUdW-fAGukjMege7EklVcokR-xHqAeLR0&_nc_zt=24&_nc_ht=scontent-dfw6-1.cdninstagram.com&_nc_gid=IM_kC6TY8HyeDWJu5TYsSA&_nc_ss=7a289&oh=00_Af3oD4dyV6IjdDcGBpZZwZklA9nza6MSQhXESn8UeBjYMw&oe=69E0ABBC",
+    profilePic: "https://avatars.githubusercontent.com/u/72582270?v=4",
     program: "Statistics & Data Science",
     year: "2028",
     instagram: "https://www.instagram.com/kaustubh.duddala/",
@@ -251,7 +255,7 @@ export const members: Member[] = [
     id: "sairaja-kurelli",
     name: "Sairaja Kurelli",
     website: "https://saikurelli.github.io/",
-    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQHxZ9jogMj5ew/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1684681830844?e=2147483647&v=beta&t=dXjEerg8JKQUlmK8Mer1h7Hhw53EUdnLyz6HOqqKS-E",
+    profilePic: "https://avatars.githubusercontent.com/u/22625395?v=4",
     program: "Computer Science",
     year: "2025",
     linkedin: "https://www.linkedin.com/in/sai-kurelli",
@@ -272,7 +276,7 @@ export const members: Member[] = [
     id: "terence-dumas",
     name: "Terence Dumas",
     website: "https://www.terencedumas.com/",
-    profilePic: "https://scontent-dfw5-1.cdninstagram.com/v/t51.82787-19/534309785_18285220378257836_8156068965182853089_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=111&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=eq5f3p789k4Q7kNvwGnUD4n&_nc_oc=AdrQuJw3Ha0F3i8ow-2RVSQg9-G5pjTM9mBoiZuVxvnrpMgTPqbh9uJrdW6OUTdiaHQ&_nc_zt=24&_nc_ht=scontent-dfw5-1.cdninstagram.com&_nc_gid=O6U8SnJxpXAsobP-sKv4TQ&_nc_ss=7a289&oh=00_Af1FTGiUPQFHYxpQJiY5iDuE08Im1I5ZALPjklFrFpXg_Q&oe=69E0CE6A",
+    profilePic: "https://avatars.githubusercontent.com/u/72264649?v=4",
     program: "Computer Science & Mathematics",
     year: "2027",
     instagram: "https://www.instagram.com/terence_le_bo/",
@@ -304,7 +308,7 @@ export const members: Member[] = [
     id: "arjan-suri",
     name: "Arjan Suri",
     website: "https://arjansuri.com",
-    profilePic: "https://scontent-dfw5-2.cdninstagram.com/v/t51.82787-19/659108351_18081145820381723_3795411675849393288_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=108&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=LmBZGX7kXaUQ7kNvwEeFSkY&_nc_oc=AdrnkrfZqqhBRZ2BL1RJPPgejBUPl1SLiKPGrN74CMKtZ_2qtsdTj2bhbloPhLOtwzM&_nc_zt=24&_nc_ht=scontent-dfw5-2.cdninstagram.com&_nc_gid=ajiNOwEQ9pdwPO7l1MLxxQ&_nc_ss=7a289&oh=00_Af3ew9fpJSaslI_2T_8_kQiFksu1ulZY1HnPBqajV4sgZw&oe=69E0A135",
+    profilePic: "https://avatars.githubusercontent.com/u/109180420?v=4",
     program: "Computer Science & Math",
     instagram: "https://instagram.com/arjanssuri",
     twitter: "https://x.com/arjanssuri",

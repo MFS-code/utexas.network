@@ -1,6 +1,6 @@
 import React from 'react';
 import { Member, Project } from '@/data/members';
-import { normalizeImageUrl } from '@/utils/profileImage';
+import { getAvatarFallbackLabel, normalizeImageUrl } from '@/utils/profileImage';
 import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 
@@ -83,17 +83,13 @@ export default function MembersTable({ members, projects, searchQuery }: Members
                                         }}
                                     />
                                 ) : null}
-                                {!member.profilePic ? (
-                                    <div 
-                                        className={`avatar ${searchQuery && index === 0 ? 'avatar-highlighted' : ''}`}
-                                        style={{ backgroundColor: '#e0e0e0' }} 
-                                    />
-                                ) : (
-                                    <div 
-                                        className={`avatar ${searchQuery && index === 0 ? 'avatar-highlighted' : ''}`}
-                                        style={{ backgroundColor: '#e0e0e0', display: 'none' }} 
-                                    />
-                                )}
+                                <div 
+                                    className={`avatar avatar-fallback ${searchQuery && index === 0 ? 'avatar-highlighted' : ''}`}
+                                    style={member.profilePic ? { display: 'none' } : undefined}
+                                    aria-hidden="true"
+                                >
+                                    {getAvatarFallbackLabel(member.name)}
+                                </div>
                                 {member.website && member.website.trim() ? (
                                     <a 
                                         href={member.website.startsWith('http') ? member.website : `https://${member.website}`}
@@ -199,17 +195,16 @@ export default function MembersTable({ members, projects, searchQuery }: Members
                                                 }}
                                             />
                                         ) : null}
-                                        {!project.profilePic ? (
-                                            <div
-                                                className="avatar avatar-project"
-                                                style={{ backgroundColor: '#e0e0e0', borderColor: getProjectAccentColor(project.accentItem) }}
-                                            />
-                                        ) : (
-                                            <div
-                                                className="avatar avatar-project"
-                                                style={{ backgroundColor: '#e0e0e0', display: 'none', borderColor: getProjectAccentColor(project.accentItem) }}
-                                            />
-                                        )}
+                                        <div
+                                            className="avatar avatar-project avatar-fallback"
+                                            style={{
+                                                borderColor: getProjectAccentColor(project.accentItem),
+                                                ...(project.profilePic ? { display: 'none' } : {}),
+                                            }}
+                                            aria-hidden="true"
+                                        >
+                                            {getAvatarFallbackLabel(project.name, true)}
+                                        </div>
                                         {project.website ? (
                                             <a
                                                 href={project.website.startsWith('http') ? project.website : `https://${project.website}`}
