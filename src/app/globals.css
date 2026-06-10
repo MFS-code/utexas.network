@@ -682,7 +682,9 @@ a {
   color: var(--foreground);
 }
 
-.agents-section .description {
+/* .description is a column flexbox; agents-page paragraphs contain inline links, so restore block flow */
+.agents-page-content .description {
+  display: block;
   max-width: 640px;
 }
 
@@ -1012,6 +1014,10 @@ a {
   max-width: none;
   height: auto;
   display: block;
+}
+
+/* The SVG paths are black on transparent; invert them to white for dark mode */
+[data-theme='dark'] .ascii-art-background img {
   filter: invert(1);
 }
 
@@ -1052,7 +1058,7 @@ a {
   letter-spacing: 0;
   opacity: 0;
   pointer-events: none;
-  filter: invert(1);
+  color: var(--foreground);
 }
 
 .ascii-art-state-4 {
