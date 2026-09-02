@@ -343,6 +343,16 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/wyatt-c-hansen/",
     connections: [],
   },
+  {
+    id: "andrew-xia",
+    name: "Andrew Xia",
+    website: "https://axia.sh/",
+    profilePic: "https://lh3.googleusercontent.com/a/ACg8ocITVGvUykS1BV1K-K3n_suQ8LduVG_wtNh_hAkDYho_9Yai6sE=s96-c",
+    program: "Aerospace Engineering",
+    year: "2030",
+    instagram: "https://instagram.com/axia.sh/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
