@@ -353,6 +353,17 @@ export const members: Member[] = [
     instagram: "https://instagram.com/axia.sh/",
     connections: [],
   },
+  {
+    id: "suhas-voolla",
+    name: "Suhas Voolla",
+    website: "https://suhas.one",
+    profilePic: "https://files.suhas.one/me.jpeg",
+    program: "Computer Science",
+    year: "2028",
+    instagram: "https://instagram.com/probablysuhas",
+    linkedin: "https://linkedin.com/in/suhasvoolla",
+    connections: ["robotics-and-automation-society","longhorn-developers","gabriel-keller","praneel-seth","karmanyaah-malhotra","siddhartha-venkatayogi","derek-chen"],
+  },
 ];
 
 export const projects: Project[] = [
