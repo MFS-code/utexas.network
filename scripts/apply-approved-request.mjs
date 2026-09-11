@@ -158,6 +158,9 @@ if (isProject) {
   if (sanitizeUrl(payload.linkedin)) {
     entryLines.push(`    linkedin: ${JSON.stringify(sanitizeUrl(payload.linkedin))},`);
   }
+  if (sanitizeUrl(payload.github)) {
+    entryLines.push(`    github: ${JSON.stringify(sanitizeUrl(payload.github))},`);
+  }
   entryLines.push(`    connections: ${JSON.stringify(connections)},`);
   entryLines.push('  },');
 
