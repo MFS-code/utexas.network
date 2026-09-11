@@ -434,12 +434,12 @@ export default function SearchableContent({ members, projects, connections }: Se
                 />
             </div>
 
-            {showJoinForm && (
-                <div
-                    className="join-modal-overlay"
-                    onClick={() => !isSubmitting && setShowJoinForm(false)}
-                    role="presentation"
-                >
+            <div
+                className="join-modal-overlay"
+                hidden={!showJoinForm}
+                onClick={() => !isSubmitting && setShowJoinForm(false)}
+                role="presentation"
+            >
                     <div
                         className="join-modal-content"
                         onClick={(e) => e.stopPropagation()}
@@ -574,8 +574,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                             </div>
                         </form>
                     </div>
-                </div>
-            )}
+            </div>
             <div className="template-credit">
                 inspired by{' '}
                 <a
