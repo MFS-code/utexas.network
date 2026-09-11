@@ -385,6 +385,18 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/yashkarandikar/",
     connections: ["siddhartha-venkatayogi","derek-chen"],
   },
+  {
+    id: "dhilan-shah",
+    name: "Dhilan Rakesh Shah",
+    website: "https://www.dhilan.dev/",
+    profilePic: "https://lh3.googleusercontent.com/a/ACg8ocKR8K07OziR6g_iLnQq1o3Bp4xvT_b54W5VqYWKvKVytUtjIA=s96-c",
+    program: "Computer Science, Mathematics, Philosophy",
+    year: "2028",
+    instagram: "https://www.instagram.com/atxdhilan",
+    twitter: "https://www.x.com/@_dhilan_shah_",
+    linkedin: "https://www.linkedin.com/in/dhilan-shah-a1326820b/",
+    connections: ["miguel-serna","gabriel-keller","arjan-suri"],
+  },
 ];
 
 export const projects: Project[] = [
