@@ -368,6 +368,66 @@ a {
   grid-column: 1 / -1;
 }
 
+.color-picker {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.color-picker-swatches {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.color-picker-swatch {
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 2rem;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.color-picker-swatch-active {
+  border-color: var(--foreground);
+  box-shadow: 0 0 0 2px var(--input-bg), 0 0 0 4px var(--foreground);
+}
+
+.color-picker-custom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--foreground);
+  background: var(--input-bg);
+  border-color: var(--border);
+}
+
+.color-picker-native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.color-picker-hex {
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .color-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .color-picker-hex {
+    width: 100%;
+  }
+}
+
 .join-submit {
   border: none;
   border-radius: 8px;
