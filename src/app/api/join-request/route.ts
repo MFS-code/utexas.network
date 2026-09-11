@@ -5,7 +5,7 @@ interface MemberPayload {
   fullName: string;
   utEmail: string;
   website: string;
-  profilePic: string;
+  profilePic?: string;
   program?: string;
   year?: string;
   twitter?: string;
@@ -46,8 +46,7 @@ function isValidMemberPayload(p: Record<string, unknown>): boolean {
     typeof p.fullName === 'string' && p.fullName.trim().length > 0 &&
     utEmail.length > 0 &&
     isEduEmail(utEmail) &&
-    typeof p.website === 'string' && p.website.trim().length > 0 &&
-    typeof p.profilePic === 'string' && p.profilePic.trim().length > 0
+    typeof p.website === 'string' && p.website.trim().length > 0
   );
 }
 
@@ -209,7 +208,7 @@ function buildMemberIssue(payload: MemberPayload) {
     fullName: payload.fullName.trim(),
     utEmail: payload.utEmail.trim(),
     website: payload.website.trim(),
-    profilePic: payload.profilePic.trim(),
+    profilePic: payload.profilePic?.trim() || '',
     program: payload.program?.trim() || '',
     year: payload.year?.trim() || '',
     twitter: payload.twitter?.trim() || '',
@@ -226,7 +225,7 @@ function buildMemberIssue(payload: MemberPayload) {
     `- **Name:** ${clean.fullName}`,
     `- **UT Email:** ${clean.utEmail}`,
     `- **Website:** ${clean.website}`,
-    `- **Profile Photo:** ${clean.profilePic}`,
+    `- **Profile Photo:** ${clean.profilePic || '-'}`,
     `- **Program:** ${clean.program || '-'}`,
     `- **Year:** ${clean.year || '-'}`,
     `- **Twitter:** ${clean.twitter || '-'}`,
@@ -259,7 +258,7 @@ function buildMemberIssue(payload: MemberPayload) {
       `Name: ${clean.fullName}`,
       `UT Email: ${clean.utEmail}`,
       `Website: ${clean.website}`,
-      `Profile Photo: ${clean.profilePic}`,
+      `Profile Photo: ${clean.profilePic || '-'}`,
       `Program: ${clean.program || '-'}`,
       `Year: ${clean.year || '-'}`,
       `Twitter: ${clean.twitter || '-'}`,
