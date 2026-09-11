@@ -374,6 +374,17 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/jonahgleitman/",
     connections: [],
   },
+  {
+    id: "yash-karandikar",
+    name: "Yash Karandikar",
+    website: "https://karx.xyz",
+    profilePic: "https://etc.karx.xyz/IMG_20241207_024145_831.jpg",
+    program: "Computer Science",
+    year: "2028",
+    instagram: "https://www.instagram.com/yashkarandikar158/",
+    linkedin: "https://www.linkedin.com/in/yashkarandikar/",
+    connections: ["siddhartha-venkatayogi","derek-chen"],
+  },
 ];
 
 export const projects: Project[] = [
