@@ -360,7 +360,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                         <p>
                             want to join? use the button below to submit your info for manual approval, or open a PR on{' '}
                             <a
-                                href="https://github.com/MFS-code/utexas.network"
+                                href="https://github.com/MFS-code/utexas.network/pulls"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="join-link"
