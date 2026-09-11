@@ -457,6 +457,14 @@ export const projects: Project[] = [
     github: "https://github.com/Longhorn-Developers/UT-Registration-Plus",
     accentItem: "#bf5700",
   },
+  {
+    id: "degree-audit-plus",
+    name: "Degree-Audit-Plus",
+    memberIds: ["derek-chen"],
+    profilePic: "https://avatars.githubusercontent.com/u/71949018?s=800&v=4",
+    github: "https://github.com/Longhorn-Developers/Degree-Audit-Plus",
+    accentItem: "#bf5700",
+  },
 ];
 
 // Helper to get all connections for the network graph
