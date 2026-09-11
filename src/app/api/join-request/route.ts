@@ -6,7 +6,7 @@ interface MemberPayload {
   utEmail: string;
   website: string;
   profilePic?: string;
-  program?: string;
+  program: string;
   year?: string;
   twitter?: string;
   instagram?: string;
@@ -46,7 +46,8 @@ function isValidMemberPayload(p: Record<string, unknown>): boolean {
     typeof p.fullName === 'string' && p.fullName.trim().length > 0 &&
     utEmail.length > 0 &&
     isEduEmail(utEmail) &&
-    typeof p.website === 'string' && p.website.trim().length > 0
+    typeof p.website === 'string' && p.website.trim().length > 0 &&
+    typeof p.program === 'string' && p.program.trim().length > 0
   );
 }
 

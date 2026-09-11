@@ -505,7 +505,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         />
                                         <input className="join-input" name="website" required type="url" placeholder="Personal website URL *" />
                                         <input className="join-input" name="profilePic" type="url" placeholder="Profile photo URL (direct link, Google Drive)" />
-                                        <input className="join-input" name="program" placeholder="Program / major" />
+                                        <input className="join-input" name="program" required placeholder="Program / major *" />
                                         <input className="join-input" name="year" placeholder="Graduation year" />
                                         <div className="join-section-heading join-input-wide">Social Media Links</div>
                                         <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
