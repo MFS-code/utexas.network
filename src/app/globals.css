@@ -368,6 +368,16 @@ a {
   grid-column: 1 / -1;
 }
 
+.join-section-heading {
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  color: var(--secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .color-picker {
   grid-column: 1 / -1;
   display: grid;
