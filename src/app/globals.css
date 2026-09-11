@@ -923,6 +923,10 @@ a {
   object-fit: cover;
 }
 
+.project-card-member-avatar-fallback {
+  background: #bf5700;
+}
+
 .project-card-socials {
   display: flex;
   gap: 0.5rem;

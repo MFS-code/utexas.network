@@ -96,7 +96,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
         const dark = isDarkRef.current;
         fallback.style.background = node.isProject
             ? (dark ? 'rgba(191, 87, 0, 0.18)' : 'rgba(191, 87, 0, 0.12)')
-            : (dark ? '#2b2b2b' : '#ececec');
+            : '#bf5700';
         fallback.style.color = node.isProject
             ? getProjectAccentColor(node.accentItem)
             : (dark ? '#f5f5f5' : '#4b4b4b');
@@ -312,7 +312,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
             const avatarSize = node.isProject ? '28px' : '32px';
             const fallback = document.createElement('div');
             fallback.dataset.nodeFallback = 'true';
-            fallback.textContent = getFallbackLabel(node.name, node.isProject);
+            fallback.textContent = node.isProject ? getFallbackLabel(node.name, true) : '';
             fallback.style.width = avatarSize;
             fallback.style.height = avatarSize;
             fallback.style.borderRadius = node.isProject ? '6px' : '50%';

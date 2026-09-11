@@ -120,7 +120,7 @@ export default function ProjectsPage() {
                           href={`/#member-${member.id}`}
                           className="project-card-member-chip"
                         >
-                          {member.profilePic && (
+                          {member.profilePic ? (
                             <img
                               src={normalizeImageUrl(member.profilePic)}
                               alt={member.name}
@@ -130,9 +130,16 @@ export default function ProjectsPage() {
                               fetchPriority="low"
                               onError={(e) => {
                                 (e.currentTarget as HTMLImageElement).style.display = 'none';
+                                const fallback = e.currentTarget.nextElementSibling as HTMLElement | null;
+                                if (fallback) fallback.style.display = '';
                               }}
                             />
-                          )}
+                          ) : null}
+                          <span
+                            className="project-card-member-avatar project-card-member-avatar-fallback"
+                            style={{ display: member.profilePic ? 'none' : '' }}
+                            aria-hidden="true"
+                          />
                           <span>{member.name}</span>
                         </Link>
                       ))}
