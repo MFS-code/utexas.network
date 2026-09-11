@@ -364,6 +364,16 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/suhasvoolla",
     connections: ["robotics-and-automation-society","longhorn-developers","gabriel-keller","praneel-seth","karmanyaah-malhotra","siddhartha-venkatayogi","derek-chen"],
   },
+  {
+    id: "jonah-gleitman",
+    name: "Jonah Gleitman",
+    website: "https://jonahgleitman.com/",
+    profilePic: "https://lh3.googleusercontent.com/a/ACg8ocKj3xYxKX_OJR2DkOCuAHWClzhLLA6oAMzhpr7vLsY17NHb1-Kkug=s96-c",
+    year: "2025",
+    twitter: "https://x.com/JonahGleitman",
+    linkedin: "https://www.linkedin.com/in/jonahgleitman/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
