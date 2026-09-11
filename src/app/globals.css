@@ -481,6 +481,227 @@ a {
   } 
 }
 
+.member-picker {
+  position: relative;
+}
+
+.member-picker-control {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  border-radius: 8px;
+  padding: 0.4rem 0.5rem;
+}
+
+.member-picker-control:focus-within {
+  outline: 2px solid var(--hover-color);
+  outline-offset: 2px;
+}
+
+.member-picker-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.member-picker-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  max-width: 100%;
+  padding: 0.2rem 0.3rem 0.2rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--foreground);
+  font-size: 0.8rem;
+}
+
+.member-picker-chip-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.member-picker-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--secondary);
+  cursor: pointer;
+}
+
+.member-picker-chip-remove:hover {
+  background: var(--hover-bg);
+  color: var(--foreground);
+}
+
+.member-picker-chip-remove:focus-visible,
+.member-picker-trigger:focus-visible,
+.member-picker-option:focus-visible,
+.member-picker-search-input:focus-visible {
+  outline: 2px solid var(--hover-color);
+  outline-offset: 2px;
+}
+
+.member-picker-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 2.1rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.35rem;
+  border: none;
+  background: transparent;
+  color: var(--secondary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.member-picker-trigger[aria-expanded='true'] {
+  color: var(--foreground);
+}
+
+.member-picker-trigger svg {
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.member-picker-trigger[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.member-picker-trigger-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.member-picker-dropdown {
+  margin-top: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 18%);
+  overflow: hidden;
+}
+
+.member-picker-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--secondary);
+}
+
+.member-picker-search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+}
+
+.member-picker-search-input::placeholder {
+  color: var(--tertiary);
+}
+
+.member-picker-options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 14rem;
+  overflow-y: auto;
+}
+
+.member-picker-empty {
+  padding: 0.85rem 0.75rem;
+  color: var(--secondary);
+  font-size: 0.85rem;
+}
+
+.member-picker-option {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.member-picker-option:hover {
+  background: var(--hover-bg);
+}
+
+.member-picker-option-selected {
+  background: var(--hover-bg);
+}
+
+.member-picker-check {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: 0 0 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--input-bg);
+  color: #ffffff;
+}
+
+.member-picker-option-selected .member-picker-check {
+  background: var(--hover-color);
+  border-color: var(--hover-color);
+}
+
+.member-picker-option-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 0.1rem;
+}
+
+.member-picker-option-name {
+  font-size: 0.92rem;
+}
+
+.member-picker-option-meta {
+  font-size: 0.78rem;
+  color: var(--secondary);
+}
+
+@media (max-width: 640px) {
+  .member-picker-options {
+    max-height: 12rem;
+  }
+
+  .member-picker-chip {
+    max-width: calc(100% - 0.25rem);
+  }
+}
+
 .join-submit {
   border: none;
   border-radius: 8px;

@@ -6,6 +6,7 @@ import { Member, Project, Connection } from '@/data/members';
 import MembersTable from './MembersTable';
 import AsciiBackground from './AsciiBackground';
 import ColorPicker from './ColorPicker';
+import MemberPicker from './MemberPicker';
 import { Search, ArrowRight } from 'lucide-react';
 // import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
@@ -511,7 +512,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
                                         <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
                                         <input className="join-input" name="github" type="url" placeholder="GitHub URL" />
-                                        <input className="join-input join-input-wide" name="connections" placeholder="Connection IDs (comma-separated, optional)" />
+                                        <MemberPicker name="connections" members={members} placeholder="Who are you connected to? (optional)" />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
                                     <p className="join-tip">
