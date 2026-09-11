@@ -86,12 +86,12 @@ export default function MembersTable({ members, projects, searchQuery }: Members
                                 {!member.profilePic ? (
                                     <div 
                                         className={`avatar ${searchQuery && index === 0 ? 'avatar-highlighted' : ''}`}
-                                        style={{ backgroundColor: '#e0e0e0' }} 
+                                        style={{ backgroundColor: '#bf5700' }} 
                                     />
                                 ) : (
                                     <div 
                                         className={`avatar ${searchQuery && index === 0 ? 'avatar-highlighted' : ''}`}
-                                        style={{ backgroundColor: '#e0e0e0', display: 'none' }} 
+                                        style={{ backgroundColor: '#bf5700', display: 'none' }} 
                                     />
                                 )}
                                 {member.website && member.website.trim() ? (
