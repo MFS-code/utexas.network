@@ -15,6 +15,7 @@
  * - instagram: Full URL
  * - twitter: Full URL
  * - linkedin: Full URL
+ * - github: Full URL
  * - connections: IDs of other members
  */
 
@@ -28,6 +29,7 @@ export interface Member {
   instagram?: string;
   twitter?: string;
   linkedin?: string;
+  github?: string;
   connections?: string[]; // IDs of other members you want to connect with
 }
 

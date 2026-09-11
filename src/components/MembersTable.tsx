@@ -124,6 +124,17 @@ export default function MembersTable({ members, projects, searchQuery }: Members
                             </td>
                             <td>
                                 <div className="social-icons">
+                                    {member.github && (
+                                        <a
+                                            href={member.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="social-icon-link"
+                                            title="GitHub"
+                                        >
+                                            <FaGithub size={16} />
+                                        </a>
+                                    )}
                                     {member.instagram && (
                                         <a 
                                             href={member.instagram} 
@@ -157,7 +168,7 @@ export default function MembersTable({ members, projects, searchQuery }: Members
                                             <FaLinkedin size={16} />
                                         </a>
                                     )}
-                                    {!member.instagram && !member.twitter && !member.linkedin && (
+                                    {!member.github && !member.instagram && !member.twitter && !member.linkedin && (
                                         <span className="table-placeholder">—</span>
                                     )}
                                 </div>
