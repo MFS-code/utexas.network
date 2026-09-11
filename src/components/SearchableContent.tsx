@@ -352,10 +352,9 @@ export default function SearchableContent({ members, projects, connections }: Se
                         <h1 className="title">utexas.network</h1>
                     </div>
                     <div className="description">
-                        <p>Welcome to the unofficial webring for builders at the university of texas at austin.</p>
+                        <p>Welcome to the unofficial webring for students / alumni at the university of texas at austin.</p>
                         <p>
-                            From engineers and founders to artists, designers, and writers, 
-                            UT has people building all kinds of cool stuff online. 
+                            From artists, musicians, and entrepreneurs to writers, researchers, and engineers, UT has people building all kinds of cool stuff online. 
                             This directory makes it easier to find and connect with fellow Longhorns and their work.
                         </p>
                         <p>
