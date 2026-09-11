@@ -281,6 +281,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                 twitter: String(formData.get('twitter') || ''),
                 instagram: String(formData.get('instagram') || ''),
                 linkedin: String(formData.get('linkedin') || ''),
+                github: String(formData.get('github') || ''),
                 connections: String(formData.get('connections') || ''),
                 notes: String(formData.get('notes') || ''),
             };
@@ -352,16 +353,15 @@ export default function SearchableContent({ members, projects, connections }: Se
                         <h1 className="title">utexas.network</h1>
                     </div>
                     <div className="description">
-                        <p>Welcome to the unofficial webring for builders at the university of texas at austin.</p>
+                        <p>Welcome to the unofficial webring for students / alumni at the university of texas at austin.</p>
                         <p>
-                            From engineers and founders to artists, designers, and writers, 
-                            UT has people building all kinds of cool stuff online. 
+                            From artists, musicians, and entrepreneurs to writers, researchers, and engineers, UT has people building all kinds of cool stuff online. 
                             This directory makes it easier to find and connect with fellow Longhorns and their work.
                         </p>
                         <p>
                             want to join? use the button below to submit your info for manual approval, or open a PR on{' '}
                             <a
-                                href="https://github.com/MFS-code/utexas.network"
+                                href="https://github.com/MFS-code/utexas.network/pulls"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="join-link"
@@ -508,6 +508,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
                                         <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
                                         <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
+                                        <input className="join-input" name="github" type="url" placeholder="GitHub URL" />
                                         <input className="join-input join-input-wide" name="connections" placeholder="Connection IDs (comma-separated, optional)" />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
