@@ -6,7 +6,7 @@ import { Member, Project, Connection } from '@/data/members';
 import MembersTable from './MembersTable';
 import AsciiBackground from './AsciiBackground';
 import { Search, ArrowRight } from 'lucide-react';
-import { FcGoogle } from 'react-icons/fc';
+// import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
 
 const NetworkGraph = dynamic(() => import('./NetworkGraph'), {
@@ -467,6 +467,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                         <form className="join-form" onSubmit={handleJoinSubmit} ref={joinFormRef}>
                             {formType === 'member' ? (
                                 <>
+                                    {/*
                                     <div className="google-auth-cta">
                                         <button
                                             type="button"
@@ -479,6 +480,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         </button>
                                         <p className="google-auth-note">Prefills name, email, and profile photo.</p>
                                     </div>
+                                    */}
                                     {submitStatus && (
                                         <p className={`join-status join-status-${submitStatus.type} join-modal-status`}>
                                             {submitStatus.message}
