@@ -530,7 +530,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                     <div className="join-form-grid">
                                         <input className="join-input" name="projectName" required placeholder="Project / org name *" />
                                         <input className="join-input" name="contactEmail" required type="email" placeholder="Contact email *" />
-                                        <input className="join-input join-input-wide" name="memberIds" required placeholder="Member IDs (comma-separated, at least one existing member) *" />
+                                        <MemberPicker name="memberIds" members={members} required placeholder="Who is in this project / org? *" />
                                         <ColorPicker name="accentItem" />
                                         <input className="join-input join-input-wide" name="description" placeholder="Short description" />
                                         <input className="join-input" name="website" type="url" placeholder="Project website URL" />
