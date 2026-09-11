@@ -515,10 +515,6 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <MemberPicker name="connections" members={members} placeholder="Who are you connected to? (optional)" />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
-                                    <p className="join-tip">
-                                        tip: IDs are generated as <code>firstname-lastname</code>, all lowercase.
-                                        Any space is converted to <code>-</code>.
-                                    </p>
                                 </>
                             ) : (
                                 <>
@@ -543,8 +539,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
                                     <p className="join-tip">
-                                        at least one member ID must belong to someone already in the network.
-                                        IDs follow the <code>firstname-lastname</code> format.
+                                        pick at least one person who is already in the network.
                                     </p>
                                 </>
                             )}
