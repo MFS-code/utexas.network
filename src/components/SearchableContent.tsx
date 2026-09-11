@@ -377,7 +377,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                             className="join-request-btn"
                             onClick={() => setShowJoinForm(true)}
                         >
-                            request to join
+                            add yourself
                         </button>
                         <Link href="/projects" className="nav-link">
                             projects <ArrowRight size={14} />
