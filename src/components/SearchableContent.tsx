@@ -40,6 +40,17 @@ const PINNED_MEMBER_ID = 'miguel-serna';
 const GOOGLE_OAUTH_SOURCE = 'google-oauth';
 const EDU_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.edu$/i;
 
+function ensureHttpsUrl(value: string): string {
+    const trimmed = value.trim();
+    if (!trimmed) return '';
+    if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return trimmed;
+    return `https://${trimmed}`;
+}
+
+function handleUrlFieldBlur(event: React.FocusEvent<HTMLInputElement>) {
+    event.currentTarget.value = ensureHttpsUrl(event.currentTarget.value);
+}
+
 interface GoogleOAuthProfile {
     name: string;
     email: string;
@@ -503,15 +514,15 @@ export default function SearchableContent({ members, projects, connections }: Se
                                             placeholder="UT .edu email *"
                                             title="Please use your .edu email address."
                                         />
-                                        <input className="join-input" name="website" required type="url" placeholder="Personal website URL *" />
-                                        <input className="join-input" name="profilePic" type="url" placeholder="Profile photo URL (direct link, Google Drive)" />
+                                        <input className="join-input" name="website" required type="url" placeholder="Personal website URL *" onBlur={handleUrlFieldBlur} />
+                                        <input className="join-input" name="profilePic" type="url" placeholder="Profile photo URL (direct link, Google Drive)" onBlur={handleUrlFieldBlur} />
                                         <input className="join-input" name="program" required placeholder="Program / major *" />
                                         <input className="join-input" name="year" placeholder="Graduation year" />
                                         <div className="join-section-heading join-input-wide">Social Media Links</div>
-                                        <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
-                                        <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
-                                        <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
-                                        <input className="join-input" name="github" type="url" placeholder="GitHub URL" />
+                                        <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" onBlur={handleUrlFieldBlur} />
+                                        <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" onBlur={handleUrlFieldBlur} />
+                                        <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" onBlur={handleUrlFieldBlur} />
+                                        <input className="join-input" name="github" type="url" placeholder="GitHub URL" onBlur={handleUrlFieldBlur} />
                                         <MemberPicker name="connections" members={members} placeholder="Who are you connected to? (optional)" />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
@@ -529,13 +540,13 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <MemberPicker name="memberIds" members={members} required placeholder="Who is in this project / org? *" />
                                         <ColorPicker name="accentItem" />
                                         <input className="join-input join-input-wide" name="description" placeholder="Short description" />
-                                        <input className="join-input" name="website" type="url" placeholder="Project website URL" />
-                                        <input className="join-input" name="profilePic" type="url" placeholder="Logo / image URL" />
+                                        <input className="join-input" name="website" type="url" placeholder="Project website URL" onBlur={handleUrlFieldBlur} />
+                                        <input className="join-input" name="profilePic" type="url" placeholder="Logo / image URL" onBlur={handleUrlFieldBlur} />
                                         <div className="join-section-heading join-input-wide">Social Media Links</div>
-                                        <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
-                                        <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
-                                        <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
-                                        <input className="join-input" name="github" type="url" placeholder="GitHub URL" />
+                                        <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" onBlur={handleUrlFieldBlur} />
+                                        <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" onBlur={handleUrlFieldBlur} />
+                                        <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" onBlur={handleUrlFieldBlur} />
+                                        <input className="join-input" name="github" type="url" placeholder="GitHub URL" onBlur={handleUrlFieldBlur} />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
                                     <p className="join-tip">
