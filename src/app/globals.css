@@ -418,6 +418,16 @@ a {
   min-width: 0;
 }
 
+@media (max-width: 640px) {
+  .color-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .color-picker-hex {
+    width: 100%;
+  }
+}
+
 .join-submit {
   border: none;
   border-radius: 8px;
