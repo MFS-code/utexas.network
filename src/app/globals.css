@@ -384,6 +384,11 @@ a {
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 0.5rem;
+  color-scheme: light;
+}
+
+[data-theme='dark'] .color-picker {
+  color-scheme: dark;
 }
 
 .color-picker-swatches {
@@ -400,6 +405,17 @@ a {
   border: 2px solid transparent;
   border-radius: 50%;
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.color-picker-swatch:hover {
+  transform: translateY(-1px);
+}
+
+.color-picker-swatch:focus-visible,
+.color-picker-hex:focus-visible {
+  outline: 2px solid var(--hover-color);
+  outline-offset: 2px;
 }
 
 .color-picker-swatch-active {
