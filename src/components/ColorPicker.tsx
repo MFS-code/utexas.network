@@ -1,5 +1,6 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Pipette } from 'lucide-react';
+import { HexColorPicker } from 'react-colorful';
 
 interface ColorPickerProps {
     name: string;
@@ -27,7 +28,7 @@ function normalizeHex(value: string): string | null {
 
 export default function ColorPicker({ name, placeholder = '#bf5700' }: ColorPickerProps) {
     const [hexValue, setHexValue] = useState('');
-    const customColorInputRef = useRef<HTMLInputElement | null>(null);
+    const [isCustomPickerOpen, setIsCustomPickerOpen] = useState(false);
     const normalizedHexValue = normalizeHex(hexValue);
     const pickerValue = normalizedHexValue || normalizeHex(placeholder) || '#bf5700';
 
@@ -53,21 +54,14 @@ export default function ColorPicker({ name, placeholder = '#bf5700' }: ColorPick
                 <button
                     type="button"
                     className={`color-picker-swatch color-picker-custom ${normalizedHexValue && !PRESET_COLORS.some((color) => color.value === normalizedHexValue) ? 'color-picker-swatch-active' : ''}`}
-                    onClick={() => customColorInputRef.current?.click()}
+                    onClick={() => setIsCustomPickerOpen((isOpen) => !isOpen)}
                     aria-label="Choose custom accent color"
+                    aria-expanded={isCustomPickerOpen}
+                    aria-controls={`${name}-custom-picker`}
                     title="Custom color"
                 >
                     <Pipette size={16} aria-hidden="true" />
                 </button>
-                <input
-                    ref={customColorInputRef}
-                    className="color-picker-native"
-                    type="color"
-                    value={pickerValue}
-                    onChange={(event) => selectColor(event.target.value)}
-                    tabIndex={-1}
-                    aria-hidden="true"
-                />
             </div>
             <input
                 className="join-input color-picker-hex"
@@ -79,6 +73,11 @@ export default function ColorPicker({ name, placeholder = '#bf5700' }: ColorPick
                 inputMode="text"
                 aria-label="Accent color hex value"
             />
+            {isCustomPickerOpen && (
+                <div className="color-picker-popover" id={`${name}-custom-picker`}>
+                    <HexColorPicker color={pickerValue} onChange={selectColor} />
+                </div>
+            )}
         </div>
     );
 }
