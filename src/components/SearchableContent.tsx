@@ -6,6 +6,7 @@ import { Member, Project, Connection } from '@/data/members';
 import MembersTable from './MembersTable';
 import AsciiBackground from './AsciiBackground';
 import ColorPicker from './ColorPicker';
+import MemberPicker from './MemberPicker';
 import { Search, ArrowRight } from 'lucide-react';
 // import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
@@ -504,20 +505,16 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         />
                                         <input className="join-input" name="website" required type="url" placeholder="Personal website URL *" />
                                         <input className="join-input" name="profilePic" type="url" placeholder="Profile photo URL (direct link, Google Drive)" />
-                                        <input className="join-input" name="program" placeholder="Program / major" />
+                                        <input className="join-input" name="program" required placeholder="Program / major *" />
                                         <input className="join-input" name="year" placeholder="Graduation year" />
                                         <div className="join-section-heading join-input-wide">Social Media Links</div>
                                         <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
                                         <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
                                         <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
                                         <input className="join-input" name="github" type="url" placeholder="GitHub URL" />
-                                        <input className="join-input join-input-wide" name="connections" placeholder="Connection IDs (comma-separated, optional)" />
+                                        <MemberPicker name="connections" members={members} placeholder="Who are you connected to? (optional)" />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
-                                    <p className="join-tip">
-                                        tip: IDs are generated as <code>firstname-lastname</code>, all lowercase.
-                                        Any space is converted to <code>-</code>.
-                                    </p>
                                 </>
                             ) : (
                                 <>
@@ -529,7 +526,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                     <div className="join-form-grid">
                                         <input className="join-input" name="projectName" required placeholder="Project / org name *" />
                                         <input className="join-input" name="contactEmail" required type="email" placeholder="Contact email *" />
-                                        <input className="join-input join-input-wide" name="memberIds" required placeholder="Member IDs (comma-separated, at least one existing member) *" />
+                                        <MemberPicker name="memberIds" members={members} required placeholder="Who is in this project / org? *" />
                                         <ColorPicker name="accentItem" />
                                         <input className="join-input join-input-wide" name="description" placeholder="Short description" />
                                         <input className="join-input" name="website" type="url" placeholder="Project website URL" />
@@ -542,8 +539,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
                                     <p className="join-tip">
-                                        at least one member ID must belong to someone already in the network.
-                                        IDs follow the <code>firstname-lastname</code> format.
+                                        pick at least one person who is already in the network.
                                     </p>
                                 </>
                             )}
