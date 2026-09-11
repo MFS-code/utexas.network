@@ -280,6 +280,10 @@ a {
   padding: 1rem;
 }
 
+.join-modal-overlay[hidden] {
+  display: none;
+}
+
 .join-modal-content {
   width: min(760px, 100%);
   max-height: min(90vh, 900px);
