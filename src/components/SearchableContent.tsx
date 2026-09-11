@@ -506,6 +506,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="profilePic" required type="url" placeholder="Profile photo URL (direct link, Google Drive) *" />
                                         <input className="join-input" name="program" placeholder="Program / major" />
                                         <input className="join-input" name="year" placeholder="Graduation year" />
+                                        <div className="join-section-heading join-input-wide">Social Media Links</div>
                                         <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
                                         <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
                                         <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
@@ -533,6 +534,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input join-input-wide" name="description" placeholder="Short description" />
                                         <input className="join-input" name="website" type="url" placeholder="Project website URL" />
                                         <input className="join-input" name="profilePic" type="url" placeholder="Logo / image URL" />
+                                        <div className="join-section-heading join-input-wide">Social Media Links</div>
                                         <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
                                         <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
                                         <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
