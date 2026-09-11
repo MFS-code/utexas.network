@@ -140,9 +140,11 @@ if (isProject) {
     `    id: ${JSON.stringify(id)},`,
     `    name: ${JSON.stringify(sanitizeText(payload.fullName))},`,
     `    website: ${JSON.stringify(sanitizeUrl(payload.website))},`,
-    `    profilePic: ${JSON.stringify(sanitizeUrl(payload.profilePic))},`,
   ];
 
+  if (sanitizeUrl(payload.profilePic)) {
+    entryLines.push(`    profilePic: ${JSON.stringify(sanitizeUrl(payload.profilePic))},`);
+  }
   if (sanitizeText(payload.program)) {
     entryLines.push(`    program: ${JSON.stringify(sanitizeText(payload.program))},`);
   }
