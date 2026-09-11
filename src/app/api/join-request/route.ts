@@ -11,6 +11,7 @@ interface MemberPayload {
   twitter?: string;
   instagram?: string;
   linkedin?: string;
+  github?: string;
   connections?: string;
   notes?: string;
 }
@@ -214,6 +215,7 @@ function buildMemberIssue(payload: MemberPayload) {
     twitter: payload.twitter?.trim() || '',
     instagram: payload.instagram?.trim() || '',
     linkedin: payload.linkedin?.trim() || '',
+    github: payload.github?.trim() || '',
     connections: payload.connections?.trim() || '',
     notes: payload.notes?.trim() || '',
   };
@@ -230,6 +232,7 @@ function buildMemberIssue(payload: MemberPayload) {
     `- **Twitter:** ${clean.twitter || '-'}`,
     `- **Instagram:** ${clean.instagram || '-'}`,
     `- **LinkedIn:** ${clean.linkedin || '-'}`,
+    `- **GitHub:** ${clean.github || '-'}`,
     `- **Connections:** ${clean.connections || '-'}`,
     '',
     '### Moderator commands',
@@ -262,6 +265,7 @@ function buildMemberIssue(payload: MemberPayload) {
       `Twitter: ${clean.twitter || '-'}`,
       `Instagram: ${clean.instagram || '-'}`,
       `LinkedIn: ${clean.linkedin || '-'}`,
+      `GitHub: ${clean.github || '-'}`,
       `Connections: ${clean.connections || '-'}`,
       `Notes: ${clean.notes || '-'}`,
     ],
