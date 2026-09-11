@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { Member, Project, Connection } from '@/data/members';
 import MembersTable from './MembersTable';
 import AsciiBackground from './AsciiBackground';
+import ColorPicker from './ColorPicker';
 import { Search, ArrowRight } from 'lucide-react';
 // import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
@@ -528,11 +529,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="projectName" required placeholder="Project / org name *" />
                                         <input className="join-input" name="contactEmail" required type="email" placeholder="Contact email *" />
                                         <input className="join-input join-input-wide" name="memberIds" required placeholder="Member IDs (comma-separated, at least one existing member) *" />
-                                        <input
-                                            className="join-input"
-                                            name="accentItem"
-                                            placeholder="Accent item (hex)"
-                                        />
+                                        <ColorPicker name="accentItem" />
                                         <input className="join-input join-input-wide" name="description" placeholder="Short description" />
                                         <input className="join-input" name="website" type="url" placeholder="Project website URL" />
                                         <input className="join-input" name="profilePic" type="url" placeholder="Logo / image URL" />

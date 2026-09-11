@@ -368,6 +368,26 @@ a {
   grid-column: 1 / -1;
 }
 
+.color-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.color-picker-swatch {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.2rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  cursor: pointer;
+}
+
+.color-picker-hex {
+  min-width: 0;
+}
+
 .join-submit {
   border: none;
   border-radius: 8px;
