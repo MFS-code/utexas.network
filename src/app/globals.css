@@ -369,13 +369,15 @@ a {
 }
 
 .color-picker {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .color-picker-swatch {
-  width: 2.75rem;
+  width: 3.25rem;
+  flex: 0 0 3.25rem;
   height: 2.75rem;
   padding: 0.2rem;
   border: 1px solid var(--border);
