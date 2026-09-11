@@ -464,6 +464,7 @@ export const projects: Project[] = [
     profilePic: "https://avatars.githubusercontent.com/u/71949018?s=800&v=4",
     github: "https://github.com/Longhorn-Developers/Degree-Audit-Plus",
     accentItem: "#bf5700",
+    description: "Degree Audit Plus reads information from UT Austin's UT Direct audit system and turns the dense results page into an interactive dashboard.",
   },
 ];
 
