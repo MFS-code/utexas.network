@@ -281,6 +281,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                 twitter: String(formData.get('twitter') || ''),
                 instagram: String(formData.get('instagram') || ''),
                 linkedin: String(formData.get('linkedin') || ''),
+                github: String(formData.get('github') || ''),
                 connections: String(formData.get('connections') || ''),
                 notes: String(formData.get('notes') || ''),
             };
@@ -507,6 +508,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" />
                                         <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" />
                                         <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" />
+                                        <input className="join-input" name="github" type="url" placeholder="GitHub URL" />
                                         <input className="join-input join-input-wide" name="connections" placeholder="Connection IDs (comma-separated, optional)" />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
