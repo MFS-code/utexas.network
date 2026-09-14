@@ -408,6 +408,18 @@ export const members: Member[] = [
     instagram: "https://morn1ng_h",
     connections: [],
   },
+  {
+    id: "josiah-lund",
+    name: "Josiah Lund",
+    website: "https://sites.google.com/view/josiahlund/home",
+    profilePic: "https://drive.google.com/file/d/1_BDM79EVtXkxiqZKTCi2dQ5Id8Uqqm99/view?usp=sharing",
+    program: "Philosophy",
+    year: "2028",
+    instagram: "https://www.instagram.com/1josiahlund/",
+    linkedin: "https://www.linkedin.com/in/josiahlund/",
+    github: "https://github.com/SylentJoe",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
