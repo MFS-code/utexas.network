@@ -401,12 +401,14 @@ export const members: Member[] = [
   },
   {
     id: "morning-huang",
-    name: "morning huang",
+    name: "Morning Huang",
     website: "https://morn1ng.my.canva.site/",
+    profilePic: "https://drive.google.com/file/d/1_XaYZlkpTIOnUheKMkGLO_sDJFRytP5W/view?usp=sharing",
     program: "Radio-Television-Film",
     year: "2025",
-    instagram: "https://morn1ng_h",
-    connections: [],
+    instagram: "https://www.instagram.com/morn1ng_h/",
+    linkedin: "https://www.linkedin.com/in/morninghuang/",
+    connections: ["derek-chen", "eric-zazovsky"],
   },
   {
     id: "josiah-lund",
