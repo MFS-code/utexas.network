@@ -399,6 +399,15 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/dhilan-shah-a1326820b/",
     connections: ["miguel-serna","gabriel-keller","arjan-suri"],
   },
+  {
+    id: "morning-huang",
+    name: "morning huang",
+    website: "https://morn1ng.my.canva.site/",
+    program: "Radio-Television-Film",
+    year: "2025",
+    instagram: "https://morn1ng_h",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
