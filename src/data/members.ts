@@ -422,6 +422,14 @@ export const members: Member[] = [
     github: "https://github.com/SylentJoe",
     connections: [],
   },
+  {
+    id: "test",
+    name: "test",
+    website: "https://test",
+    program: "test",
+    github: "https://github.com/DereC4",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
