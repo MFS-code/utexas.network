@@ -198,7 +198,7 @@ export const members: Member[] = [
     id: "parth-mehta",
     name: "Parth Mehta",
     website: "https://makistry.com",
-    profilePic: "https://drive.google.com/file/d/1qsenb4ASDHonB4UTNBhgmHXyJ3RNA5fA/view?usp=sharing",
+    profilePic: "/photos/parth-mehta.png",
     program: "Mechanical Engineering + Economics",
     year: "2028",
     instagram: "https://www.instagram.com/parthmehta1005/",
