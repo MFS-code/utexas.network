@@ -231,7 +231,7 @@ export const members: Member[] = [
     id: "karmanyaah-malhotra",
     name: "Karmanyaah Malhotra",
     website: "https://karmanyaah.com",
-    profilePic: "https://drive.google.com/file/d/1u2_pzgH2nZjcgSX76PRqo_k2WqDRaMvV/view?usp=sharing",
+    profilePic: "/photos/karmanyaah-malhotra.jpg",
     program: "Computer Science",
     year: "2027",
     linkedin: "https://www.linkedin.com/in/karmanyaahm/",
