@@ -538,7 +538,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
             const mouseX = e.clientX - rect.left;
             const mouseY = e.clientY - rect.top;
             
-            const zoomDelta = e.deltaY > 0 ? 0.97 : 1.03;
+            const zoomDelta = e.deltaY > 0 ? 0.9 : 1.1;
             const newZoom = Math.min(Math.max(zoom * zoomDelta, 0.5), 5);
             
             const zoomPointX = (mouseX - pan.x - width / 2) / zoom + width / 2;
