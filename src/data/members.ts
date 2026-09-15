@@ -253,7 +253,7 @@ export const members: Member[] = [
     id: "sairaja-kurelli",
     name: "Sairaja Kurelli",
     website: "https://saikurelli.github.io/",
-    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQHxZ9jogMj5ew/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1684681830844?e=2147483647&v=beta&t=dXjEerg8JKQUlmK8Mer1h7Hhw53EUdnLyz6HOqqKS-E",
+    profilePic: "https://avatars.githubusercontent.com/u/22625395?v=4",
     program: "Computer Science",
     year: "2025",
     linkedin: "https://www.linkedin.com/in/sai-kurelli",
