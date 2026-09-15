@@ -339,7 +339,7 @@ export const members: Member[] = [
     id: "wyatt-hansen",
     name: "Wyatt Hansen",
     website: "https://wyatthansen.dev/",
-    profilePic: "https://drive.google.com/file/d/1oUxHVCNqpf7unFBYtBxC4A3StxFVdhZM/view?usp=sharing",
+    profilePic: "/photos/wyatt-hansen.jpg",
     program: "Mathematics",
     year: "2027",
     linkedin: "https://www.linkedin.com/in/wyatt-c-hansen/",
