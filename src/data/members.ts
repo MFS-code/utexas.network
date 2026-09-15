@@ -464,6 +464,15 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/timmyengelman/",
     connections: [],
   },
+  {
+    id: "lalar-rajpurohit",
+    name: "Lalar Rajpurohit",
+    website: "",
+    program: "Informatics",
+    year: "2030",
+    linkedin: "https://www.linkedin.com/in/kedin.com",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
