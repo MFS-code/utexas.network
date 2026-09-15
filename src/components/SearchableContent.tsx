@@ -47,8 +47,41 @@ function ensureHttpsUrl(value: string): string {
     return `https://${trimmed}`;
 }
 
+type SocialKind = 'twitter' | 'instagram' | 'linkedin' | 'github';
+
+function resolveSocialUrl(value: string, kind: SocialKind): string {
+    const trimmed = value.trim();
+    if (!trimmed) return '';
+    if (/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return trimmed;
+
+    const hosts: Record<SocialKind, string[]> = {
+        twitter: ['twitter.com', 'x.com'],
+        instagram: ['instagram.com'],
+        linkedin: ['linkedin.com'],
+        github: ['github.com'],
+    };
+    if (hosts[kind].some((host) => trimmed.toLowerCase().includes(host))) {
+        return ensureHttpsUrl(trimmed);
+    }
+
+    const handle = trimmed.replace(/^@/, '').replace(/^\/+|\/+$/g, '');
+    if (!handle) return '';
+
+    if (kind === 'twitter') return `https://x.com/${handle.split('/')[0]}`;
+    if (kind === 'instagram') return `https://www.instagram.com/${handle.split('/')[0]}`;
+    if (kind === 'github') return `https://github.com/${handle}`;
+    if (/^(in|company|school)\//i.test(handle)) return `https://www.linkedin.com/${handle}`;
+    return `https://www.linkedin.com/in/${handle.split('/')[0]}`;
+}
+
 function handleUrlFieldBlur(event: React.FocusEvent<HTMLInputElement>) {
     event.currentTarget.value = ensureHttpsUrl(event.currentTarget.value);
+}
+
+function handleSocialFieldBlur(kind: SocialKind) {
+    return (event: React.FocusEvent<HTMLInputElement>) => {
+        event.currentTarget.value = resolveSocialUrl(event.currentTarget.value, kind);
+    };
 }
 
 interface GoogleOAuthProfile {
@@ -277,10 +310,10 @@ export default function SearchableContent({ members, projects, connections }: Se
                 description: String(formData.get('description') || ''),
                 website: String(formData.get('website') || ''),
                 profilePic: String(formData.get('profilePic') || ''),
-                twitter: String(formData.get('twitter') || ''),
-                instagram: String(formData.get('instagram') || ''),
-                linkedin: String(formData.get('linkedin') || ''),
-                github: String(formData.get('github') || ''),
+                twitter: resolveSocialUrl(String(formData.get('twitter') || ''), 'twitter'),
+                instagram: resolveSocialUrl(String(formData.get('instagram') || ''), 'instagram'),
+                linkedin: resolveSocialUrl(String(formData.get('linkedin') || ''), 'linkedin'),
+                github: resolveSocialUrl(String(formData.get('github') || ''), 'github'),
                 notes: String(formData.get('notes') || ''),
             }
             : {
@@ -291,10 +324,10 @@ export default function SearchableContent({ members, projects, connections }: Se
                 profilePic: String(formData.get('profilePic') || ''),
                 program: String(formData.get('program') || ''),
                 year: String(formData.get('year') || ''),
-                twitter: String(formData.get('twitter') || ''),
-                instagram: String(formData.get('instagram') || ''),
-                linkedin: String(formData.get('linkedin') || ''),
-                github: String(formData.get('github') || ''),
+                twitter: resolveSocialUrl(String(formData.get('twitter') || ''), 'twitter'),
+                instagram: resolveSocialUrl(String(formData.get('instagram') || ''), 'instagram'),
+                linkedin: resolveSocialUrl(String(formData.get('linkedin') || ''), 'linkedin'),
+                github: resolveSocialUrl(String(formData.get('github') || ''), 'github'),
                 connections: String(formData.get('connections') || ''),
                 notes: String(formData.get('notes') || ''),
             };
@@ -519,10 +552,10 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="program" required placeholder="Program / major *" />
                                         <input className="join-input" name="year" placeholder="Graduation year" />
                                         <div className="join-section-heading join-input-wide">Social Media Links</div>
-                                        <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" onBlur={handleUrlFieldBlur} />
-                                        <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" onBlur={handleUrlFieldBlur} />
-                                        <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" onBlur={handleUrlFieldBlur} />
-                                        <input className="join-input" name="github" type="url" placeholder="GitHub URL" onBlur={handleUrlFieldBlur} />
+                                        <input className="join-input" name="twitter" placeholder="X / Twitter URL or @username" onBlur={handleSocialFieldBlur('twitter')} />
+                                        <input className="join-input" name="instagram" placeholder="Instagram URL or @username" onBlur={handleSocialFieldBlur('instagram')} />
+                                        <input className="join-input" name="linkedin" placeholder="LinkedIn URL or username" onBlur={handleSocialFieldBlur('linkedin')} />
+                                        <input className="join-input" name="github" placeholder="GitHub URL or username" onBlur={handleSocialFieldBlur('github')} />
                                         <MemberPicker name="connections" members={members} placeholder="Who are you connected to? (optional)" />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
@@ -543,10 +576,10 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="website" type="url" placeholder="Project website URL" onBlur={handleUrlFieldBlur} />
                                         <input className="join-input" name="profilePic" type="url" placeholder="Logo / image URL" onBlur={handleUrlFieldBlur} />
                                         <div className="join-section-heading join-input-wide">Social Media Links</div>
-                                        <input className="join-input" name="twitter" type="url" placeholder="X / Twitter URL" onBlur={handleUrlFieldBlur} />
-                                        <input className="join-input" name="instagram" type="url" placeholder="Instagram URL" onBlur={handleUrlFieldBlur} />
-                                        <input className="join-input" name="linkedin" type="url" placeholder="LinkedIn URL" onBlur={handleUrlFieldBlur} />
-                                        <input className="join-input" name="github" type="url" placeholder="GitHub URL" onBlur={handleUrlFieldBlur} />
+                                        <input className="join-input" name="twitter" placeholder="X / Twitter URL or @username" onBlur={handleSocialFieldBlur('twitter')} />
+                                        <input className="join-input" name="instagram" placeholder="Instagram URL or @username" onBlur={handleSocialFieldBlur('instagram')} />
+                                        <input className="join-input" name="linkedin" placeholder="LinkedIn URL or username" onBlur={handleSocialFieldBlur('linkedin')} />
+                                        <input className="join-input" name="github" placeholder="GitHub URL or username" onBlur={handleSocialFieldBlur('github')} />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
                                     <p className="join-tip">
