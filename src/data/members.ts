@@ -422,6 +422,18 @@ export const members: Member[] = [
     github: "https://github.com/SylentJoe",
     connections: [],
   },
+  {
+    id: "john-tanaristy",
+    name: "John Tan-Aristy",
+    website: "https://johntanaristy.com",
+    program: "Electrical Engineering",
+    year: "May 2028",
+    instagram: "https://pbs.twimg.com/profile_images/2038787298394091520/PYsOOmNS_400x400.jpg",
+    twitter: "https://x.com/jpt1729",
+    linkedin: "https://www.linkedin.com/in/john-tan-aristy/",
+    github: "https://github.com/jpt1729",
+    connections: ["derek-chen"],
+  },
 ];
 
 export const projects: Project[] = [
