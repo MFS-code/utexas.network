@@ -12,6 +12,9 @@ jobs:
   moderate:
     if: github.event.issue.pull_request == null
     runs-on: ubuntu-latest
+    concurrency:
+      group: moderate-join-requests
+      cancel-in-progress: false
     steps:
       - name: Check command and permissions
         id: gate
@@ -38,6 +41,8 @@ jobs:
       - name: Checkout repository
         if: steps.gate.outputs.run == 'true'
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Approve request and commit
         if: steps.gate.outputs.run == 'true' && steps.gate.outputs.command == '/approve'
@@ -60,7 +65,10 @@ jobs:
             else
               git commit -m "approve ${{ steps.gate.outputs.request_type }} request #${{ steps.gate.outputs.issue_number }}"
             fi
-            git push
+            git push || {
+              git pull --rebase origin main
+              git push
+            }
           fi
 
       - name: Send approval email to applicant
@@ -132,7 +140,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number,
-              body: `Approval command failed before committing \`src/data/members.ts\`. This usually means the generated ${reqType} id already exists or the payload was invalid. Check workflow logs and re-approve after fixing.`
+              body: `Approval failed. Common causes: another \`/approve\` updated \`main\` at the same time (re-comment \`/approve\`), the generated ${reqType} id already exists, or the payload was invalid. Check workflow logs.`
             });
 
       - name: Mark rejected and close issue
