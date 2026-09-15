@@ -188,7 +188,7 @@ export const members: Member[] = [
     id: "neev-gupta",
     name: "Neev Gupta",
     website: "https://neevgupta.com",
-    profilePic: "https://drive.google.com/file/d/1ip8578b_fC5325gbgc00hFN9v6cT_di-/view?usp=drivesdk",
+    profilePic: "/photos/neev-gupta.jpg",
     program: "Computer Science",
     year: "2029",
     linkedin: "https://linkedin.com/in/neevgupta",
