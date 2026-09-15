@@ -155,7 +155,7 @@ export const members: Member[] = [
     id: "kaustubh-duddala",
     name: "Kaustubh Duddala",
     website: "https://kaustubh.duddala.com",
-    profilePic: "https://scontent-dfw6-1.cdninstagram.com/v/t51.82787-19/588736226_18165472369383009_4175213519499641579_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=101&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy42MTMuQzMifQ%3D%3D&_nc_ohc=_C2rOfbyth8Q7kNvwHQEZk0&_nc_oc=Adrc6IzYVtIo3ryCNmM9OBzQZLDcOyaa-ENUdW-fAGukjMege7EklVcokR-xHqAeLR0&_nc_zt=24&_nc_ht=scontent-dfw6-1.cdninstagram.com&_nc_gid=IM_kC6TY8HyeDWJu5TYsSA&_nc_ss=7a289&oh=00_Af3oD4dyV6IjdDcGBpZZwZklA9nza6MSQhXESn8UeBjYMw&oe=69E0ABBC",
+    profilePic: "https://avatars.githubusercontent.com/u/72582270?v=4",
     program: "Statistics & Data Science",
     year: "2028",
     instagram: "https://www.instagram.com/kaustubh.duddala/",
