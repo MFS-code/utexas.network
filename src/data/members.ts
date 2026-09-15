@@ -296,7 +296,7 @@ export const members: Member[] = [
     id: "aniket-chandekar",
     name: "Aniket Vinod Chandekar",
     website: "https://www.aniketchandekar.com",
-    profilePic: "https://drive.google.com/file/d/1hce5GcGhbEYNtNthKL3qNKfHKyFFAZRQ/view?usp=sharing",
+    profilePic: "/photos/aniket-chandekar.jpg",
     program: "Information Science",
     year: "2027",
     linkedin: "https://www.linkedin.com/in/aniket-chandekar",
