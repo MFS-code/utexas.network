@@ -434,6 +434,17 @@ export const members: Member[] = [
     github: "https://github.com/jpt1729",
     connections: ["derek-chen"],
   },
+  {
+    id: "sahasra-tummala",
+    name: "Sahasra Tummala",
+    website: "https://sahasratummala.com",
+    profilePic: "https://drive.google.com/file/d/15NTyvaWTnHqOQ2SMwPQYQ1TygXqn8QVO/view?usp=sharing",
+    program: "Computer Science & Design",
+    year: "2029",
+    instagram: "https://www.instagram.com/sahasratummalaa",
+    linkedin: "https://www.linkedin.com/in/sahasratummala",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
