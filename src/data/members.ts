@@ -178,7 +178,7 @@ export const members: Member[] = [
     id: "nathan-brown",
     name: "Nathan Brown",
     website: "https://www.njbrown.com",
-    profilePic: "https://drive.google.com/file/d/1vY6Q2clGgoZMVpQk4JfIU5pyIf4VZiMd/view?usp=sharing",
+    profilePic: "/photos/nathan-brown.jpg",
     program: "Mathematics",
     year: "2028",
     linkedin: "https://www.linkedin.com/in/nj-brown/",
