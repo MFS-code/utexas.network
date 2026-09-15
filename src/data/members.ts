@@ -403,7 +403,7 @@ export const members: Member[] = [
     id: "morning-huang",
     name: "Morning Huang",
     website: "https://morn1ng.my.canva.site/",
-    profilePic: "https://drive.google.com/file/d/1_XaYZlkpTIOnUheKMkGLO_sDJFRytP5W/view?usp=sharing",
+    profilePic: "/photos/morning-huang.png",
     program: "Radio-Television-Film",
     year: "2025",
     instagram: "https://www.instagram.com/morn1ng_h/",
