@@ -445,6 +445,15 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/sahasratummala",
     connections: [],
   },
+  {
+    id: "lasya-yakkala",
+    name: "Lasya Yakkala",
+    website: "https://lasyayakkala.framer.website",
+    program: "Computer Science",
+    year: "2026",
+    linkedin: "https://www.linkedin.com/in/lasya-yakkala",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
