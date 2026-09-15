@@ -438,7 +438,7 @@ export const members: Member[] = [
     id: "sahasra-tummala",
     name: "Sahasra Tummala",
     website: "https://sahasratummala.com",
-    profilePic: "https://drive.google.com/file/d/15NTyvaWTnHqOQ2SMwPQYQ1TygXqn8QVO/view?usp=sharing",
+    profilePic: "/photos/sahasra-tummala.jpg",
     program: "Computer Science & Design",
     year: "2029",
     instagram: "https://www.instagram.com/sahasratummalaa",
