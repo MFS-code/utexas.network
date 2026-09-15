@@ -166,7 +166,7 @@ export const members: Member[] = [
     id: "praneel-seth",
     name: "Praneel Seth",
     website: "https://praneelseth.com",
-    profilePic: "https://drive.google.com/file/d/162GAO_pzsZZ3EpkxstHXN6jT7J1Z-cny/view?usp=sharing",
+    profilePic: "/photos/praneel-seth.jpg",
     program: "Computer Science & Mathematics",
     year: "May 2027",
     instagram: "https://instagram.com/praneelseth",
