@@ -221,7 +221,7 @@ export const members: Member[] = [
     id: "abdelgadir-osman",
     name: "Abdelgadir Osman",
     website: "https://abdelgadirosman.com/",
-    profilePic: "https://drive.google.com/file/d/1RTB7V6deuVCdpgNRDmXwvEuFnrbAkL34/view?usp=sharing",
+    profilePic: "/photos/abdelgadir-osman.jpg",
     program: "Electrical & Computer Engineering",
     year: "2027",
     linkedin: "https://www.linkedin.com/in/abdelgadir-osman/",
