@@ -241,7 +241,7 @@ export const members: Member[] = [
     id: "siddhartha-venkatayogi",
     name: "Siddhartha Venkatayogi",
     website: "https://sidvenkatayogi.github.io/",
-    profilePic: "https://drive.google.com/file/d/1OYaciysUGvPgWF44bFLN63qBFv2qLDIs/view?usp=sharing",
+    profilePic: "/photos/siddhartha-venkatayogi.png",
     program: "Computer Science",
     year: "2029",
     instagram: "https://www.instagram.com/sidvenkatayogi/",
