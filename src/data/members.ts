@@ -78,7 +78,7 @@ export const members: Member[] = [
     id: "miguel-serna",
     name: "Miguel Serna",
     website: "https://mfserna.dev",
-    profilePic: "https://www.mfserna.dev/photos/headshot.webp",
+    profilePic: "https://avatars.githubusercontent.com/u/56933863?v=4",
     program: "Computer Science",
     year: "2027",
     instagram: "https://www.instagram.com/mfserna_/",
