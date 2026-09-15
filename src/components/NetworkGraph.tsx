@@ -96,7 +96,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
         const dark = isDarkRef.current;
         fallback.style.background = node.isProject
             ? (dark ? 'rgba(191, 87, 0, 0.18)' : 'rgba(191, 87, 0, 0.12)')
-            : '#bf5700';
+            : (dark ? '#2b2b2b' : '#ececec');
         fallback.style.color = node.isProject
             ? getProjectAccentColor(node.accentItem)
             : (dark ? '#f5f5f5' : '#4b4b4b');
@@ -411,6 +411,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 img.style.filter = 'grayscale(0%)';
                 img.style.opacity = '1';
                 nameLabel.style.opacity = '1';
+                if (!node.isProject) fallback.style.background = '#bf5700';
             });
 
             nodeDiv.addEventListener('mouseleave', () => {
@@ -430,6 +431,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
                     fallback.style.opacity = '1';
                 }
                 nameLabel.style.opacity = '0';
+                applyFallbackTheme(fallback, node);
             });
 
             nodeDiv.addEventListener('mousedown', (e) => {
