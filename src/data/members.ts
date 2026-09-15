@@ -306,7 +306,7 @@ export const members: Member[] = [
     id: "arjan-suri",
     name: "Arjan Suri",
     website: "https://arjansuri.com",
-    profilePic: "https://scontent-dfw5-2.cdninstagram.com/v/t51.82787-19/659108351_18081145820381723_3795411675849393288_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=108&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=LmBZGX7kXaUQ7kNvwEeFSkY&_nc_oc=AdrnkrfZqqhBRZ2BL1RJPPgejBUPl1SLiKPGrN74CMKtZ_2qtsdTj2bhbloPhLOtwzM&_nc_zt=24&_nc_ht=scontent-dfw5-2.cdninstagram.com&_nc_gid=ajiNOwEQ9pdwPO7l1MLxxQ&_nc_ss=7a289&oh=00_Af3ew9fpJSaslI_2T_8_kQiFksu1ulZY1HnPBqajV4sgZw&oe=69E0A135",
+    profilePic: "https://avatars.githubusercontent.com/u/109180420?v=4",
     program: "Computer Science & Math",
     instagram: "https://instagram.com/arjanssuri",
     twitter: "https://x.com/arjanssuri",
