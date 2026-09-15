@@ -274,7 +274,7 @@ export const members: Member[] = [
     id: "terence-dumas",
     name: "Terence Dumas",
     website: "https://www.terencedumas.com/",
-    profilePic: "https://scontent-dfw5-1.cdninstagram.com/v/t51.82787-19/534309785_18285220378257836_8156068965182853089_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=111&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=eq5f3p789k4Q7kNvwGnUD4n&_nc_oc=AdrQuJw3Ha0F3i8ow-2RVSQg9-G5pjTM9mBoiZuVxvnrpMgTPqbh9uJrdW6OUTdiaHQ&_nc_zt=24&_nc_ht=scontent-dfw5-1.cdninstagram.com&_nc_gid=O6U8SnJxpXAsobP-sKv4TQ&_nc_ss=7a289&oh=00_Af1FTGiUPQFHYxpQJiY5iDuE08Im1I5ZALPjklFrFpXg_Q&oe=69E0CE6A",
+    profilePic: "https://avatars.githubusercontent.com/u/72264649?v=4",
     program: "Computer Science & Mathematics",
     year: "2027",
     instagram: "https://www.instagram.com/terence_le_bo/",
