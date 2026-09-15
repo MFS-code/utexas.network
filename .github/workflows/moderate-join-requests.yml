@@ -45,6 +45,7 @@ jobs:
         continue-on-error: true
         env:
           ISSUE_BODY: ${{ github.event.issue.body }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           node scripts/apply-approved-request.mjs
           if git diff --quiet; then
@@ -53,7 +54,12 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add src/data/members.ts
-            git commit -m "approve ${{ steps.gate.outputs.request_type }} request #${{ steps.gate.outputs.issue_number }}"
+            TRAILER=$(node scripts/github-coauthor.mjs)
+            if [ -n "$TRAILER" ]; then
+              git commit -m "approve ${{ steps.gate.outputs.request_type }} request #${{ steps.gate.outputs.issue_number }}" -m "$TRAILER"
+            else
+              git commit -m "approve ${{ steps.gate.outputs.request_type }} request #${{ steps.gate.outputs.issue_number }}"
+            fi
             git push
           fi
 
