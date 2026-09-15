@@ -112,7 +112,7 @@ export const members: Member[] = [
     id: "nicolas-garza",
     name: "Nicolas Garza",
     website: "https://nicolas.ai",
-    profilePic: "https://i.ibb.co/q3y0Nw1R/518599989-18086923360776720-5534035868491386411-n.jpg",
+    profilePic: "https://avatars.githubusercontent.com/u/67522447?v=4",
     program: "Computer Science",
     year: "2027",
     instagram: "https://www.instagram.com/nicolasgarza_/",
