@@ -464,7 +464,7 @@ export const projects: Project[] = [
     memberIds: ["ayman-mahfuz"],
     description: "An AI native product management platform",
     website: "https://helmpm.app/",
-    profilePic: "https://drive.google.com/file/d/1LF8k1v9mayo-ZO01aJA-3xBFN8IK6qS0/view?usp=drive_link",
+    profilePic: "/photos/helm-pm.png",
     twitter: "https://x.com/HelmPM_",
     linkedin: "https://www.linkedin.com/company/helm-pm/",
     accentItem: "#2E4258",
