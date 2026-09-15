@@ -414,7 +414,7 @@ export const members: Member[] = [
     id: "josiah-lund",
     name: "Josiah Lund",
     website: "https://sites.google.com/view/josiahlund/home",
-    profilePic: "https://drive.google.com/file/d/1_BDM79EVtXkxiqZKTCi2dQ5Id8Uqqm99/view?usp=sharing",
+    profilePic: "/photos/josiah-lund.jpg",
     program: "Philosophy",
     year: "2028",
     instagram: "https://www.instagram.com/1josiahlund/",
