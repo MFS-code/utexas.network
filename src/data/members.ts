@@ -454,6 +454,16 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/lasya-yakkala",
     connections: [],
   },
+  {
+    id: "timothy-engelman",
+    name: "Timothy Engelman",
+    website: "https://tedesigns.org/",
+    profilePic: "https://drive.google.com/file/d/1ELr2xFEa-H-rrHpp1JGQZ_iLeEJ314Rd/view?usp=sharing",
+    program: "Computer Science",
+    year: "2030",
+    linkedin: "https://www.linkedin.com/in/timmyengelman/",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
