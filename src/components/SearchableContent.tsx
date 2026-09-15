@@ -552,10 +552,10 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="program" required placeholder="Program / major *" />
                                         <input className="join-input" name="year" placeholder="Graduation year" />
                                         <div className="join-section-heading join-input-wide">Social Media Links</div>
-                                        <input className="join-input" name="twitter" placeholder="X / Twitter URL or @username" onBlur={handleSocialFieldBlur('twitter')} />
-                                        <input className="join-input" name="instagram" placeholder="Instagram URL or @username" onBlur={handleSocialFieldBlur('instagram')} />
-                                        <input className="join-input" name="linkedin" placeholder="LinkedIn URL or username" onBlur={handleSocialFieldBlur('linkedin')} />
-                                        <input className="join-input" name="github" placeholder="GitHub URL or username" onBlur={handleSocialFieldBlur('github')} />
+                                        <input className="join-input" name="twitter" placeholder="X / Twitter" onBlur={handleSocialFieldBlur('twitter')} />
+                                        <input className="join-input" name="instagram" placeholder="Instagram" onBlur={handleSocialFieldBlur('instagram')} />
+                                        <input className="join-input" name="linkedin" placeholder="LinkedIn" onBlur={handleSocialFieldBlur('linkedin')} />
+                                        <input className="join-input" name="github" placeholder="GitHub" onBlur={handleSocialFieldBlur('github')} />
                                         <MemberPicker name="connections" members={members} placeholder="Who are you connected to? (optional)" />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
@@ -576,10 +576,10 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="website" type="url" placeholder="Project website URL" onBlur={handleUrlFieldBlur} />
                                         <input className="join-input" name="profilePic" type="url" placeholder="Logo / image URL" onBlur={handleUrlFieldBlur} />
                                         <div className="join-section-heading join-input-wide">Social Media Links</div>
-                                        <input className="join-input" name="twitter" placeholder="X / Twitter URL or @username" onBlur={handleSocialFieldBlur('twitter')} />
-                                        <input className="join-input" name="instagram" placeholder="Instagram URL or @username" onBlur={handleSocialFieldBlur('instagram')} />
-                                        <input className="join-input" name="linkedin" placeholder="LinkedIn URL or username" onBlur={handleSocialFieldBlur('linkedin')} />
-                                        <input className="join-input" name="github" placeholder="GitHub URL or username" onBlur={handleSocialFieldBlur('github')} />
+                                        <input className="join-input" name="twitter" placeholder="X / Twitter" onBlur={handleSocialFieldBlur('twitter')} />
+                                        <input className="join-input" name="instagram" placeholder="Instagram" onBlur={handleSocialFieldBlur('instagram')} />
+                                        <input className="join-input" name="linkedin" placeholder="LinkedIn" onBlur={handleSocialFieldBlur('linkedin')} />
+                                        <input className="join-input" name="github" placeholder="GitHub" onBlur={handleSocialFieldBlur('github')} />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
                                     <p className="join-tip">
