@@ -496,6 +496,16 @@ export const members: Member[] = [
     github: "https://github.com/arunbagavathiannan",
     connections: ["derek-chen"],
   },
+  {
+    id: "carla-leija",
+    name: "Carla Garcia Leija",
+    website: "https://carlagarcialeija.com",
+    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQGYLRHNJLKSbA/profile-displayphoto-shrink_200_200/B56ZZ1YGOFHsAc-/0/1745725974038?e=1791417600&v=beta&t=PRd2F2YCwMOvODkl3MpJIpI39HZRXdX6_0yF8dSFz4Q",
+    program: "Design",
+    year: "2026",
+    linkedin: "https://www.linkedin.com/in/carla-garcia-leija/",
+    connections: ["derek-chen","lasya-yakkala","sahasra-tummala"],
+  },
 ];
 
 export const projects: Project[] = [
