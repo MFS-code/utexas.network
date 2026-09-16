@@ -484,6 +484,18 @@ export const members: Member[] = [
     github: "https://www.linkedin.com/in/rizkyp1/",
     connections: ["suhas-voolla","yash-karandikar","karmanyaah-malhotra","gabriel-keller"],
   },
+  {
+    id: "arun-bagavathiannan",
+    name: "Arun Bagavathiannan",
+    website: "https://astrowind-git-main-arunbagavathiannan-4324s-projects.vercel.app/",
+    profilePic: "https://drive.google.com/file/d/1KqXcMJAkdvslc3ClhPab33iteKeoUtol/view?usp=sharing",
+    program: "Computer Science",
+    year: "2028",
+    instagram: "https://www.instagram.com/arun.bagavathiannan/",
+    linkedin: "https://www.linkedin.com/in/arun-bagavathiannan/",
+    github: "https://github.com/arunbagavathiannan",
+    connections: ["derek-chen"],
+  },
 ];
 
 export const projects: Project[] = [
