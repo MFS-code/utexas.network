@@ -473,6 +473,17 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/kedin.com",
     connections: [],
   },
+  {
+    id: "rizky-pratama",
+    name: "Rizky Pratama",
+    website: "https://rizkyp.com/",
+    profilePic: "https://rizkyp.com/assets/professional_pfp-BQGp3CXx.jpg",
+    program: "Computer Science & Robotics",
+    year: "2028",
+    linkedin: "https://www.linkedin.com/in/rizkyp1/",
+    github: "https://www.linkedin.com/in/rizkyp1/",
+    connections: ["suhas-voolla","yash-karandikar","karmanyaah-malhotra","gabriel-keller"],
+  },
 ];
 
 export const projects: Project[] = [
