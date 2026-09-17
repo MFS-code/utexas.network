@@ -311,6 +311,7 @@ export const members: Member[] = [
     instagram: "https://instagram.com/arjanssuri",
     twitter: "https://x.com/arjanssuri",
     linkedin: "https://linkedin.com/in/arjansuri",
+    github: "https://github.com/arjanssuri",
     connections: [],
   },
   {
@@ -364,6 +365,7 @@ export const members: Member[] = [
     year: "2028",
     instagram: "https://instagram.com/probablysuhas",
     linkedin: "https://linkedin.com/in/suhasvoolla",
+    github: "https://github.com/tildezero",
     connections: ["robotics-and-automation-society","longhorn-developers","gabriel-keller","praneel-seth","karmanyaah-malhotra","siddhartha-venkatayogi","derek-chen"],
   },
   {
@@ -385,6 +387,7 @@ export const members: Member[] = [
     year: "2028",
     instagram: "https://www.instagram.com/yashkarandikar158/",
     linkedin: "https://www.linkedin.com/in/yashkarandikar/",
+    github: "https://github.com/karx1",
     connections: ["siddhartha-venkatayogi","derek-chen"],
   },
   {
@@ -452,6 +455,7 @@ export const members: Member[] = [
     program: "Computer Science",
     year: "2026",
     linkedin: "https://www.linkedin.com/in/lasya-yakkala",
+    github: "https://github.com/siaxvii",
     connections: [],
   },
   {
@@ -481,7 +485,7 @@ export const members: Member[] = [
     program: "Computer Science & Robotics",
     year: "2028",
     linkedin: "https://www.linkedin.com/in/rizkyp1/",
-    github: "https://www.linkedin.com/in/rizkyp1/",
+    github: "https://github.com/rizkyapratama100",
     connections: ["suhas-voolla","yash-karandikar","karmanyaah-malhotra","gabriel-keller"],
   },
   {
@@ -504,6 +508,7 @@ export const members: Member[] = [
     program: "Design",
     year: "2026",
     linkedin: "https://www.linkedin.com/in/carla-garcia-leija/",
+    github: "https://github.com/carlagarcialeija",
     connections: ["derek-chen","lasya-yakkala","sahasra-tummala"],
   },
 ];
