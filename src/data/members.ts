@@ -73,6 +73,7 @@ export interface Connection {
   dotted?: boolean;
 }
 
+// imo if we're going to store these in plaintext like this, shouldn't they at least be immediately next to each schema to be easier to reference?   -dkillough@
 export const members: Member[] = [
   {
     id: "miguel-serna",
@@ -511,6 +512,18 @@ export const members: Member[] = [
     github: "https://github.com/carlagarcialeija",
     connections: ["derek-chen","lasya-yakkala","sahasra-tummala"],
   },
+  {
+    id: "dkillough",
+    name: "Daniel Killough",
+    website: "https://dkillough.com",
+    profilePic: "https://avatars.githubusercontent.com/u/52042713",
+    program: "Computer Science, BDP Digital Arts & Media, Texas Immersive (Advertising)",
+    year: "December 2022",
+    twitter: "https://x.com/_dekilo",
+    linkedin: "https://www.linkedin.com/in/dkillough/",
+    github: "https://github.com/dkillough",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
@@ -579,6 +592,15 @@ export const projects: Project[] = [
     github: "https://github.com/Longhorn-Developers/Degree-Audit-Plus",
     accentItem: "#bf5700",
     description: "Degree Audit Plus reads information from UT Austin's UT Direct audit system and turns the dense results page into an interactive dashboard.",
+  },
+  {
+    id: "solar-run",
+    name: "SolAR Run",
+    memberIds: ["dkillough"],
+    description: "AR App, Game, & Research Project for skin cancer prevention in young adults in Texas and Singapore. Presidents Award for Global Learning recipient.",
+    profilePic: "",
+    website: "https://immersive.moody.utexas.edu/projects/solar-run",
+    accentItem: "#ffd700",
   },
 ];
 
