@@ -524,6 +524,16 @@ export const members: Member[] = [
     github: "https://github.com/dkillough",
     connections: [],
   },
+  {
+    id: "meggie-do",
+    name: "Meggie Do",
+    website: "https://meggiedo.com/",
+    profilePic: "https://drive.google.com/file/d/11nuDyyQDCP2svDT5xAfqyWRAggoJPlkb/view?usp=drivesdk",
+    program: "Master of Science in Information Sciences",
+    year: "2027",
+    linkedin: "https://www.linkedin.com/in/meggie-do?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+    connections: ["john-tanaristy","carla-leija","derek-chen"],
+  },
 ];
 
 export const projects: Project[] = [
