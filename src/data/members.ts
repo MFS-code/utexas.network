@@ -193,7 +193,7 @@ export const members: Member[] = [
     program: "Computer Science",
     year: "2029",
     linkedin: "https://linkedin.com/in/neevgupta",
-    connections: [],
+    connections: ["longhorn-developers"],
   },
   {
     id: "parth-mehta",
@@ -457,7 +457,7 @@ export const members: Member[] = [
     year: "2026",
     linkedin: "https://www.linkedin.com/in/lasya-yakkala",
     github: "https://github.com/siaxvii",
-    connections: [],
+    connections: ["longhorn-developers"],
   },
   {
     id: "timothy-engelman",
@@ -499,7 +499,7 @@ export const members: Member[] = [
     instagram: "https://www.instagram.com/arun.bagavathiannan/",
     linkedin: "https://www.linkedin.com/in/arun-bagavathiannan/",
     github: "https://github.com/arunbagavathiannan",
-    connections: ["derek-chen"],
+    connections: ["derek-chen","longhorn-developers","ut-registration-plus"],
   },
   {
     id: "carla-leija",
@@ -510,7 +510,7 @@ export const members: Member[] = [
     year: "2026",
     linkedin: "https://www.linkedin.com/in/carla-garcia-leija/",
     github: "https://github.com/carlagarcialeija",
-    connections: ["derek-chen","lasya-yakkala","sahasra-tummala"],
+    connections: ["derek-chen","lasya-yakkala","sahasra-tummala","longhorn-developers","ut-registration-plus"],
   },
   {
     id: "dkillough",
@@ -532,7 +532,7 @@ export const members: Member[] = [
     program: "Master of Science in Information Sciences",
     year: "2027",
     linkedin: "https://www.linkedin.com/in/meggie-do?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
-    connections: ["john-tanaristy","carla-leija","derek-chen"],
+    connections: ["john-tanaristy","carla-leija","derek-chen","longhorn-developers"],
   },
   {
     id: "nathan-chase",
@@ -583,7 +583,14 @@ export const projects: Project[] = [
   {
     id: "longhorn-developers",
     name: "Longhorn Developers",
-    memberIds: ["derek-chen"],
+    memberIds: [
+      "derek-chen",
+      "lasya-yakkala",
+      "meggie-do",
+      "carla-leija",
+      "neev-gupta",
+      "arun-bagavathiannan",
+    ],
     description: "Home to the UT Reg. Plus Extension! We are a student organization aimed at addressing student issues at UT through technology and design solutions.",
     website: "https://chromewebstore.google.com/detail/ut-registration-plus/hboadpjkoaieogjimneceaahlppnipaa?utm_source=item-share-cb",
     profilePic: "https://avatars.githubusercontent.com/u/71949018?s=800&v=4",
@@ -595,7 +602,11 @@ export const projects: Project[] = [
   {
     id: "ut-registration-plus",
     name: "UT Registration Plus",
-    memberIds: ["derek-chen"],
+    memberIds: [
+      "derek-chen",
+      "carla-leija",
+      "arun-bagavathiannan",
+    ],
     description: "An open-source Chrome extension that enhances UT Austin’s course registration for over 60k students",
     website: "https://chromewebstore.google.com/detail/ut-registration-plus/hboadpjkoaieogjimneceaahlppnipaa?utm_source=item-share-cb",
     profilePic: "https://raw.githubusercontent.com/Longhorn-Developers/UT-Registration-Plus/refs/heads/main/public/icons/icon_production.svg",
