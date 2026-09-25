@@ -534,6 +534,16 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/meggie-do?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     connections: ["john-tanaristy","carla-leija","derek-chen"],
   },
+  {
+    id: "nathan-chase",
+    name: "Nathan Chase",
+    website: "https://nathan-chase-portfolio.work",
+    program: "Computer Science",
+    year: "2025",
+    linkedin: "https://www.linkedin.com/in/nathan-t-chase",
+    github: "https://github.com/NathanChase22",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
