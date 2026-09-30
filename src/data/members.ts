@@ -545,6 +545,19 @@ export const members: Member[] = [
     github: "https://github.com/NathanChase22",
     connections: [],
   },
+  {
+    id: "malcolm-roalson",
+    name: "Malcolm Roalson",
+    website: "https://malcolmroalson.com",
+    profilePic: "https://drive.google.com/file/d/1j8aooLfeLPa005Wr97IN3NreMSm5MzP-/view",
+    program: "Computer Science & Business",
+    year: "2029",
+    instagram: "https://instagram.com/malcolmb.r",
+    twitter: "https://x.com/maliciousfiles",
+    linkedin: "https://linkedin.com/in/mtroalson",
+    github: "https://github.com/maliciousfiles",
+    connections: ["derek-chen","gabriel-keller"],
+  },
 ];
 
 export const projects: Project[] = [
