@@ -31,6 +31,7 @@ export interface Member {
   linkedin?: string;
   github?: string;
   connections?: string[]; // IDs of other members you want to connect with
+  organizations?: string[]; // IDs of projects/orgs you are part of
 }
 
 /**

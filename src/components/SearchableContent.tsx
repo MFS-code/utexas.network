@@ -7,6 +7,7 @@ import MembersTable from './MembersTable';
 import AsciiBackground from './AsciiBackground';
 import ColorPicker from './ColorPicker';
 import MemberPicker from './MemberPicker';
+import ProjectPicker from './ProjectPicker';
 import { Search, ArrowRight } from 'lucide-react';
 // import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
@@ -323,6 +324,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                 linkedin: resolveSocialUrl(String(formData.get('linkedin') || ''), 'linkedin'),
                 github: resolveSocialUrl(String(formData.get('github') || ''), 'github'),
                 connections: String(formData.get('connections') || ''),
+                organizations: String(formData.get('organizations') || ''),
                 notes: String(formData.get('notes') || ''),
             };
 
@@ -551,6 +553,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                                         <input className="join-input" name="linkedin" placeholder="LinkedIn" />
                                         <input className="join-input" name="github" placeholder="GitHub" />
                                         <MemberPicker name="connections" members={members} placeholder="Who are you connected to? (optional)" />
+                                        <ProjectPicker name="organizations" projects={projects} placeholder="What orgs are you connected to? (optional)" />
                                         <textarea className="join-textarea join-input-wide" name="notes" rows={4} placeholder="Anything else we should know?" />
                                     </div>
                                 </>

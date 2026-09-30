@@ -13,6 +13,7 @@ interface MemberPayload {
   linkedin?: string;
   github?: string;
   connections?: string;
+  organizations?: string;
   notes?: string;
 }
 
@@ -217,6 +218,7 @@ function buildMemberIssue(payload: MemberPayload) {
     linkedin: payload.linkedin?.trim() || '',
     github: payload.github?.trim() || '',
     connections: payload.connections?.trim() || '',
+    organizations: payload.organizations?.trim() || '',
     notes: payload.notes?.trim() || '',
   };
 
@@ -234,6 +236,7 @@ function buildMemberIssue(payload: MemberPayload) {
     `- **LinkedIn:** ${clean.linkedin || '-'}`,
     `- **GitHub:** ${clean.github || '-'}`,
     `- **Connections:** ${clean.connections || '-'}`,
+    `- **Organizations:** ${clean.organizations || '-'}`,
     '',
     '### Moderator commands',
     '- Reply with `/approve` to add this member to `src/data/members.ts` automatically.',
@@ -267,6 +270,7 @@ function buildMemberIssue(payload: MemberPayload) {
       `LinkedIn: ${clean.linkedin || '-'}`,
       `GitHub: ${clean.github || '-'}`,
       `Connections: ${clean.connections || '-'}`,
+      `Organizations: ${clean.organizations || '-'}`,
       `Notes: ${clean.notes || '-'}`,
     ],
   };
