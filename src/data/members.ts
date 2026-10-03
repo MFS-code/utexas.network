@@ -569,6 +569,17 @@ export const members: Member[] = [
     github: "https://github.com/Code-Tomato",
     connections: [],
   },
+  {
+    id: "sam-singh",
+    name: "Sam Singh",
+    website: "https://www.samyaksingh.com/",
+    profilePic: "https://media.licdn.com/dms/image/v2/D5603AQGB7drw6hLq9w/profile-displayphoto-crop_800_800/B56Z_flcP8JoAI-/0/1786162563760?e=1792627200&v=beta&t=fMf598AYHxfsV9wiA7J1p-HL94jsdx1aJ4ofNsuSDbw",
+    program: "Computer Science",
+    instagram: "https://instagram.com/samyaksw",
+    linkedin: "https://www.linkedin.com/in/samsingh-/",
+    github: "https://github.com/samsinghh",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
