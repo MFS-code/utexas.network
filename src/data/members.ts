@@ -558,6 +558,17 @@ export const members: Member[] = [
     github: "https://github.com/maliciousfiles",
     connections: ["derek-chen","gabriel-keller"],
   },
+  {
+    id: "nathan-lemma",
+    name: "Nathan Lemma",
+    website: "https://code-tomato.github.io",
+    profilePic: "https://avatars.githubusercontent.com/u/60159540?v=4&size=64",
+    program: "Electrical and Computer Engineering",
+    year: "2027",
+    linkedin: "https://linkedin.com/in/nathanylemma",
+    github: "https://github.com/Code-Tomato",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
