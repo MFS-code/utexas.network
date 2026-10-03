@@ -580,6 +580,16 @@ export const members: Member[] = [
     github: "https://github.com/samsinghh",
     connections: [],
   },
+  {
+    id: "abdulrahman-alshahrani",
+    name: "Abdulrahman Alshahrani",
+    website: "https://abdomash.com/",
+    program: "Computer Science",
+    year: "2025",
+    linkedin: "https://www.linkedin.com/in/abdomash/",
+    github: "https://github.com/Abdomash",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
