@@ -591,6 +591,15 @@ export const members: Member[] = [
     github: "https://github.com/Abdomash",
     connections: [],
   },
+  {
+    id: "valerius-petrini",
+    name: "Valerius Petrini",
+    website: "https://valerius-petrini.vercel.app",
+    program: "Computer Science",
+    year: "2030",
+    connections: [],
+    organizations: ["longhorn-developers","ut-registration-plus"],
+  },
 ];
 
 export const projects: Project[] = [
