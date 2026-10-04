@@ -17,6 +17,7 @@
  * - linkedin: Full URL
  * - github: Full URL
  * - connections: IDs of other members
+ * - organizations: IDs of projects or orgs
  */
 
 export interface Member {

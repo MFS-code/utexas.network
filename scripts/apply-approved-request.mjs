@@ -134,6 +134,10 @@ if (isProject) {
     .split(',')
     .map((v) => v.trim())
     .filter(Boolean);
+  const organizations = sanitizeText(payload.organizations)
+    .split(',')
+    .map((v) => v.trim())
+    .filter(Boolean);
 
   const entryLines = [
     '  {',
@@ -164,6 +168,9 @@ if (isProject) {
     entryLines.push(`    github: ${JSON.stringify(sanitizeUrl(payload.github))},`);
   }
   entryLines.push(`    connections: ${JSON.stringify(connections)},`);
+  if (organizations.length > 0) {
+    entryLines.push(`    organizations: ${JSON.stringify(organizations)},`);
+  }
   entryLines.push('  },');
 
   const entryBlock = `${entryLines.join('\n')}\n`;
