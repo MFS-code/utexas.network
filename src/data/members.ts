@@ -600,6 +600,19 @@ export const members: Member[] = [
     connections: [],
     organizations: ["longhorn-developers","ut-registration-plus"],
   },
+  {
+    id: "leslie-looi",
+    name: "Leslie Looi",
+    website: "https://portfolio.leslielooi.workers.dev/",
+    profilePic: "https://drive.google.com/file/d/1-p85DZxhYzZ6TjeVUBeEnYrDatWBMHjE/view?usp=sharing",
+    program: "Design",
+    year: "2027",
+    instagram: "https://www.instagram.com/leslie.looi/",
+    linkedin: "https://www.linkedin.com/in/leslie-looi/",
+    github: "https://github.com/lesliewlooi",
+    connections: [],
+    organizations: ["longhorn-developers","ut-registration-plus"],
+  },
 ];
 
 export const projects: Project[] = [
