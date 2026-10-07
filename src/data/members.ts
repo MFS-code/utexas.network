@@ -624,6 +624,16 @@ export const members: Member[] = [
     connections: [],
     organizations: ["longhorn-developers"],
   },
+  {
+    id: "taekbeen-nam",
+    name: "Taek-Been Nam",
+    website: "https://tnamux.design",
+    program: "Master in Information Studies - UX/HCI",
+    year: "2027",
+    linkedin: "https://www.linkedin.com/in/tnamux",
+    github: "https://github.com/tnamdevnote",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
