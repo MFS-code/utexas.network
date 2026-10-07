@@ -613,6 +613,17 @@ export const members: Member[] = [
     connections: [],
     organizations: ["longhorn-developers","ut-registration-plus"],
   },
+  {
+    id: "katie-luu",
+    name: "Katie Luu",
+    website: "https://katieluu.com",
+    program: "Design & Advertising w/ ASL Minor",
+    year: "2028",
+    linkedin: "https://www.linkedin.com/in/katiekluu",
+    github: "https://github.com/katiektluu",
+    connections: [],
+    organizations: ["longhorn-developers"],
+  },
 ];
 
 export const projects: Project[] = [
