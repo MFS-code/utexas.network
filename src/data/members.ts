@@ -634,6 +634,15 @@ export const members: Member[] = [
     github: "https://github.com/tnamdevnote",
     connections: [],
   },
+  {
+    id: "jesse-chen",
+    name: "Jesse Chen",
+    website: "https://chenjesse.com/",
+    program: "Master of Science in Information Studies",
+    year: "2027",
+    linkedin: "https://linkedin.com/in/jessexchen",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
