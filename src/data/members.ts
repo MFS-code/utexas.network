@@ -643,6 +643,17 @@ export const members: Member[] = [
     linkedin: "https://linkedin.com/in/jessexchen",
     connections: [],
   },
+  {
+    id: "miles-fritzmather",
+    name: "Miles Fritzmather",
+    website: "https://milesfm.me",
+    program: "Computer Science + Mathematics",
+    year: "2028",
+    linkedin: "https://www.linkedin.com/in/miles-fritzmather/",
+    github: "https://github.com/Miles-Fritzmather",
+    connections: ["carla-leija","malcolm-roalson","derek-chen","gabriel-keller","john-tanaristy","katie-luu"],
+    organizations: ["degree-audit-plus","longhorn-developers","ut-registration-plus"],
+  },
 ];
 
 export const projects: Project[] = [
