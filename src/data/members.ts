@@ -654,6 +654,17 @@ export const members: Member[] = [
     connections: ["carla-leija","malcolm-roalson","derek-chen","gabriel-keller","john-tanaristy","katie-luu"],
     organizations: ["degree-audit-plus","longhorn-developers","ut-registration-plus"],
   },
+  {
+    id: "matthew-walker",
+    name: "Matthew Walker",
+    website: "https://matthewwalkerdev.com/",
+    program: "Business Technology & Artificial Intelligence",
+    year: "2027",
+    linkedin: "https://www.linkedin.com/in/matthew-ev-walker/?isSelfProfile=true",
+    github: "https://github.com/MatthewEvWalker",
+    connections: ["derek-chen"],
+    organizations: ["longhorn-developers"],
+  },
 ];
 
 export const projects: Project[] = [
