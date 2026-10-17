@@ -4,6 +4,7 @@
   "private": true,
   "packageManager": "pnpm@9.12.2",
   "scripts": {
+    "preinstall": "node -e \"if (!process.env.npm_config_user_agent?.includes('pnpm')) { console.error('\\nNote: this is using pnpm. In the future, please use pnpm.\\n'); process.exit(1); }\"",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
