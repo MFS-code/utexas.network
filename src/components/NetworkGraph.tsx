@@ -263,6 +263,55 @@ export default function NetworkGraph({ members, projects, connections, highlight
         container.innerHTML = '';
         nodeElementsRef.current.clear();
 
+        const nodeMap = new Map<string, { node: Node; img: HTMLImageElement; fallback: HTMLDivElement }>();
+        const neighborsMap = new Map<string, string[]>();
+        connections.forEach((conn) => {
+            const listFrom = neighborsMap.get(conn.fromId);
+            if (listFrom) {
+                if (!listFrom.includes(conn.toId)) listFrom.push(conn.toId);
+            } else {
+                neighborsMap.set(conn.fromId, [conn.toId]);
+            }
+            const listTo = neighborsMap.get(conn.toId);
+            if (listTo) {
+                if (!listTo.includes(conn.fromId)) listTo.push(conn.fromId);
+            } else {
+                neighborsMap.set(conn.toId, [conn.fromId]);
+            }
+        });
+
+        const colorBubble = (targetId: string) => {
+            const entry = nodeMap.get(targetId);
+            if (!entry) return;
+            entry.img.style.filter = 'grayscale(0%)';
+            entry.img.style.opacity = '1';
+            entry.fallback.style.opacity = '1';
+            if (!entry.node.isProject) {
+                entry.fallback.style.background = '#bf5700';
+            }
+        };
+
+        const resetBubble = (targetId: string) => {
+            const entry = nodeMap.get(targetId);
+            if (!entry) return;
+            const isHighlighted = highlightedRef.current.length === 0 || highlightedRef.current.includes(entry.node.id);
+            const query = searchQueryRef.current;
+            if (query && isHighlighted) {
+                entry.img.style.filter = 'grayscale(0%)';
+                entry.img.style.opacity = '1';
+                entry.fallback.style.opacity = '1';
+            } else if (query && !isHighlighted) {
+                entry.img.style.filter = 'grayscale(100%)';
+                entry.img.style.opacity = '0.3';
+                entry.fallback.style.opacity = '0.3';
+            } else {
+                entry.img.style.filter = 'grayscale(100%)';
+                entry.img.style.opacity = '1';
+                entry.fallback.style.opacity = '1';
+            }
+            applyFallbackTheme(entry.fallback, entry.node);
+        };
+
         const allEntries = [
             ...members.map(m => ({ id: m.id, name: m.name, profilePic: m.profilePic, website: m.website, accentItem: undefined, isProject: false })),
             ...projects.map(p => ({
@@ -405,33 +454,25 @@ export default function NetworkGraph({ members, projects, connections, highlight
             };
             applyLabelTheme();
 
+            nodeMap.set(node.id, { node, img, fallback });
+
             nodeDiv.addEventListener('mouseenter', () => {
                 applyLabelTheme();
-                fallback.style.opacity = '1';
-                img.style.filter = 'grayscale(0%)';
-                img.style.opacity = '1';
                 nameLabel.style.opacity = '1';
-                if (!node.isProject) fallback.style.background = '#bf5700';
+                colorBubble(node.id);
+                const neighbors = neighborsMap.get(node.id);
+                if (neighbors) {
+                    neighbors.forEach(colorBubble);
+                }
             });
 
             nodeDiv.addEventListener('mouseleave', () => {
-                const isHighlighted = highlightedRef.current.length === 0 || highlightedRef.current.includes(node.id);
-                const query = searchQueryRef.current;
-                if (query && isHighlighted) {
-                    img.style.filter = 'grayscale(0%)';
-                    img.style.opacity = '1';
-                    fallback.style.opacity = '1';
-                } else if (query && !isHighlighted) {
-                    img.style.filter = 'grayscale(100%)';
-                    img.style.opacity = '0.3';
-                    fallback.style.opacity = '0.3';
-                } else {
-                    img.style.filter = 'grayscale(100%)';
-                    img.style.opacity = '1';
-                    fallback.style.opacity = '1';
-                }
                 nameLabel.style.opacity = '0';
-                applyFallbackTheme(fallback, node);
+                resetBubble(node.id);
+                const neighbors = neighborsMap.get(node.id);
+                if (neighbors) {
+                    neighbors.forEach(resetBubble);
+                }
             });
 
             nodeDiv.addEventListener('mousedown', (e) => {
