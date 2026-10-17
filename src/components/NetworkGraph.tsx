@@ -390,7 +390,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
             img.style.transition = 'filter 0.3s ease, opacity 0.3s ease';
             fallback.style.display = 'flex';
 
-            const imageSrc = normalizeImageUrl(node.profilePic) || '/icon.svg';
+            const imageSrc = normalizeImageUrl(node.profilePic);
             const revealImage = () => {
                 fallback.style.display = 'none';
                 img.style.display = 'block';
@@ -400,11 +400,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 fallback.style.display = 'flex';
             };
 
-            if (imageSrc === '/icon.svg') {
-                img.onload = revealImage;
-                img.onerror = revealFallback;
-                img.src = imageSrc;
-            } else {
+            if (imageSrc) {
                 deferredImageLoads.push(() => new Promise((resolve) => {
                     if (cancelled) {
                         resolve();
