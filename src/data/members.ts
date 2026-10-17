@@ -449,7 +449,7 @@ export const members: Member[] = [
     year: "2029",
     instagram: "https://www.instagram.com/sahasratummalaa",
     linkedin: "https://www.linkedin.com/in/sahasratummala",
-    connections: [],
+    connections: ["longhorn-developers","carla-leija"],
   },
   {
     id: "lasya-yakkala",
@@ -701,6 +701,7 @@ export const projects: Project[] = [
       "carla-leija",
       "neev-gupta",
       "arun-bagavathiannan",
+      "sahasra-tummala",
     ],
     description: "Home to the UT Reg. Plus Extension! We are a student organization aimed at addressing student issues at UT through technology and design solutions.",
     website: "https://chromewebstore.google.com/detail/ut-registration-plus/hboadpjkoaieogjimneceaahlppnipaa?utm_source=item-share-cb",
