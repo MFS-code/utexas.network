@@ -672,6 +672,17 @@ export const members: Member[] = [
     connections: ["derek-chen"],
     organizations: ["longhorn-developers"],
   },
+  {
+    id: "beatrix-mcguinness",
+    name: "Beatrix McGuinness",
+    website: "https://beatrixwashere.neocities.org/",
+    profilePic: "https://beatrixwashere.neocities.org/images/art/beatrixpfp.png",
+    program: "Computer Science",
+    year: "2030",
+    github: "https://github.com/beatrixwashere",
+    connections: [],
+    organizations: ["longhorn-developers"],
+  },
 ];
 
 export const projects: Project[] = [
