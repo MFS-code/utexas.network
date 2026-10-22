@@ -586,7 +586,7 @@ export default function SearchableContent({ members, projects, connections }: Se
                             )}
 
                             <p className="join-tip">
-                                share only information you are comfortable sending to the maintainers for manual review.
+                                By submitting, you confirm you have rights to share this photo and consent to your profile being public on this site and its open-source GitHub repo.
                             </p>
 
                             <div className="join-form-actions">
