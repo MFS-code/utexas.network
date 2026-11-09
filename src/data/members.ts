@@ -683,6 +683,18 @@ export const members: Member[] = [
     connections: [],
     organizations: ["longhorn-developers"],
   },
+  {
+    id: "aarushi-lakhi",
+    name: "Aarushi Lakhi",
+    website: "https://aarushilakhi.com",
+    profilePic: "https://drive.google.com/file/d/1TFVXM5PeUB_R9BJRo0CUiiWz7g74E1FP/view?usp=sharing",
+    program: "Computer Science",
+    year: "2027",
+    twitter: "https://x.com/aarushilakhi",
+    linkedin: "https://www.linkedin.com/in/aarushi-lakhi/",
+    github: "https://github.com/aarushi-lakhi",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
