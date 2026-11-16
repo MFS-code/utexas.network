@@ -695,6 +695,17 @@ export const members: Member[] = [
     github: "https://github.com/aarushi-lakhi",
     connections: [],
   },
+  {
+    id: "harrison-rustan",
+    name: "Harrison Rustan",
+    website: "https://www.harrison-rustan.com/",
+    profilePic: "https://drive.google.com/file/d/1V4f95hYWyVt6NBRb6doplK5ZlB2EfXhH/view?usp=sharing",
+    program: "Master of Business Administration",
+    year: "2027",
+    linkedin: "https://www.linkedin.com/in/harrison-rustan/",
+    github: "https://github.com/hrustan",
+    connections: [],
+  },
 ];
 
 export const projects: Project[] = [
