@@ -325,9 +325,15 @@ export default function NetworkGraph({ members, projects, connections, highlight
             })),
         ];
 
+        const isMobile = width < 600;
+        if (zoomRef.current === 1 && isMobile) {
+            zoomRef.current = 0.75;
+        }
+
         const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+        const spacingScale = isMobile ? 220 : Math.min(width, height) * 0.45;
         nodesRef.current = allEntries.map((entry, i) => {
-            const radius = Math.sqrt(i + 0.5) * (Math.min(width, height) / (2.5 * Math.sqrt(allEntries.length)));
+            const radius = Math.sqrt((i + 1) / allEntries.length) * spacingScale;
             const angle = i * goldenAngle;
 
             return {
