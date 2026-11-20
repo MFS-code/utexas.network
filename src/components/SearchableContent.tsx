@@ -430,12 +430,40 @@ export default function SearchableContent({ members, projects, connections }: Se
                     </div>
                 </div>
 
+                <div className="graph-section mobile-graph">
+                    <div className="search-bar-container">
+                        <Search size={18} />
+                        <input
+                            type="text"
+                            placeholder="Search members..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="search-input"
+                        />
+                        {searchQuery && (
+                            <button
+                                onClick={() => setSearchQuery('')}
+                                className="search-clear-btn"
+                            >
+                                Clear
+                            </button>
+                        )}
+                    </div>
+                    <NetworkGraph 
+                        members={members}
+                        projects={projects}
+                        connections={connections} 
+                        highlightedMemberIds={[...displayedMembers.map(m => m.id), ...filteredProjects.map(p => p.id)]}
+                        searchQuery={searchQuery}
+                    />
+                </div>
+
                 <div className="table-section">
                     <MembersTable members={displayedMembers} projects={filteredProjects} searchQuery={searchQuery} />
                 </div>
             </div>
 
-            <div className="graph-section">
+            <div className="graph-section desktop-graph">
                 <div className="search-bar-container">
                     <Search size={18} />
                     <input

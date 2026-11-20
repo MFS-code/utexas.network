@@ -102,6 +102,21 @@ a {
   z-index: 1;
 }
 
+.mobile-graph {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .desktop-graph {
+    display: none;
+  }
+  .mobile-graph {
+    display: flex;
+    max-width: 100%;
+  }
+}
+
+
 .network-graph-container {
   border-radius: 8px;
   overflow: hidden;
