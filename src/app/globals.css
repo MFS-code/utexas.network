@@ -126,6 +126,7 @@ a {
   width: 100%;
   height: var(--graph-height);
   min-height: var(--graph-height);
+  touch-action: none;
 }
 
 .network-graph-placeholder {

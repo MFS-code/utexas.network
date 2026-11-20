@@ -38,6 +38,7 @@ export default function NetworkGraph({ members, projects, connections, highlight
     const isDraggingRef = useRef(false);
     const isPanningRef = useRef(false);
     const panStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+    const pinchDistanceRef = useRef<number | null>(null);
     const animationFrameRef = useRef<number | null>(null);
     const isAnimatingRef = useRef(false);
     const isDarkRef = useRef(false);
@@ -471,15 +472,15 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 }
             });
 
-            nodeDiv.addEventListener('mousedown', (e) => {
+            const handleNodeDown = (clientX: number, clientY: number) => {
                 nodeDiv.__isDragging = false;
-                dragStartRef.current = { x: e.clientX, y: e.clientY };
+                dragStartRef.current = { x: clientX, y: clientY };
                 isDraggingRef.current = false;
                 dragNodeRef.current = node.id;
                 nodeDiv.style.cursor = 'grabbing';
                 const rect = container.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
+                const mouseX = clientX - rect.left;
+                const mouseY = clientY - rect.top;
                 const zoom = zoomRef.current;
                 const pan = panRef.current;
                 const transformedX = (node.x - width / 2) * zoom + width / 2 + pan.x;
@@ -489,7 +490,17 @@ export default function NetworkGraph({ members, projects, connections, highlight
                     x: (mouseX - transformedX) * zoom,
                     y: (mouseY - transformedY) * zoom
                 };
+            };
+
+            nodeDiv.addEventListener('mousedown', (e) => {
+                handleNodeDown(e.clientX, e.clientY);
             });
+
+            nodeDiv.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    handleNodeDown(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
 
             nodeDiv.addEventListener('click', () => {
                 const wasDragging = nodeDiv.__isDragging === true;
@@ -518,12 +529,12 @@ export default function NetworkGraph({ members, projects, connections, highlight
             }
         };
 
-        const handleMouseMove = (e: MouseEvent) => {
+        const handlePointerMove = (clientX: number, clientY: number) => {
             const zoom = zoomRef.current;
             const pan = panRef.current;
 
             if (dragNodeRef.current && dragStartRef.current) {
-                const moveDistance = Math.abs(e.clientX - dragStartRef.current.x) + Math.abs(e.clientY - dragStartRef.current.y);
+                const moveDistance = Math.abs(clientX - dragStartRef.current.x) + Math.abs(clientY - dragStartRef.current.y);
                 if (moveDistance > 3) {
                     isDraggingRef.current = true;
                     const nodeDiv = nodeElementsRef.current.get(dragNodeRef.current);
@@ -535,8 +546,8 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 const rect = container.getBoundingClientRect();
                 const node = nodesRef.current.find(n => n.id === dragNodeRef.current);
                 if (node) {
-                    const mouseX = e.clientX - rect.left;
-                    const mouseY = e.clientY - rect.top;
+                    const mouseX = clientX - rect.left;
+                    const mouseY = clientY - rect.top;
                     
                     node.x = ((mouseX - pan.x - width / 2) / zoom) + width / 2 - dragOffsetRef.current.x / zoom;
                     node.y = ((mouseY - pan.y - height / 2) / zoom) + height / 2 - dragOffsetRef.current.y / zoom;
@@ -545,14 +556,18 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 }
             } else if (isPanningRef.current) {
                 panRef.current = {
-                    x: e.clientX - panStartRef.current.x,
-                    y: e.clientY - panStartRef.current.y
+                    x: clientX - panStartRef.current.x,
+                    y: clientY - panStartRef.current.y
                 };
                 updateVisuals();
             }
         };
 
-        const handleMouseUp = () => {
+        const handleMouseMove = (e: MouseEvent) => {
+            handlePointerMove(e.clientX, e.clientY);
+        };
+
+        const handlePointerUp = () => {
             if (dragNodeRef.current) {
                 const nodeDiv = nodeElementsRef.current.get(dragNodeRef.current);
                 if (nodeDiv) {
@@ -566,6 +581,66 @@ export default function NetworkGraph({ members, projects, connections, highlight
                 isPanningRef.current = false;
                 container.style.cursor = '';
             }
+            pinchDistanceRef.current = null;
+        };
+
+        const handleMouseUp = () => {
+            handlePointerUp();
+        };
+
+        const handleTouchStart = (e: TouchEvent) => {
+            if (e.touches.length === 1) {
+                const touch = e.touches[0];
+                isPanningRef.current = true;
+                panStartRef.current = {
+                    x: touch.clientX - panRef.current.x,
+                    y: touch.clientY - panRef.current.y
+                };
+            } else if (e.touches.length === 2) {
+                isPanningRef.current = false;
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                pinchDistanceRef.current = Math.hypot(dx, dy);
+            }
+        };
+
+        const handleTouchMove = (e: TouchEvent) => {
+            if (e.touches.length === 1 && !pinchDistanceRef.current) {
+                handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+            } else if (e.touches.length === 2) {
+                e.preventDefault();
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                const dist = Math.hypot(dx, dy);
+
+                if (pinchDistanceRef.current !== null && pinchDistanceRef.current > 0) {
+                    const zoomFactor = dist / pinchDistanceRef.current;
+                    const zoom = zoomRef.current;
+                    const newZoom = Math.min(Math.max(zoom * zoomFactor, 0.4), 5);
+
+                    const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                    const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                    const rect = container.getBoundingClientRect();
+                    const pointX = midX - rect.left;
+                    const pointY = midY - rect.top;
+
+                    const zoomPointX = (pointX - panRef.current.x - width / 2) / zoom + width / 2;
+                    const zoomPointY = (pointY - panRef.current.y - height / 2) / zoom + height / 2;
+
+                    zoomRef.current = newZoom;
+                    panRef.current = {
+                        x: pointX - (zoomPointX - width / 2) * newZoom - width / 2,
+                        y: pointY - (zoomPointY - height / 2) * newZoom - height / 2
+                    };
+
+                    updateVisuals();
+                }
+                pinchDistanceRef.current = dist;
+            }
+        };
+
+        const handleTouchEnd = () => {
+            handlePointerUp();
         };
 
         const handleWheel = (e: WheelEvent) => {
@@ -596,6 +671,10 @@ export default function NetworkGraph({ members, projects, connections, highlight
         container.addEventListener('mousedown', handleContainerMouseDown);
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
+        container.addEventListener('touchstart', handleTouchStart, { passive: false });
+        container.addEventListener('touchmove', handleTouchMove, { passive: false });
+        container.addEventListener('touchend', handleTouchEnd);
+        container.addEventListener('touchcancel', handleTouchEnd);
 
         const startDeferredLoads = () => {
             const maxConcurrentLoads = 6;
@@ -638,6 +717,10 @@ export default function NetworkGraph({ members, projects, connections, highlight
             container.removeEventListener('mousedown', handleContainerMouseDown);
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
+            container.removeEventListener('touchstart', handleTouchStart);
+            container.removeEventListener('touchmove', handleTouchMove);
+            container.removeEventListener('touchend', handleTouchEnd);
+            container.removeEventListener('touchcancel', handleTouchEnd);
         };
     }, [members, projects, connections, updateVisuals, applyFallbackTheme, getProjectAccentColor]);
 
