@@ -1218,6 +1218,8 @@ a {
   overflow: visible;
   transform: translate3d(-50%, 0, 0) scale3d(var(--ascii-scale), var(--ascii-scale), 1);
   transform-origin: center bottom;
+  will-change: transform;
+  contain: paint;
 }
 
 @supports (height: 1svh) {
@@ -1247,84 +1249,6 @@ a {
 .ascii-art-base {
   position: relative;
   z-index: 1;
-}
-
-.ascii-art-frame {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.ascii-art-frame-2 {
-  animation: longhorn-shift-2 0.6s steps(1, end) infinite;
-}
-
-.ascii-art-frame-3 {
-  animation: longhorn-shift-3 0.6s steps(1, end) infinite;
-}
-
-.ascii-art-state {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0;
-  width: 800px;
-  max-width: none;
-  white-space: pre;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 8px;
-  line-height: 1;
-  letter-spacing: 0;
-  opacity: 0;
-  pointer-events: none;
-  filter: invert(1);
-}
-
-.ascii-art-state-4 {
-  animation: longhorn-state-4 1.2s steps(1, end) infinite;
-}
-
-@keyframes longhorn-shift-2 {
-  0%, 24% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-  25%, 49% {
-    opacity: 0.9;
-    transform: translate(10px, -4px);
-  }
-  50%, 100% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes longhorn-shift-3 {
-  0%, 49% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-  50%, 74% {
-    opacity: 0.85;
-    transform: translate(-10px, 4px);
-  }
-  75%, 100% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes longhorn-state-4 {
-  0%, 65% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-  66%, 100% {
-    opacity: 0.9;
-    transform: translate(0, 0);
-  }
 }
 
 /* Responsive */
