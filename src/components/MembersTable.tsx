@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Member, Project } from '@/data/members';
 import { normalizeImageUrl } from '@/utils/profileImage';
 import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
@@ -32,10 +32,16 @@ export default function MembersTable({ members, projects, searchQuery }: Members
         }
     };
 
+    const searchRegex = useMemo(() => {
+        if (!searchQuery) return null;
+        const escaped = searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return new RegExp(`(${escaped})`, 'gi');
+    }, [searchQuery]);
+
     const highlightText = (text: string | null | undefined) => {
-        if (!text || !searchQuery) return text || '';
+        if (!text || !searchRegex || !searchQuery) return text || '';
         
-        const parts = text.split(new RegExp(`(${searchQuery})`, 'gi'));
+        const parts = text.split(searchRegex);
         return parts.map((part, i) => 
             part.toLowerCase() === searchQuery.toLowerCase() 
                 ? <mark key={i} style={{ background: '#ffd54f', padding: '0 2px' }}>{part}</mark>
